@@ -1,1 +1,14 @@
 .idea
+
+/dist
+/tmp
+/classes
+/out
+/out-tsc
+/target
+
+.project
+.classpath
+.c9/
+*.launch
+.settings/
