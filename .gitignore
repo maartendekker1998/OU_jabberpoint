@@ -1,11 +1,13 @@
 .idea
 
+
 /dist
 /tmp
 /classes
 /out
 /out-tsc
 /target
+/DesignPatterns/out
 
 .project
 .classpath
