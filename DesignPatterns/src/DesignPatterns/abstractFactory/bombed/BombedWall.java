@@ -2,9 +2,9 @@ package DesignPatterns.abstractFactory.bombed;
 
 import DesignPatterns.abstractFactory.Wall;
 
-public class BombedWall extends Wall
+class BombedWall extends Wall
 {
-    public BombedWall()
+    BombedWall()
     {
         System.out.println("Bombed wall made");
     }

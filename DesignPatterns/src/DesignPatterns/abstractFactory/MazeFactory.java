@@ -4,7 +4,7 @@ public abstract class MazeFactory
 {
     protected MazeFactory(){}
 
-    public Maze makeMaze()
+    Maze makeMaze()
     {
         return new Maze();
     }
@@ -19,7 +19,7 @@ public abstract class MazeFactory
         return new Room(i);
     }
 
-    public Door makeDoor(Room r1, Room r2)
+    Door makeDoor(Room r1, Room r2)
     {
         return new Door(r1, r2);
     }

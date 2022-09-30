@@ -1,8 +1,8 @@
 package DesignPatterns.abstractFactory;
 
-class Door
+public class Door
 {
-    Door(Room r1, Room r2)
+    public Door(Room r1, Room r2)
     {
         System.out.println("Door made");
     }

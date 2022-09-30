@@ -1,8 +1,10 @@
 package DesignPatterns.abstractFactory;
 
+import DesignPatterns.builder.MazeBuilder;
+
 public class MazeGame
 {
-    public Maze createMaze(MazeFactory factory)
+    Maze createMaze(MazeFactory factory)
     {
         Maze maze = factory.makeMaze();
         Room r1 = factory.makeRoom(1);
@@ -23,5 +25,23 @@ public class MazeGame
         r2.setSide("West", door);
 
         return maze;
+    }
+
+    //See Builder pattern, this is not part of the abstract factory
+    public Maze createMaze(MazeBuilder builder)
+    {
+        builder.buildMaze();
+        builder.buildRoom(1);
+        builder.buildRoom(2);
+        builder.buildDoor(1, 2);
+        return builder.getMaze();
+    }
+
+    public Maze createComplexMaze(MazeBuilder builder)
+    {
+        builder.buildRoom(1);
+        //...
+        builder.buildRoom(1001);
+        return builder.getMaze();
     }
 }

@@ -22,10 +22,13 @@ public class StartController extends MainController
         decoratorPattern.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> super.openNewView("decorator"));
         Button abstractFactoryPattern = new Button("AbstractFactory");
         abstractFactoryPattern.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> super.openNewView("abstractfactory"));
+        Button builderPattern = new Button("Builder");
+        builderPattern.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> super.openNewView("builder"));
         mainGrid.add(statePattern,0,0);
         mainGrid.add(bridgePattern,0,1);
         mainGrid.add(decoratorPattern, 0, 2);
         mainGrid.add(abstractFactoryPattern,0,3);
+        mainGrid.add(builderPattern, 0, 4);
         mainGrid.setMinWidth(250);
         super.main.getChildren().add(mainGrid);
     }
