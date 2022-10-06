@@ -1,6 +1,6 @@
 .idea
 
-
+/bin
 /dist
 /tmp
 /classes
