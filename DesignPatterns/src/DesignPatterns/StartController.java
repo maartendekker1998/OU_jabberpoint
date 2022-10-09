@@ -1,5 +1,6 @@
 package DesignPatterns;
 
+import DesignPatterns.slideshow.Projector;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
@@ -24,12 +25,26 @@ public class StartController extends MainController
         abstractFactoryPattern.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> super.openNewView("abstractfactory"));
         Button builderPattern = new Button("Builder");
         builderPattern.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> super.openNewView("builder"));
+        Button compositePattern = new Button("Composite");
+        compositePattern.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> super.openNewView("composite"));
+
+
+        Button slideshow = new Button("Slideshow");
+        slideshow.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> this.slideshow());
         mainGrid.add(statePattern,0,0);
         mainGrid.add(bridgePattern,0,1);
         mainGrid.add(decoratorPattern, 0, 2);
         mainGrid.add(abstractFactoryPattern,0,3);
         mainGrid.add(builderPattern, 0, 4);
+        mainGrid.add(compositePattern, 0, 5);
+
+        mainGrid.add(slideshow, 0, 10);
         mainGrid.setMinWidth(250);
         super.main.getChildren().add(mainGrid);
+    }
+
+    private void slideshow()
+    {
+        new Projector();
     }
 }
