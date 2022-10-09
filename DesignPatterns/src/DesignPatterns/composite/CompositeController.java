@@ -17,11 +17,11 @@ public class CompositeController extends MainController
         GridPane mainGrid = new GridPane();
         Button buttonBack = new Button("Back");
         buttonBack.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> super.openNewView("start"));
-        Button buttonDecorator = new Button("Composite");
-        buttonDecorator.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> composite());
+        Button buttonComposite = new Button("Composite");
+        buttonComposite.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> composite());
         mainGrid.setMinWidth(250);
         mainGrid.add(buttonBack,0, 0);
-        mainGrid.add(buttonDecorator,0, 1);
+        mainGrid.add(buttonComposite,0, 1);
         super.main.getChildren().add(mainGrid);
     }
 
