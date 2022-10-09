@@ -29,6 +29,8 @@ public class StartController extends MainController
         compositePattern.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> super.openNewView("composite"));
         Button commandPattern = new Button("Command");
         commandPattern.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> super.openNewView("command"));
+        Button observerPattern = new Button("Observer");
+        observerPattern.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> super.openNewView("observer"));
 
         Button slideshow = new Button("Slideshow");
         slideshow.addEventHandler(MouseEvent.MOUSE_RELEASED, event -> this.slideshow());
@@ -39,6 +41,7 @@ public class StartController extends MainController
         mainGrid.add(builderPattern, 0, 4);
         mainGrid.add(compositePattern, 0, 5);
         mainGrid.add(commandPattern, 0, 6);
+        mainGrid.add(observerPattern,0,7);
 
         mainGrid.add(slideshow, 0, 10);
         mainGrid.setMinWidth(250);
