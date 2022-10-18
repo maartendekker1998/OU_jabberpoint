@@ -3,9 +3,9 @@ package DesignPatterns.slideshow;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Text extends Content<String>
+public class Image extends Content<String>
 {
-    Text(int indentation, String data)
+    Image(int indentation, String data)
     {
         super(indentation, data);
     }
@@ -17,9 +17,9 @@ public class Text extends Content<String>
     }
 
     @Override
-    public List<Text> getContent()
+    public List<Image> getContent()
     {
-        List<Text> displayContentList = new ArrayList<>();
+        List<Image> displayContentList = new ArrayList<>();
         displayContentList.add(this);
         return displayContentList;
     }

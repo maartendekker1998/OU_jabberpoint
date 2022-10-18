@@ -1,28 +1,31 @@
 package DesignPatterns.slideshow;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Projector
 {
-    private SlideShow slideShow;
+    private Iterable slideShowComponent;
+    private Iterator iterator;
 
-    public Projector()
+    public Projector(Iterable slideShowComponent)
     {
-        this.something();
+        this.slideShowComponent = slideShowComponent;
+        this.iterator = this.slideShowComponent.createIterator();
     }
 
-    public void something()
+    public void start()
     {
-        List<Slide> slides = new ArrayList<>();
-        List<SlideItem> items = new ArrayList<>();
-        Text text = new Text();
-        items.add(text);
-        Slide slideWithTextOnly = new Slide(items);
-        Slide slideWithTextOnly2 = new Slide(items);
-        slides.add(slideWithTextOnly);
-        slides.add(slideWithTextOnly2);
-        slideShow = new SlideShow(slides);
-        slideShow.start();
+//        StringBuilder stringBuilder = new StringBuilder();
+//        stringBuilder.append("<html><body>");
+//        for (this.iterator.first(); !this.iterator.isDone(); this.iterator.next())
+//        {
+//            stringBuilder.append(this.iterator.current().getContent());
+//        }
+//        stringBuilder.append("</body></html>");
+//        System.out.println(stringBuilder.toString());
+    }
+
+    public SlideShowComponent getNextSlide()
+    {
+        this.iterator.next();
+        return this.iterator.current();
     }
 }

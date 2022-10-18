@@ -1,0 +1,65 @@
+class Control
+{
+  private Projector projector;
+  private Infra infra;
+
+  main
+  {
+     XMLObject object = infra.readXML();
+     projector.build(object);
+     UI.display(this);
+  }
+
+  String next()
+  {
+     return projector.getIterator().next().display();
+  }
+}
+
+class UI
+{
+   private Control control;
+
+   void display(Control control)
+   {
+     this.control = control;
+   }
+ 
+   void next()
+   {
+      String json = control.next();
+      new Label(this.parseJson()).show();
+   }
+}
+
+class Infra
+{
+    private DomainService domainService;
+
+    readXML()
+    {
+       //read xml somehow
+       domainService.constructXML(this.somehowReadXML());
+    }
+
+    getXMLObject()
+    {
+       return domainService.getXMLObject();
+    }
+}
+
+class DomainService
+{
+  private XMLObject object;
+  
+  constructXML()
+  {
+     builder.build(...);
+     this.object = builder.getXML();
+  }
+
+  XMLObject getXMLObject()
+  {
+     return this.object;
+  }
+}

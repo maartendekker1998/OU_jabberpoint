@@ -2,9 +2,10 @@ package DesignPatterns.slideshow;
 
 public interface Iterator
 {
-    SlideShowComponent next();
-    SlideShowComponent previous();
+    void next();
+    void previous();
     boolean isDone();
+    SlideShowComponent current();
 
     SlideShowComponent first();
 }

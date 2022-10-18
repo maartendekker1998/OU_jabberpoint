@@ -1,6 +1,10 @@
 package DesignPatterns.slideshow;
 
+import java.util.List;
+
 public abstract class SlideShowComponent implements Iterable
 {
-    abstract String display();
+    public abstract List<? extends Content> getContent();
 }
+
+
