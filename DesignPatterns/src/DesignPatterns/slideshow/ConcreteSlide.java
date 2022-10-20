@@ -14,9 +14,9 @@ public class ConcreteSlide extends SlideShowComposite
     }
 
     @Override
-    public Iterator createIterator()
+    public SlideIterator createIterator()
     {
-        return null;
+        return new SlideIterator(this);
     }
 
     @Override

@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class BulletList extends ContentComposite
+public class ContentList extends ContentComposite
 {
-    BulletList(int indentation, Content... contents)
+    ContentList(int indentation, List<Content> contents)
     {
-        super(indentation, Arrays.asList(contents));
+        super(indentation, contents);
     }
 
     @Override

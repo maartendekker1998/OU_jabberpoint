@@ -11,12 +11,6 @@ public class Text extends Content<String>
     }
 
     @Override
-    public String getData()
-    {
-        return super.getData();
-    }
-
-    @Override
     public List<Text> getContent()
     {
         List<Text> displayContentList = new ArrayList<>();

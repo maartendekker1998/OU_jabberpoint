@@ -11,12 +11,6 @@ public class Image extends Content<String>
     }
 
     @Override
-    public String getData()
-    {
-        return super.getData();
-    }
-
-    @Override
     public List<Image> getContent()
     {
         List<Image> displayContentList = new ArrayList<>();

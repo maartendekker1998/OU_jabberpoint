@@ -1,10 +1,10 @@
 package DesignPatterns.slideshow;
 
-public class SlideShowIterator extends SlideShowComponentIterator<SlideShowConcrete>
+public class SlideShowIterator extends SlideShowCompositeIterator
 {
-    SlideShowIterator(SlideShowConcrete slideshow)
+    SlideShowIterator(SlideShowConcrete iterable)
     {
-        this.slideshow = slideshow;
+        this.iterable = iterable;
     }
 
     @Override
@@ -24,18 +24,24 @@ public class SlideShowIterator extends SlideShowComponentIterator<SlideShowConcr
     @Override
     public boolean isDone()
     {
-        return this.index >= this.slideshow.componentList.size();
+        return this.index >= this.iterable.componentList.size();
+    }
+
+    @Override
+    public void resetIndex()
+    {
+        this.index = 0;
     }
 
     @Override
     public SlideShowComponent current()
     {
-        return this.slideshow.componentList.get(this.index-1);
+        return this.iterable.componentList.get(this.index-1);
     }
 
     @Override
     public SlideShowComponent first()
     {
-        return this.slideshow.componentList.get(0);
+        return this.iterable.componentList.get(0);
     }
 }

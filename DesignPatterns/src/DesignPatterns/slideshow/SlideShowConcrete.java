@@ -11,7 +11,7 @@ public class SlideShowConcrete extends SlideShowComposite
     }
 
     @Override
-    public Iterator createIterator()
+    public SlideShowIterator createIterator()
     {
         return new SlideShowIterator(this);
     }
@@ -127,5 +127,4 @@ class XMLSwingFactory extends ControllerFactory
     public InfraStructure getInfraStructure() {
         return super.createInfra(new XMLDirector());
     }
-
 }

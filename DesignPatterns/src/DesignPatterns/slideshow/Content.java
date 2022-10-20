@@ -18,7 +18,7 @@ public abstract class Content<T> extends SlideShowComponent
         return null;
     }
 
-    public T getData()
+    public final T getData()
     {
         return this.data;
     }
