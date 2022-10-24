@@ -10,15 +10,17 @@ public class SlideShowIterator extends SlideShowCompositeIterator
     @Override
     public void next()
     {
+        if ((this.index+1) >= this.iterable.componentList.size()) return;
         this.index++;
-        System.out.println("slide next" + (this.index-1));
+        System.out.println("slide next " + (this.index));
     }
 
     @Override
     public void previous()
     {
+        if ((this.index - 1) < 0) return;
         this.index--;
-        System.out.println("slide prev" + (this.index));
+        System.out.println("slide prev " + (this.index));
     }
 
     @Override
@@ -36,7 +38,8 @@ public class SlideShowIterator extends SlideShowCompositeIterator
     @Override
     public SlideShowComponent current()
     {
-        return this.iterable.componentList.get(this.index-1);
+        if (this.index-1 < 0) return this.first();
+        return this.iterable.componentList.get(this.index);
     }
 
     @Override

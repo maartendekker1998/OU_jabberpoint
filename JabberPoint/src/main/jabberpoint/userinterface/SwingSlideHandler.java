@@ -2,6 +2,7 @@ package main.jabberpoint.userinterface;
 
 import main.jabberpoint.domain.ConcreteSlide;
 import main.jabberpoint.domain.Content;
+import main.jabberpoint.domain.Text;
 
 public class SwingSlideHandler implements SlideHandler
 {
@@ -11,12 +12,16 @@ public class SwingSlideHandler implements SlideHandler
     public void renderSlide(ConcreteSlide slide)
     {
         System.out.println(slide.getTitle());
-        this.windowHandler.addNode(0, slide.getTitle());
-//        if (slide.hasTransitions()) //Uncomment when transitions added
+        this.windowHandler.clear();
+        this.windowHandler.setTitle(slide.getTitle());
+//        if (!slide.hasTransitions()) //Uncomment when transitions added
         {
-            for (Content<String> content : slide.getContent())
+            for (Content content : slide.getContent())
             {
-                this.windowHandler.addNode(0, content.getData());
+                if (content instanceof Text)
+                {
+                    this.windowHandler.addNode((Text)content);
+                }
             }
         }
     }

@@ -47,7 +47,7 @@ public class Controller
 
     public void previousSlide()
     {
-
+        this.userInterface.renderSlide(this.projectorService.getPreviousSlide());
     }
 
     public SlideShowComponent nextContent()

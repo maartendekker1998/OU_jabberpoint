@@ -17,7 +17,7 @@ public class ProjectorService
         return this.projector.getNextSlide();
     }
 
-    public SlideShowComponent getPriviousSlide()
+    public SlideShowComponent getPreviousSlide()
     {
         return this.projector.previousSlide();
     }

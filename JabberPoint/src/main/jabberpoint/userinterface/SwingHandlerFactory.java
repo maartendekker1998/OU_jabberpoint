@@ -2,11 +2,11 @@ package main.jabberpoint.userinterface;
 
 public class SwingHandlerFactory implements HandlerFactory
 {
-    @Override
-    public EventHandler createEventHandler()
-    {
-        return new SwingEventHandler();
-    }
+//    @Override
+//    public EventHandler createEventHandler()
+//    {
+//        return new SwingEventHandler();
+//    }
 
     @Override
     public SlideHandler createSlideHandler()
@@ -17,6 +17,6 @@ public class SwingHandlerFactory implements HandlerFactory
     @Override
     public WindowHandler createWindowHandler()
     {
-        return new SwingWindowHandler();
+        return new SwingWindowHandler(new SwingEventHandler());
     }
 }

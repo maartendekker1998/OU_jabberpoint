@@ -1,8 +1,13 @@
 package main.jabberpoint.userinterface;
 
+import main.jabberpoint.domain.Text;
+
 public interface WindowHandler
 {
     void renderUI();
 
-    void addNode(int indentation, String text);
+    void addNode(Text text);
+    void setTitle(String title);
+
+    void clear();
 }

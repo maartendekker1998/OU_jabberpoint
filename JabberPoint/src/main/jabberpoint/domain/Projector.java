@@ -34,12 +34,6 @@ public class Projector
         return this.slideIterator.current();
     }
 
-    public SlideShowComponent previousSlide()
-    {
-        this.slideIterator.previous();
-        return this.slideIterator.current();
-    }
-
     public void previousContent()
     {
         this.slideIterator.previous();
@@ -63,6 +57,14 @@ public class Projector
     public SlideShowComponent getNextSlide()
     {
         this.slideShowIterator.next();
+        SlideShowComponent slide = this.slideShowIterator.current();
+        this.slideIterator = slide.createIterator();
+        return slide;
+    }
+
+    public SlideShowComponent previousSlide()
+    {
+        this.slideShowIterator.previous();
         SlideShowComponent slide = this.slideShowIterator.current();
         this.slideIterator = slide.createIterator();
         return slide;

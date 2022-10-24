@@ -8,14 +8,14 @@ import java.util.List;
 public class UserInterface
 {
     private HandlerFactory handlerFactory;
-    private EventHandler eventHandler;
+//    private EventHandler eventHandler;
     private SlideHandler slideHandler;
     private WindowHandler windowHandler;
 
     public UserInterface(HandlerFactory handlerFactory)
     {
         this.handlerFactory = handlerFactory;
-        this.eventHandler = this.handlerFactory.createEventHandler();
+//        this.eventHandler = this.handlerFactory.createEventHandler();
         this.slideHandler = this.handlerFactory.createSlideHandler();
         this.windowHandler = this.handlerFactory.createWindowHandler();
 
