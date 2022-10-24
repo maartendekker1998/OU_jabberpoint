@@ -17,7 +17,7 @@ public class SwingWindowHandler implements WindowHandler
     private final JPanel slide = new JPanel();
 
     private final int DEFAULT_WIDTH = 400;
-    private final int DEFAULT_HEIGHT = 400;
+    private final int DEFAULT_HEIGHT = 800;
     private final int X_MARGIN = 5;
     private final int Y_MARGIN = 5;
     private final int DEFAULT_LABEL_HEIGHT = 36;

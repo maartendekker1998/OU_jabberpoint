@@ -1,42 +1,16 @@
 package main.jabberpoint.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SlideShowComponentBuilder implements Builder
 {
-    private SlideShowComponent slideShowComponent;
+    private ConcreteSlideShow slideShow;
     private ConcreteSlide slide;
-    private List<ConcreteSlide> slides;
-
-    public void build()
-    {
-        List<ConcreteSlide> slides = new ArrayList<>();
-        List<Content> items = new ArrayList<>();
-        Text text = new Text(0, "<h1>epic data</h1>");
-        items.add(text);
-        ConcreteSlide slideWithTextOnly = new ConcreteSlide("Slide 1", items);
-        Image image = new Image(0, "<h1>epic data</h1>");
-        items.add(image);
-        ConcreteSlide slideWithImageAndText = new ConcreteSlide("Slide 2", items);
-
-        slides.add(slideWithTextOnly);
-        slides.add(slideWithImageAndText);
-
-        items.clear();
-        items.add(new Text(0, "<h1>epic data</h1>"));
-        items.add(new BulletList(1, new Text(1, "<h2>epic data</h2>"), new BulletList(2, new Text(2, "<h3>epic data</h3>"), new Image(2, "<img>epic image</img>"))));
-        items.add(new Image(0, "<h1>epic data</h1>"));
-        ConcreteSlide slideWithBulletList = new ConcreteSlide("Slide 3", items);
-        slides.add(slideWithBulletList);
-        this.slideShowComponent = new ConcreteSlideShow(slides);
-    }
 
     @Override
     //reset function for the builder
     public void newSlideShow() {
-        this.slideShowComponent = new ConcreteSlideShow();
-        this.slides = new ArrayList<>();
+        this.slideShow = new ConcreteSlideShow();
     }
 
     @Override
@@ -50,6 +24,10 @@ public class SlideShowComponentBuilder implements Builder
         this.slide.setTitle(title);
     }
 
+    @Override
+    public void setSlideTransitions(Boolean transitions){
+        this.slide.setHasTransitions(transitions);
+    }
 
     private void addContent(Content content) {
         //add content to local slide
@@ -68,14 +46,16 @@ public class SlideShowComponentBuilder implements Builder
 
     @Override
     public void addSlide() {
-        //add the local slide to the slides
-        this.slides.add(this.slide);
+        this.slideShow.addSlide(this.slide);
     }
 
     @Override
-    public SlideShowComponent getSlideShow()
-    {
-        this.slideShowComponent = new ConcreteSlideShow(this.slides);
-        return this.slideShowComponent;
+    public SlideShowComponent getSlideShow(){
+        return this.slideShow;
+    }
+
+    @Override
+    public void addBulletList(Integer indentation, List<Content> contentList) {
+        this.addContent(new BulletList(indentation, contentList));
     }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Image extends Content<String>
 {
-    Image(int indentation, String data)
+    public Image(int indentation, String data)
     {
         super(indentation, data);
     }

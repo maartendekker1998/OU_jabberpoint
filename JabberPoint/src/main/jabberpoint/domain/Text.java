@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Text extends Content<String>
 {
-    Text(int indentation, String data)
+    public Text(int indentation, String data)
     {
         super(indentation, data);
     }

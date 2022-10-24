@@ -6,17 +6,7 @@ import java.util.List;
 public class ConcreteSlide extends SlideShowComposite
 {
     private String title;
-
-    ConcreteSlide(){
-        super();
-    }
-
-    ConcreteSlide(String title, List<Content> content)
-    {
-        super();
-        this.title = title;
-        super.componentList.addAll(content);
-    }
+    private Boolean hasTransitions;
 
     @Override
     public SlideIterator createIterator()
@@ -43,5 +33,13 @@ public class ConcreteSlide extends SlideShowComposite
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Boolean getHasTransitions() {
+        return hasTransitions;
+    }
+
+    public void setHasTransitions(Boolean hasTransitions) {
+        this.hasTransitions = hasTransitions;
     }
 }

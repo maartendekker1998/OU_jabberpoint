@@ -15,7 +15,7 @@ public class Infrastructure {
         this.director = director;
     }
 
-    public SlideShowComponent loadFile(String filename) throws IOException {
+    public SlideShowComponent loadFile(String filename) {
 
         this.director.construct(builderService, filename);
 

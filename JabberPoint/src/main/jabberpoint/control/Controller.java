@@ -18,7 +18,7 @@ public class Controller
 
     private Controller(){}
 
-    public void initialize(ControllerFactory factory) throws IOException {
+    public void initialize(ControllerFactory factory) {
         this.infrastructure = factory.getInfraStructure();
         this.userInterface = factory.getUI();
         this.projectorService = factory.getProjectorService();

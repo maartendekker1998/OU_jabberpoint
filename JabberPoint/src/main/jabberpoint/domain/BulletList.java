@@ -6,10 +6,12 @@ import java.util.List;
 
 public class BulletList extends ContentComposite
 {
-    BulletList(int indentation, Content... contents)
+    public BulletList(int indentation, List<Content> contents)
     {
-        super(indentation, Arrays.asList(contents));
+        super(indentation, contents);
     }
+
+
 
     @Override
     public List<Content> getContent()
