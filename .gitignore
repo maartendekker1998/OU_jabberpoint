@@ -8,6 +8,7 @@
 /out-tsc
 /target
 /DesignPatterns/out
+/JabberPoint/target
 
 .project
 .classpath
