@@ -2,7 +2,7 @@ package domain;
 
 public class SlideShowIterator extends SlideShowCompositeIterator
 {
-    SlideShowIterator(SlideShowConcrete iterable)
+    SlideShowIterator(ConcreteSlideShow iterable)
     {
         this.iterable = iterable;
     }

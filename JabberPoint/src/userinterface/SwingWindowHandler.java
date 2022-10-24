@@ -1,7 +1,5 @@
 package userinterface;
 
-import org.w3c.dom.css.Rect;
-
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;

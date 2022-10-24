@@ -2,25 +2,27 @@ package control;
 
 import domain.SlideShowComponent;
 import domain_service.ProjectorService;
+import infrastructure.Infrastructure;
 import userinterface.UserInterface;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Controller
 {
     private ProjectorService projectorService;
-    //infrastructure omitted
+    private Infrastructure infrastructure;
     private UserInterface userInterface;
     private static Controller instance;
 
     private Controller(){}
 
-    public void initialize(ControllerFactory factory)
-    {
-        //this.infraStructure = factory.getInfraStructure();
+    public void initialize(ControllerFactory factory) throws IOException {
+        this.infrastructure = factory.getInfraStructure();
         this.userInterface = factory.getUI();
         this.projectorService = factory.getProjectorService();
-        //this.projectorService.setSlideShow(this.infraStructure.loadFile());
+        this.projectorService.setSlideShow(this.infrastructure.loadFile("test.xml"));
         this.nextSlide();
     }
 
@@ -34,9 +36,8 @@ public class Controller
         return instance;
     }
 
-    private void loadFile(String url)
-    {
-        //omitted
+    private void loadFile(String uri) throws IOException {
+        SlideShowComponent slideshow = this.infrastructure.loadFile(uri);
     }
 
     public void nextSlide()

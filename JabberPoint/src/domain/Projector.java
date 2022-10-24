@@ -8,9 +8,12 @@ public class Projector
     private Iterator slideShowIterator;
     private Iterator slideIterator;
 
-    public Projector(Iterable slideShowComponent)
-    {
-        this.slideShowIterator = slideShowComponent.createIterator();
+    public Projector(){
+    }
+
+
+    public void setSlideShow(SlideShowComponent slideshow){
+        this.slideShowIterator = slideshow.createIterator();
     }
 
     public void start()

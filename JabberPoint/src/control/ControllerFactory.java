@@ -1,13 +1,17 @@
 package control;
 
+import domain_service.BuilderService;
 import domain_service.ProjectorService;
+import infrastructure.DirectorStrategy;
+import infrastructure.Infrastructure;
 import userinterface.HandlerFactory;
 import userinterface.UserInterface;
 
 public abstract class ControllerFactory
 {
     public abstract UserInterface getUI();
-//    public abstract InfraStructure getInfraStructure();
+
+    public abstract Infrastructure getInfraStructure();
 
     public final ProjectorService getProjectorService()
     {
@@ -19,10 +23,8 @@ public abstract class ControllerFactory
         return new UserInterface(handlerFactory);
     }
 
-    //infrastructure omitted
-
-//    final InfraStructure createInfra(DirectorStrategy strategy)
-//    {
-//        return new InfraStructure(strategy);
-//    }
+    final Infrastructure createInfra(BuilderService builderService, DirectorStrategy strategy)
+    {
+        return new Infrastructure(builderService, strategy);
+    }
 }
