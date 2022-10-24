@@ -83,7 +83,7 @@ public class SwingWindowHandler implements WindowHandler
     @Override
     public void addNode(Text text)
     {
-        JLabel label = new JLabel(text.getData());
+        JLabel label = new JLabel(this.createIndentation(text.getIndentation()) + text.getData());
         Font font = this.defaultFont;
         Rectangle area = new Rectangle(0, 0, slide.getWidth(), slide.getHeight());
         label.setFont(font.deriveFont(font.getSize() * this.getScale(area)));
@@ -116,7 +116,13 @@ public class SwingWindowHandler implements WindowHandler
         this.slide.add(label);
         this.previousComponentHeight+=label.getHeight();
         this.slide.repaint();
+    }
 
+    private String createIndentation(int indentation)
+    {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < indentation; i++) stringBuilder.append("  ");
+        return stringBuilder.toString();
     }
 
     @Override
@@ -128,6 +134,6 @@ public class SwingWindowHandler implements WindowHandler
 
     private Rectangle createBounds(int x, int y, int width, int height)
     {
-        return new Rectangle(x, y, width-10, height);
+        return new Rectangle(x, y, width-(2*X_MARGIN), height);
     }
 }
