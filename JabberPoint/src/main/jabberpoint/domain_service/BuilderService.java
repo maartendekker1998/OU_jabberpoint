@@ -63,4 +63,18 @@ public class BuilderService {
     {
         return new BulletList(indentation, new ArrayList<>());
     }
+
+    public void newMetaData(){
+        builder.newMetadata();
+    }
+
+    public void setMetadata(String key, String value){
+        builder.setMetadata(key, value);
+    }
+
+    public void addMetadata(){
+        builder.addMetadata();
+    }
+
+
 }

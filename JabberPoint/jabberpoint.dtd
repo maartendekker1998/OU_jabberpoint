@@ -2,8 +2,14 @@
  Document Type Definition voor JabberPoint presentaties
  $Id$
  -->
+<!ELEMENT presentation (metadata*,slide+)>
+
+<!ELEMENT metadata (#PCDATA)>
+<!ATTLIST metadata kind CDATA #REQUIRED>
+
+<!ELEMENT presenter (#PCDATA)>
 <!ELEMENT showtitle (#PCDATA)>
-<!ELEMENT presentation (showtitle,slide+)>
+
 <!ELEMENT title (#PCDATA)>
 <!ELEMENT slide (title, item*)>
 <!ATTLIST slide transitions CDATA #REQUIRED>

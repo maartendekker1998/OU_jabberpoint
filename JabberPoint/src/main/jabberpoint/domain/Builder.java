@@ -1,11 +1,16 @@
 package main.jabberpoint.domain;
 
-import java.util.List;
-
 public interface Builder
 {
     void newSlideShow();
     void newSlide();
+
+    void newMetadata();
+
+    void setMetadata(String key, String value);
+
+    void addMetadata();
+
     void addSlideTitle(String title);
 
     void setSlideTransitions(Boolean transitions);
@@ -14,6 +19,5 @@ public interface Builder
     void addImageContent(Integer indentation, String data);
     void addSlide();
     SlideShowComponent getSlideShow();
-
     void addBulletList(Integer indentation, BulletList contentList);
 }

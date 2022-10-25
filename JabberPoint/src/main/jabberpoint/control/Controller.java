@@ -36,7 +36,7 @@ public class Controller
         return instance;
     }
 
-    private void loadFile(String uri) throws IOException {
+    private void loadFile(String uri) {
         SlideShowComponent slideshow = this.infrastructure.loadFile(uri);
     }
 

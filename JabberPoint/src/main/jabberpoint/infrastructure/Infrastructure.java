@@ -18,7 +18,6 @@ public class Infrastructure {
     public SlideShowComponent loadFile(String filename) {
 
         this.director.construct(builderService, filename);
-
         return this.builderService.getResults();
     }
 

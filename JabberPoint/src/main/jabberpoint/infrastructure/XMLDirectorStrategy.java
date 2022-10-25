@@ -1,7 +1,6 @@
 package main.jabberpoint.infrastructure;
 
 import main.jabberpoint.domain.*;
-import main.jabberpoint.domain.Text;
 import main.jabberpoint.domain_service.BuilderService;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
@@ -9,7 +8,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import java.awt.image.ByteLookupTable;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,7 +17,11 @@ import java.util.List;
 public class XMLDirectorStrategy implements DirectorStrategy {
 
     /** namen van xml tags of attributen */
+    protected static final String METADATA = "metadata";
+    protected static final String PRESENTER = "presenter";
     protected static final String SHOWTITLE = "showtitle";
+
+
     protected static final String TRANSITIONS = "transitions";
     protected static final String SLIDETITLE = "title";
     protected static final String SLIDE = "slide";
@@ -56,8 +59,28 @@ public class XMLDirectorStrategy implements DirectorStrategy {
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document document = builder.parse(new File(filename));
-            Element doc = document.getDocumentElement();;
+            Element doc = document.getDocumentElement();
 
+            builderService.newMetaData();
+            NodeList metadata = doc.getElementsByTagName(METADATA);
+
+            for (int i = 0; i < metadata.getLength() ; i++) {
+
+                Element metadataField = (Element) metadata.item(i);
+                String type = metadataField.getAttribute(KIND);
+
+                if (PRESENTER.equals(type))
+                {
+                    builderService.setMetadata(PRESENTER, metadataField.getTextContent());
+                }
+                else if (SHOWTITLE.equals(type))
+                {
+                    builderService.setMetadata(SHOWTITLE, metadataField.getTextContent());
+                }
+                else{
+                    System.err.println(UNKNOWNTYPE);
+                }
+            }
 
             builderService.newSlideShow();
 
@@ -78,6 +101,8 @@ public class XMLDirectorStrategy implements DirectorStrategy {
                 this.prepareSlide(builderService, xmlSlide, null);
                 builderService.addSlide();
             }
+
+            builderService.addMetadata();
         }
         catch (IOException iox) {
             System.err.println(iox.toString());

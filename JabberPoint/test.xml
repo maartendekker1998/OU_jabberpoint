@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE presentation SYSTEM "jabberpoint.dtd">
 <presentation>
-	<showtitle>XML-Based Presentation for Jabberpoint</showtitle>
+	<metadata kind="presenter">Bart &amp; Maarten</metadata>
+	<metadata kind="showtitle">Dikke JabberPoint</metadata>
+
 	<slide transitions="false">
 		<title>JabberPoint XML-Demo</title>
 		<item kind="text"  level="1">Welkom bij Jabberpoint</item>
