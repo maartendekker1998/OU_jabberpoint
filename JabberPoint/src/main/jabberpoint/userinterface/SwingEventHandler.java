@@ -5,6 +5,13 @@ import java.awt.event.KeyEvent;
 
 public class SwingEventHandler extends KeyAdapter implements EventHandler
 {
+    private boolean transitions = false;
+
+    void setTransitions(boolean transitions)
+    {
+        this.transitions = transitions;
+    }
+
     @Override
     public void keyPressed(KeyEvent keyEvent)
     {
@@ -15,6 +22,12 @@ public class SwingEventHandler extends KeyAdapter implements EventHandler
                 break;
             case KeyEvent.VK_LEFT:
                 new PreviousSlideCommand().execute();
+                break;
+            case KeyEvent.VK_DOWN:
+                if (this.transitions) new NextContentCommand().execute();
+                break;
+            case KeyEvent.VK_UP:
+                if (this.transitions) new RemoveLastContentCommand().execute();
                 break;
         }
     }

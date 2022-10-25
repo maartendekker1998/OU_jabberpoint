@@ -11,29 +11,28 @@ public class SlideIterator extends SlideShowCompositeIterator
     {
         for (Content content : slideshow.getContent())
         {
-            if (content.getIndentation() == 1)
-            {
-
-            }
+            List<Content> chunkList = new ArrayList<>();
+            chunkList.add(content);
+            this.chunks.add(new ContentList(0, chunkList));
+//            if (content.getIndentation() == 1)
+//            {
+//
+//            }
         }
-
-        List<Content> chunk = new ArrayList<>();
-
-        chunks.add(new ContentList(0, chunk));
-
-//        this.slideshow = slideshow;
     }
 
     @Override
     public void next()
     {
+        if ((this.index+1) >= this.chunks.size()) return;
         this.index++;
-        System.out.println("slide item next" + (this.index-1));
+        System.out.println("slide item next" + (this.index));
     }
 
     @Override
     public void previous()
     {
+//        if ((this.index - 2) < 0) return;
         this.index--;
         System.out.println("slide item prev" + (this.index));
     }
@@ -41,7 +40,7 @@ public class SlideIterator extends SlideShowCompositeIterator
     @Override
     public boolean isDone()
     {
-        return this.index >= this.chunks.size();
+        return (this.index+1) >= this.chunks.size();
     }
 
     @Override
@@ -53,7 +52,7 @@ public class SlideIterator extends SlideShowCompositeIterator
     @Override
     public SlideShowComponent current()
     {
-        return this.chunks.get(this.index-1);
+        return this.chunks.get(this.index);
     }
 
 //    @Override

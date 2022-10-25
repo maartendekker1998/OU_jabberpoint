@@ -24,12 +24,12 @@ public class ProjectorService
 
     public SlideShowComponent nextContent()
     {
-        return null;
+        return this.projector.nextContent();
     }
 
-    public void removeLastContent()
+    public SlideShowComponent removeLastContent()
     {
-
+        return this.projector.previousContent();
     }
 
     public void removeAllContent()

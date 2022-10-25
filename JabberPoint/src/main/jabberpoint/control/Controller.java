@@ -1,5 +1,6 @@
 package main.jabberpoint.control;
 
+import main.jabberpoint.domain.Content;
 import main.jabberpoint.domain.SlideShowComponent;
 import main.jabberpoint.domain_service.ProjectorService;
 import main.jabberpoint.infrastructure.Infrastructure;
@@ -52,12 +53,14 @@ public class Controller
 
     public SlideShowComponent nextContent()
     {
+        this.userInterface.renderContent(this.projectorService.nextContent());
         return null;
     }
 
     public void removeLastContent()
     {
-
+        SlideShowComponent content = this.projectorService.removeLastContent();
+        this.userInterface.removeLastContent(content);
     }
 
     public void removeAllContent()

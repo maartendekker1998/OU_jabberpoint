@@ -30,13 +30,16 @@ public class Projector
 
     public SlideShowComponent nextContent()//ContentList.class
     {
+        if (this.slideIterator.isDone()) return null;
         this.slideIterator.next();
         return this.slideIterator.current();
     }
 
-    public void previousContent()
+    public SlideShowComponent previousContent()
     {
+        SlideShowComponent component = this.slideIterator.current();
         this.slideIterator.previous();
+        return component;
     }
 
     public void removeContent()

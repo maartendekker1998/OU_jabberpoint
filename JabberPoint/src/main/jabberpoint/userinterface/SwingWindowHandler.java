@@ -1,5 +1,8 @@
 package main.jabberpoint.userinterface;
 
+import main.jabberpoint.domain.Content;
+import main.jabberpoint.domain.ContentList;
+import main.jabberpoint.domain.Image;
 import main.jabberpoint.domain.Text;
 
 import javax.swing.*;
@@ -24,15 +27,18 @@ public class SwingWindowHandler implements WindowHandler
     private int DEFAULT_LABEL_WIDTH = DEFAULT_WIDTH-(2*X_MARGIN);
 
     private final Map<Component, Font> fontMap = new HashMap<>();
+    private final Map<Content, JComponent> itemMap = new HashMap<>();
     private final Font defaultFont = new Font("Helvetica", Font.BOLD, DEFAULT_LABEL_HEIGHT);
     private int previousComponentHeight = 5;
+    private final SwingEventHandler eventHandler;
 
     public SwingWindowHandler(SwingEventHandler eventHandler)
     {
+        this.eventHandler = eventHandler;
         this.slide.addComponentListener(new ComponentAdapter()
         {
             @Override
-            public void componentResized(ComponentEvent e)
+            public void componentResized(ComponentEvent event)
             {
                 DEFAULT_LABEL_WIDTH = (slide.getWidth()+16)-(2*X_MARGIN);
                 Rectangle area = new Rectangle(0, 0, slide.getWidth(), slide.getHeight());
@@ -42,26 +48,14 @@ public class SwingWindowHandler implements WindowHandler
                     Font font = fontMap.get(component);
                     component.setFont(font.deriveFont(font.getSize() * getScale(area)));
                     component.setSize(component.getSize().width, component.getFont().getSize()+Y_MARGIN);
-                    component.setBounds(createBounds(component.getX(), component.getY(), e.getComponent().getWidth(), component.getHeight()));
+                    component.setBounds(createBounds(component.getX(), component.getY(), event.getComponent().getWidth(), component.getHeight()));
                     component.setLocation(X_MARGIN, previousComponentHeight);
                     previousComponentHeight += component.getHeight();
                 }
             }
         });
-//        this.nextButton.addActionListener(event ->
-//        {
-////            evenHandler.handle(new NextSlideCommand());
-//            //Not needed in this case
-////            SwingUtilities.invokeLater(this::nextSlide);
-//        });
-//        menuItem.addActionListener(event ->
-//        {
-//            evenHandler.handle(new NextSlideCommand());
-//            //Not needed in this case
-//            SwingUtilities.invokeLater(this::nextSlide);
-//        });
-        this.mainFrame.setMenuBar(new MenuController(eventHandler));
-        this.mainFrame.addKeyListener(eventHandler);
+        this.mainFrame.setMenuBar(new MenuController(this.eventHandler));
+        this.mainFrame.addKeyListener(this.eventHandler);
         this.mainFrame.setContentPane(this.slide);
         this.mainFrame.setTitle("JabberPoint");
         this.mainFrame.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
@@ -81,8 +75,9 @@ public class SwingWindowHandler implements WindowHandler
     }
 
     @Override
-    public void addNode(Text text)
+    public void addText(Text text)
     {
+
         JLabel label = new JLabel(this.createIndentation(text.getIndentation()) + text.getData());
         Font font = this.defaultFont;
         Rectangle area = new Rectangle(0, 0, slide.getWidth(), slide.getHeight());
@@ -99,6 +94,16 @@ public class SwingWindowHandler implements WindowHandler
 //        this.mainFrame.setSize(this.previousComponentHeight > 400 ? (DEFAULT_HEIGHT=previousComponentHeight) : DEFAULT_HEIGHT, DEFAULT_WIDTH);
 //        this.mainFrame.setSize(this.previousComponentHeight < 400 ? DEFAULT_HEIGHT : (DEFAULT_HEIGHT=previousComponentHeight), DEFAULT_HEIGHT);
         this.slide.repaint();
+        itemMap.put(text, label);
+    }
+
+    @Override
+    public void addImage(Image content)
+    {
+        //TODO WEG DIT
+        this.itemMap.put(content, new JLabel("heloooooooooooooo"));
+//        this.addText(new Text(content.getIndentation(), content.getData()));
+        //TODO
     }
 
     @Override
@@ -127,7 +132,28 @@ public class SwingWindowHandler implements WindowHandler
     public void clear()
     {
         this.slide.removeAll();
+        this.itemMap.clear();
         this.previousComponentHeight = 5;
+    }
+
+    @Override
+    public void setTransitions(boolean transitions)
+    {
+        this.eventHandler.setTransitions(transitions);
+    }
+
+    @Override
+    public void removeLastContent(Content content)
+    {
+        for (Map.Entry<Content, JComponent> k : itemMap.entrySet())
+        {
+            System.out.println(k.getKey().getData());
+        }
+//        System.out.println(((ContentList)content).getContent().get(0).getData());
+        this.slide.remove(itemMap.get(((ContentList)content).getContent().get(0)));
+        itemMap.remove(content);
+//        this.slide.remove(this.slide.getComponents().length-1);
+        this.slide.repaint();
     }
 
     private Rectangle createBounds(int x, int y, int width, int height)

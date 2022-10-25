@@ -1,6 +1,7 @@
 package main.jabberpoint.userinterface;
 
 import main.jabberpoint.domain.ConcreteSlide;
+import main.jabberpoint.domain.Content;
 import main.jabberpoint.domain.SlideShowComponent;
 
 import java.util.List;
@@ -34,9 +35,9 @@ public class UserInterface
         this.slideHandler.renderSlide((ConcreteSlide)slide);
     }
 
-    void renderContent(SlideShowComponent content)
+    public void renderContent(SlideShowComponent content)
     {
-
+        this.slideHandler.renderContent((Content)content);
     }
 
     void renderContent(List<SlideShowComponent> contents)
@@ -44,9 +45,9 @@ public class UserInterface
 
     }
 
-    void removeLastContent()
+    public void removeLastContent(SlideShowComponent content)
     {
-
+        this.slideHandler.removeLastContent((Content) content);
     }
 
     void removeAllContent()

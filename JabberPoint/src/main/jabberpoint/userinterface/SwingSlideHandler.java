@@ -1,8 +1,8 @@
 package main.jabberpoint.userinterface;
 
-import main.jabberpoint.domain.ConcreteSlide;
-import main.jabberpoint.domain.Content;
-import main.jabberpoint.domain.Text;
+import main.jabberpoint.domain.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SwingSlideHandler implements SlideHandler
 {
@@ -11,18 +11,20 @@ public class SwingSlideHandler implements SlideHandler
     @Override
     public void renderSlide(ConcreteSlide slide)
     {
-        System.out.println(slide.getTitle());
+        System.out.println("Title: " + slide.getTitle());
         this.windowHandler.clear();
         this.windowHandler.setTitle(slide.getTitle());
-//        if (!slide.hasTransitions()) //Uncomment when transitions added
+        this.windowHandler.setTransitions(slide.hasTransitions());
+        if (!slide.hasTransitions()) this.renderContent(slide.getContent());
+    }
+
+    private void renderContent(List<Content> contentList)
+    {
+        for (Content content : contentList)
         {
-            for (Content content : slide.getContent())
-            {
-                if (content instanceof Text)
-                {
-                    this.windowHandler.addNode((Text)content);
-                }
-            }
+            if (content instanceof Text) this.windowHandler.addText((Text)content);
+            if (content instanceof Image) this.windowHandler.addImage((Image)content);
+            if (content instanceof ContentComposite) this.renderContent(((ContentComposite)content).getData());
         }
     }
 
@@ -30,5 +32,20 @@ public class SwingSlideHandler implements SlideHandler
     public void setWindowHandler(WindowHandler windowHandler)
     {
         this.windowHandler = windowHandler;
+    }
+
+    @Override
+    public void renderContent(Content content)
+    {
+        if (content == null) return;
+        List<Content> contentList = new ArrayList<>();
+        contentList.add(content);
+        this.renderContent(contentList);
+    }
+
+    @Override
+    public void removeLastContent(Content content)
+    {
+        this.windowHandler.removeLastContent(content);
     }
 }
