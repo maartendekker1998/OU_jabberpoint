@@ -1,7 +1,5 @@
 package main.jabberpoint.domain;
 
-import java.util.List;
-
 public class SlideShowComponentBuilder implements Builder
 {
     private ConcreteSlideShow slideShow;
@@ -55,7 +53,7 @@ public class SlideShowComponentBuilder implements Builder
     }
 
     @Override
-    public void addBulletList(Integer indentation, List<Content> contentList) {
-        this.addContent(new BulletList(indentation, contentList));
+    public void addBulletList(Integer indentation, BulletList contentList) {
+        this.addContent(contentList);
     }
 }

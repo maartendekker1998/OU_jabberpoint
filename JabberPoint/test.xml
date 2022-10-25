@@ -9,16 +9,41 @@
 		<item kind="text"  level="2">Herschreven door</item>
 		<item kind="text"  level="2">Gert Florijn, Mark van Elswijk, Marc Evers</item>
 		<item kind="text"  level="2">en Sylvia Stuurman</item>
-		<item kind="text"  level="1">Navigatie:</item>
+		<item kind="image"  level="1">Navigatie:</item>
 		<item kind="text"  level="2">Volgende slide: PgDn or Enter</item>
 		<item kind="text"  level="2">Vorige slide: PgUp or up-arrow</item>
 		<item kind="text"  level="2">Stoppen: q or Q</item>
-		<item kind="bulletlist" level="2">
-			<item kind="text"  level="3">BulletItem1</item>
-			<item kind="text"  level="3">BulletItem2</item>
-			<item kind="bulletlist" level="4">
-				<item kind="text" level="5">nestedBul1</item>
-				<item kind="text" level="5">nestedBul2</item>
+		<item kind="bulletlist" level="1">
+			<item kind="image"  level="1">BulletItem1</item>
+			<item kind="text"  level="1">BulletItem2</item>
+			<item kind="bulletlist" level="2">
+				<item kind="text" level="2">NestedBul1</item>
+				<item kind="text" level="2">NestedBul2</item>
+				<item kind="bulletlist" level="3">
+					<item kind="text" level="3">Even deeper</item>
+					<item kind="bulletlist" level="4">
+						<item kind="text" level="4">What? even more deeper!</item>
+					</item>
+					<item kind="text"  level="3">item na en voor bullet op indentation 3</item>
+					<item kind="bulletlist" level="4">
+						<item kind="text" level="4">How deep can we go???</item>
+						<item kind="bulletlist" level="5">
+							<item kind="text" level="5">Well, why not deeper?</item>
+							<item kind="bulletlist" level="6">
+								<item kind="text" level="6">Because we can!!!</item>
+								<item kind="bulletlist" level="7">
+									<item kind="text" level="7">Recursion ftw!!!</item>
+									<item kind="bulletlist" level="8">
+										<item kind="text" level="8">Almost there!</item>
+										<item kind="bulletlist" level="9">
+											<item kind="text" level="9">You have just reached indentation 10!</item>
+										</item>
+									</item>
+								</item>
+							</item>
+						</item>
+					</item>
+				</item>
 			</item>
 		</item>
 	</slide>

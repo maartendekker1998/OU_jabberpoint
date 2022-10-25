@@ -19,7 +19,7 @@ public class SwingWindowHandler implements WindowHandler
     private final int X_MARGIN = 50;
     private final int Y_MARGIN = 5;
     private int DEFAULT_WIDTH = 720+(2*X_MARGIN);
-    private int DEFAULT_HEIGHT = 512;
+    private int DEFAULT_HEIGHT = 1012;
     private final int DEFAULT_LABEL_HEIGHT = 36;
     private int DEFAULT_LABEL_WIDTH = DEFAULT_WIDTH-(2*X_MARGIN);
 
@@ -42,7 +42,7 @@ public class SwingWindowHandler implements WindowHandler
                     Font font = fontMap.get(component);
                     component.setFont(font.deriveFont(font.getSize() * getScale(area)));
                     component.setSize(component.getSize().width, component.getFont().getSize()+Y_MARGIN);
-                    component.setBounds(createBounds(component.getX(),component.getY(),e.getComponent().getWidth(), component.getHeight()));
+                    component.setBounds(createBounds(component.getX(), component.getY(), e.getComponent().getWidth(), component.getHeight()));
                     component.setLocation(X_MARGIN, previousComponentHeight);
                     previousComponentHeight += component.getHeight();
                 }
@@ -87,13 +87,11 @@ public class SwingWindowHandler implements WindowHandler
         Font font = this.defaultFont;
         Rectangle area = new Rectangle(0, 0, slide.getWidth(), slide.getHeight());
         label.setFont(font.deriveFont(font.getSize() * this.getScale(area)));
-        label.setBounds(this.createBounds(X_MARGIN + (text.getIndentation()*20), this.previousComponentHeight, DEFAULT_LABEL_WIDTH-X_MARGIN, label.getFont().getSize()+Y_MARGIN));
+        label.setBounds(this.createBounds(X_MARGIN, this.previousComponentHeight, DEFAULT_LABEL_WIDTH-X_MARGIN, label.getFont().getSize()+Y_MARGIN));
         label.setBorder(new CompoundBorder(new EmptyBorder(0,0,0,0), new EmptyBorder(-7,0,0,0)));
         this.fontMap.put(label, font);
         this.slide.add(label);
         this.previousComponentHeight+=label.getHeight();
-        System.out.println(DEFAULT_WIDTH);
-        System.out.println(slide.getWidth()+16);
 //        if (this.previousComponentHeight+40 > DEFAULT_HEIGHT)
 //        {
 //            System.out.println("tsetse");

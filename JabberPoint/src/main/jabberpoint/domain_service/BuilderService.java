@@ -1,9 +1,8 @@
 package main.jabberpoint.domain_service;
 
-import main.jabberpoint.domain.Builder;
-import main.jabberpoint.domain.Content;
-import main.jabberpoint.domain.SlideShowComponent;
+import main.jabberpoint.domain.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BuilderService {
@@ -38,8 +37,18 @@ public class BuilderService {
         builder.addImageContent(indentation, data);
     }
 
-    public void addBulletList(Integer indentation, List<Content> contentList){
+    public void addBulletList(Integer indentation, BulletList contentList){
         builder.addBulletList(indentation, contentList);
+    }
+
+    public void addTextToBullet(int indentation, String data, ContentComposite bulletList)
+    {
+        bulletList.addContent(new Text(indentation, data));
+    }
+
+    public void addImageToBullet(int indentation, String data, ContentComposite bulletList)
+    {
+        bulletList.addContent(new Image(indentation, data));
     }
 
     public void addSlide(){
@@ -48,5 +57,10 @@ public class BuilderService {
 
     public SlideShowComponent getResults() {
         return builder.getSlideShow();
+    }
+
+    public BulletList createBulletList(int indentation)
+    {
+        return new BulletList(indentation, new ArrayList<>());
     }
 }

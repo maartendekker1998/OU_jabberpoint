@@ -1,8 +1,6 @@
 package main.jabberpoint.infrastructure;
 
-import main.jabberpoint.domain.BulletList;
-import main.jabberpoint.domain.Content;
-import main.jabberpoint.domain.Image;
+import main.jabberpoint.domain.*;
 import main.jabberpoint.domain.Text;
 import main.jabberpoint.domain_service.BuilderService;
 import org.w3c.dom.*;
@@ -11,6 +9,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import java.awt.image.ByteLookupTable;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,8 +39,8 @@ public class XMLDirectorStrategy implements DirectorStrategy {
         return titles.item(0).getTextContent();
     }
 
-    public static List<Element> getChildrenByTagName(Element parent, String name) {
-        List<Element> nodeList = new ArrayList<Element>();
+    public List<Element> getChildrenByTagName(Element parent, String name) {
+        List<Element> nodeList = new ArrayList<>();
         for (Node child = parent.getFirstChild(); child != null; child = child.getNextSibling()) {
             if (child.getNodeType() == Node.ELEMENT_NODE &&
                     name.equals(child.getNodeName())) {
@@ -55,8 +54,6 @@ public class XMLDirectorStrategy implements DirectorStrategy {
     public void construct(BuilderService builderService, String filename) {
 
         try {
-            int slideNumber, itemNumber, max = 0, maxItems = 0;
-
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document document = builder.parse(new File(filename));
             Element doc = document.getDocumentElement();;
@@ -65,8 +62,8 @@ public class XMLDirectorStrategy implements DirectorStrategy {
             builderService.newSlideShow();
 
             NodeList slides = doc.getElementsByTagName(SLIDE);
-            max = slides.getLength();
-            for (slideNumber = 0; slideNumber < max; slideNumber++) {
+
+            for (int slideNumber = 0; slideNumber < slides.getLength(); slideNumber++) {
 
                 Element xmlSlide = (Element) slides.item(slideNumber);
 
@@ -76,43 +73,9 @@ public class XMLDirectorStrategy implements DirectorStrategy {
                 NamedNodeMap slideAttributes = xmlSlide.getAttributes();
                 String transitions = slideAttributes.getNamedItem(TRANSITIONS).getTextContent();
 
-                if (transitions.equals("true")){
-                    builderService.setTransitions(true);
-                }else{
-                    builderService.setTransitions(false);
-                }
+                builderService.setTransitions(transitions.equals("true"));
 
-                List<Element> slideItems = getChildrenByTagName(xmlSlide, ITEM);
-
-                for (Element e : slideItems ) {
-
-
-                    int indentation = 1; // default
-                    NamedNodeMap attributes = e.getAttributes();
-                    String indentationText = attributes.getNamedItem(LEVEL).getTextContent();
-                    if (indentationText != null) {
-                        try {
-                            indentation = Integer.parseInt(indentationText);
-                        }
-                        catch(NumberFormatException x) {
-                            System.err.println(NFE);
-                        }
-                    }
-
-                    String type = attributes.getNamedItem(KIND).getTextContent();
-                    if (TEXT.equals(type)) {
-                        builderService.addTextContent(indentation, e.getTextContent());
-                    }
-                    else if (IMAGE.equals(type)) {
-                        builderService.addImageContent(indentation, e.getTextContent());
-                    }
-                    else if (BULLETLIST.equals(type)) {
-                        builderService.addBulletList(indentation, parseBulletList(e));
-                    }
-                    else{
-                        System.err.println(UNKNOWNTYPE);
-                    }
-                }
+                this.prepareSlide(builderService, xmlSlide, null);
                 builderService.addSlide();
             }
         }
@@ -127,16 +90,15 @@ public class XMLDirectorStrategy implements DirectorStrategy {
         }
     }
 
-    private List<Content> parseBulletList(Element element){
+    private boolean recursive = false;
 
-        List<Content> bulletList = new ArrayList<>();
-
-        List<Element> slideItems = getChildrenByTagName(element, ITEM);
-
-        for (Element e : slideItems ) {
-
-            int indentation = 1; // default
-            NamedNodeMap attributes = e.getAttributes();
+    private void prepareSlide(BuilderService builderService, Element xmlSlide, ContentComposite contents)
+    {
+        List<Element> slideItems = this.getChildrenByTagName(xmlSlide, ITEM);
+        for (Element element : slideItems)
+        {
+            int indentation = 0; // default
+            NamedNodeMap attributes = element.getAttributes();
             String indentationText = attributes.getNamedItem(LEVEL).getTextContent();
             if (indentationText != null) {
                 try {
@@ -146,21 +108,35 @@ public class XMLDirectorStrategy implements DirectorStrategy {
                     System.err.println(NFE);
                 }
             }
-
             String type = attributes.getNamedItem(KIND).getTextContent();
-            if (TEXT.equals(type)) {
-                bulletList.add(new Text(indentation, e.getTextContent()));
+            if (TEXT.equals(type))
+            {
+                if (recursive) builderService.addTextToBullet(indentation, element.getTextContent(), contents);
+                else builderService.addTextContent(indentation, element.getTextContent());
             }
-            else if (IMAGE.equals(type)) {
-                bulletList.add(new Image(indentation, e.getTextContent()));
+            else if (IMAGE.equals(type))
+            {
+                if (recursive) builderService.addImageToBullet(indentation, element.getTextContent(), contents);
+                else builderService.addImageContent(indentation, element.getTextContent());
             }
-            else if (BULLETLIST.equals(type)) {
-                bulletList.add(new BulletList(indentation, parseBulletList(e)));
+            else if (BULLETLIST.equals(type))
+            {
+                if (recursive)
+                {
+                    ContentComposite bulletList = builderService.createBulletList(indentation);
+                    this.prepareSlide(builderService, element, bulletList);
+                    contents.addContent(bulletList);
+                    continue;
+                }
+                recursive = true;
+                BulletList bulletList = builderService.createBulletList(indentation);
+                this.prepareSlide(builderService, element, bulletList);
+                builderService.addBulletList(indentation, bulletList);
+                recursive = false;
             }
             else{
                 System.err.println(UNKNOWNTYPE);
             }
         }
-        return bulletList;
     }
 }

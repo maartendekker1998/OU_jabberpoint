@@ -22,7 +22,8 @@ public class ConcreteSlide extends SlideShowComposite
     public List<Content> getContent()
     {
         List<Content> list = new ArrayList<>();
-        super.componentList.forEach(content -> list.addAll(content.getContent()));
+        super.componentList.forEach(content -> list.add((Content) content));
+//        super.componentList.forEach(content -> list.addAll(content.getContent()));
         return list;
     }
 
@@ -35,7 +36,7 @@ public class ConcreteSlide extends SlideShowComposite
         this.title = title;
     }
 
-    public Boolean getHasTransitions() {
+    public Boolean hasTransitions() {
         return hasTransitions;
     }
 

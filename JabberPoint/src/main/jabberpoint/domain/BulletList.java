@@ -1,7 +1,6 @@
 package main.jabberpoint.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class BulletList extends ContentComposite
@@ -10,8 +9,6 @@ public class BulletList extends ContentComposite
     {
         super(indentation, contents);
     }
-
-
 
     @Override
     public List<Content> getContent()
