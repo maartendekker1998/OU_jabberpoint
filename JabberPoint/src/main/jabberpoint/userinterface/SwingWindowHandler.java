@@ -32,9 +32,6 @@ public class SwingWindowHandler implements WindowHandler
     private final Map<Component, Font> fontMap = new HashMap<>();
     private final Map<Component, Content> itemMap = new HashMap<>();
     private final Font defaultFont = new Font("Helvetica", Font.BOLD, DEFAULT_LABEL_HEIGHT);
-=======
-    private Font defaultFont = new Font("Helvetica", Font.BOLD, DEFAULT_LABEL_HEIGHT);
->>>>>>> 63dbc42 (Added styling)
     private int previousComponentHeight = 5;
     private final SwingEventHandler eventHandler;
 
@@ -116,12 +113,12 @@ public class SwingWindowHandler implements WindowHandler
     @Override
     public void addText(Text text)
     {
-        JLabel label = new JLabel(/*this.createIndentation(text.getIndentation()) + */text.getData());
-        JLabel label = new JLabel(/*this.createIndentation(text.getIndentation()) + */text.getData());
+//        JLabel label = new JLabel(/*this.createIndentation(text.getIndentation()) + */text.getData());
 
         System.out.println(text.getData());
         System.out.println(text.getStyles());
-        JLabel label = new JLabel(this.createIndentation(text.getIndentation()) + text.getData());
+        JLabel label = new JLabel(text.getData());
+
         Font font = this.defaultFont;
         font = new Font(text.getStyles().get("font") == null ? "Helvetica" : text.getStyles().get("font"), Font.BOLD, text.getStyles().get("fontsize") == null ? DEFAULT_LABEL_HEIGHT : Integer.parseInt(text.getStyles().get("fontsize")));
         Rectangle area = new Rectangle(0, 0, slide.getWidth(), slide.getHeight());
