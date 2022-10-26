@@ -5,6 +5,10 @@ public interface Builder
     void newSlideShow();
     void newSlide();
 
+    void newStyles();
+
+    void addStyle(String key, String value);
+
     void newMetadata();
 
     void setMetadata(String key, String value);

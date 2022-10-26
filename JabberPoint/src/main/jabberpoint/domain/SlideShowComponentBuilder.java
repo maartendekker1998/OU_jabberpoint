@@ -8,6 +8,7 @@ public class SlideShowComponentBuilder implements Builder
     private ConcreteSlideShow slideShow;
     private ConcreteSlide slide;
     private Map<String, String> metadata;
+    private Map<String, String> styles;
 
     //Slideshow related functions
     @Override
@@ -40,10 +41,15 @@ public class SlideShowComponentBuilder implements Builder
         this.slide.setHasTransitions(transitions);
     }
 
-
     // Content related functions
     private void addContent(Content content) {
-        this.slide.addContent(content);
+        if (this.styles.isEmpty()){
+            this.slide.addContent(content);
+        }else{
+            content.addStyles(this.styles);
+            this.slide.addContent(content);
+        }
+
     }
     @Override
     public void addTextContent(Integer indentation, String data){
@@ -58,6 +64,15 @@ public class SlideShowComponentBuilder implements Builder
         this.addContent(contentList);
     }
 
+    @Override
+    public void newStyles(){
+        this.styles = new HashMap<>();
+    }
+
+    @Override
+    public void addStyle(String key, String value){
+        this.styles.put(key, value);
+    }
 
     // Metadata related functions
     @Override

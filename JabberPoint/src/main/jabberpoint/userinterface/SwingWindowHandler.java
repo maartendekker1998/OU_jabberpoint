@@ -27,8 +27,12 @@ public class SwingWindowHandler implements WindowHandler
     private int DEFAULT_LABEL_WIDTH = DEFAULT_WIDTH-(2*X_MARGIN);
 
     private final Map<Component, Font> fontMap = new HashMap<>();
+<<<<<<< HEAD
     private final Map<Content, JComponent> itemMap = new HashMap<>();
     private final Font defaultFont = new Font("Helvetica", Font.BOLD, DEFAULT_LABEL_HEIGHT);
+=======
+    private Font defaultFont = new Font("Helvetica", Font.BOLD, DEFAULT_LABEL_HEIGHT);
+>>>>>>> 63dbc42 (Added styling)
     private int previousComponentHeight = 5;
     private final SwingEventHandler eventHandler;
 
@@ -78,8 +82,11 @@ public class SwingWindowHandler implements WindowHandler
     public void addText(Text text)
     {
 
+        System.out.println(text.getData());
+        System.out.println(text.getStyles());
         JLabel label = new JLabel(this.createIndentation(text.getIndentation()) + text.getData());
         Font font = this.defaultFont;
+        font = new Font(text.getStyles().get("font") == null ? "Helvetica" : text.getStyles().get("font"), Font.BOLD, text.getStyles().get("fontsize") == null ? DEFAULT_LABEL_HEIGHT : Integer.parseInt(text.getStyles().get("fontsize")));
         Rectangle area = new Rectangle(0, 0, slide.getWidth(), slide.getHeight());
         label.setFont(font.deriveFont(font.getSize() * this.getScale(area)));
         label.setBounds(this.createBounds(X_MARGIN, this.previousComponentHeight, DEFAULT_LABEL_WIDTH-X_MARGIN, label.getFont().getSize()+Y_MARGIN));
@@ -87,12 +94,14 @@ public class SwingWindowHandler implements WindowHandler
         this.fontMap.put(label, font);
         this.slide.add(label);
         this.previousComponentHeight+=label.getHeight();
+
 //        if (this.previousComponentHeight+40 > DEFAULT_HEIGHT)
 //        {
 //            System.out.println("tsetse");
 //        }
 //        this.mainFrame.setSize(this.previousComponentHeight > 400 ? (DEFAULT_HEIGHT=previousComponentHeight) : DEFAULT_HEIGHT, DEFAULT_WIDTH);
 //        this.mainFrame.setSize(this.previousComponentHeight < 400 ? DEFAULT_HEIGHT : (DEFAULT_HEIGHT=previousComponentHeight), DEFAULT_HEIGHT);
+
         this.slide.repaint();
         itemMap.put(text, label);
     }

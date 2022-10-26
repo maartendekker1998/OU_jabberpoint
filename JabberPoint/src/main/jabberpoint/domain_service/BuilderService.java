@@ -64,6 +64,15 @@ public class BuilderService {
         return new BulletList(indentation, new ArrayList<>());
     }
 
+    public void newStyles(){
+        builder.newStyles();
+    }
+
+    public void addStyle(String key, String value){
+        builder.addStyle(key, value);
+    }
+
+
     public void newMetaData(){
         builder.newMetadata();
     }

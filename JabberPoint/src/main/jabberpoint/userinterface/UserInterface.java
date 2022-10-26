@@ -31,7 +31,6 @@ public class UserInterface
 
     public void renderSlide(SlideShowComponent slide)
     {
-        System.out.println(slide.getMetadata());
         this.slideHandler.renderSlide((ConcreteSlide)slide);
     }
 

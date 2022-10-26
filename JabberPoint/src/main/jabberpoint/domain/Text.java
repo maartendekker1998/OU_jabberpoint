@@ -2,6 +2,7 @@ package main.jabberpoint.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Text extends Content<String>
 {

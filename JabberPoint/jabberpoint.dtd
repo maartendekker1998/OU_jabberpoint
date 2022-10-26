@@ -9,11 +9,16 @@
 
 <!ELEMENT presenter (#PCDATA)>
 <!ELEMENT showtitle (#PCDATA)>
-
-<!ELEMENT title (#PCDATA)>
 <!ELEMENT slide (title, item*)>
+<!ELEMENT title (#PCDATA)>
+
 <!ATTLIST slide transitions CDATA #REQUIRED>
 <!ELEMENT item (#PCDATA|item)*>
+
 <!ATTLIST item kind CDATA #REQUIRED>
+<!ATTLIST item font CDATA #IMPLIED>
+<!ATTLIST item fontsize CDATA #IMPLIED>
+<!ATTLIST item color CDATA #IMPLIED>
+
 <!ATTLIST item level CDATA #REQUIRED>
 

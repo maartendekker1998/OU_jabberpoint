@@ -20,6 +20,9 @@ public class XMLDirectorStrategy implements DirectorStrategy {
     protected static final String METADATA = "metadata";
     protected static final String PRESENTER = "presenter";
     protected static final String SHOWTITLE = "showtitle";
+    protected static final String FONT = "font";
+    protected static final String FONTSIZE = "fontsize";
+    protected static final String COLOR = "color";
 
 
     protected static final String TRANSITIONS = "transitions";
@@ -133,6 +136,18 @@ public class XMLDirectorStrategy implements DirectorStrategy {
                     System.err.println(NFE);
                 }
             }
+
+            builderService.newStyles();
+            if (attributes.getNamedItem(FONT)!= null)  {
+                builderService.addStyle(FONT, attributes.getNamedItem(FONT).getTextContent());
+            }
+            if (attributes.getNamedItem(FONTSIZE)!= null)  {
+                builderService.addStyle(FONTSIZE, attributes.getNamedItem(FONTSIZE).getTextContent());
+            }
+            if (attributes.getNamedItem(COLOR)!= null)  {
+                builderService.addStyle(COLOR, attributes.getNamedItem(COLOR).getTextContent());
+            }
+
             String type = attributes.getNamedItem(KIND).getTextContent();
             if (TEXT.equals(type))
             {
