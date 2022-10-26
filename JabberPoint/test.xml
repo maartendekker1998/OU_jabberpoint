@@ -55,8 +55,13 @@
 	</slide>
 	<slide transitions="true">
 		<title>Achtergrond</title>
+<<<<<<< Updated upstream
 		<item kind="text"  level="1">Jabberpoint is een oefening voor de</item>
 		<item kind="text"  level="1">cursus Design patterns van de Open universiteit</item>
+=======
+		<item kind="text" size="36" font="Ärial" level="1">Jabberpoint is een oefening voor de</item>
+		<item kind="text" font="other font" level="1">cursus Design patterns van de Open universiteit</item>
+>>>>>>> Stashed changes
 		<item kind="text"  level="2">Dutch flag</item>
 		<item kind="image"  level="2">nl.png</item>
 		<item kind="text"  level="1">De oefening is ontwikeld door het SERC</item>
