@@ -9,16 +9,25 @@ public class SlideIterator extends SlideShowCompositeIterator
 
     SlideIterator(ConcreteSlide slideshow)
     {
+        Boolean buildingChunk = false;
+        List<Content> chunkList = new ArrayList<>();
+
         for (Content content : slideshow.getContent())
         {
-            List<Content> chunkList = new ArrayList<>();
-            chunkList.add(content);
-            this.chunks.add(new ContentList(0, chunkList));
-//            if (content.getIndentation() == 1)
-//            {
-//
-//            }
+            if (content.getIndentation() == 1 && buildingChunk){
+                this.chunks.add(new ContentList(0, chunkList));
+                chunkList = new ArrayList<>();
+                buildingChunk = false;
+            }
+            if (content.getIndentation() == 1 && !buildingChunk){
+                chunkList.add(content);
+                buildingChunk = true;
+            }
+            if (content.getIndentation() > 1){
+                chunkList.add(content);
+            }
         }
+        if (!chunkList.isEmpty()) this.chunks.add(new ContentList(0, chunkList));
     }
 
     @Override
