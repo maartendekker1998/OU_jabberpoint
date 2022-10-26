@@ -117,6 +117,7 @@ public class SwingWindowHandler implements WindowHandler
     public void addText(Text text)
     {
         JLabel label = new JLabel(/*this.createIndentation(text.getIndentation()) + */text.getData());
+        JLabel label = new JLabel(/*this.createIndentation(text.getIndentation()) + */text.getData());
 
         System.out.println(text.getData());
         System.out.println(text.getStyles());
