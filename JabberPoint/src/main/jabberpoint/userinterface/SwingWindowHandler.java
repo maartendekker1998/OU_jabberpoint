@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -45,7 +46,7 @@ public class SwingWindowHandler implements WindowHandler
             {
                 DEFAULT_LABEL_WIDTH = (slide.getWidth()+16)-(2*X_MARGIN);
                 Rectangle area = new Rectangle(0, 0, slide.getWidth(), slide.getHeight());
-                int previousComponentHeight = Y_MARGIN;
+                previousComponentHeight = Y_MARGIN;
                 boolean isTitle = true;
                 for (Component component : mainFrame.getContentPane().getComponents())
                 {
@@ -54,28 +55,31 @@ public class SwingWindowHandler implements WindowHandler
                     if (this.isImage(component))
                     {
                         Icon icon = ((JLabel)component).getIcon();
-//                        java.awt.Image bi = new BufferedImage(icon.getIconWidth()/2, icon.getIconHeight()/2, BufferedImage.TYPE_INT_RGB);
-                        JLabel i = new JLabel(icon);
-
-//                        Graphics2D g2 = resizedImg.createGraphics();
+                        BufferedImage bufferedImage = new BufferedImage((int)(component.getWidth() * getScale(area)), (int)(component.getHeight()* getScale(area)), BufferedImage.TYPE_INT_RGB);
+                        Graphics2D graphics2D = bufferedImage.createGraphics();
+                        graphics2D.drawImage(this.iconToImage(icon), 0, 0, (int)(component.getWidth() * getScale(area)), (int)(component.getHeight() * getScale(area)), null);
+//                        JLabel image = new JLabel(new ImageIcon(bufferedImage));
+////                        image.setBorder(new CompoundBorder(new LineBorder(Color.BLACK, 0), new EmptyBorder(0,0,0,0)));
+//                        image.setBounds(0, 0, 80, 80);
 //
-//                        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-//                        g2.drawImage(srcImg, 0, 0, w, h, null);
-//                        g2.dispose();
+//                        System.out.println(itemMap.get(component) == null);
 
-//                        icon.paintIcon(i, bi.getGraphics(), 0, 0);
+                        ((JLabel) component).setIcon(new ImageIcon(this.iconToImage(icon)));
+//                        Content c = itemMap.remove(component);
+//                        component = image;
 
+//                        itemMap.put(image, c);
 
-//                        i.setBorder(new CompoundBorder(new EmptyBorder(0,0,0,0), new EmptyBorder(-7,0,0,0)));
-                        i.setBounds(0,0, 80, 80);
-
-//                        slide.add(i);
-//                        slide.repaint();
+//                        System.out.println(itemMap.get(component) == null);
+//                        slide.remove(component);
+//                        slide.add(image);
+//                        itemMap.put(image, c);
+                        slide.repaint();
 //                        if (true) break;
-                        Rectangle w = new Rectangle(0, 0, ((JLabel)component).getIcon().getIconWidth(), ((JLabel)component).getIcon().getIconHeight());
-                        System.out.println(component.getSize().getHeight()*getScale(w));
-                        System.out.println(component.getSize().getWidth()*getScale(w));
-                        component.setSize((int)(component.getSize().getHeight()*getScale(w)), 10);
+//                        Rectangle w = new Rectangle(0, 0, ((JLabel)component).getIcon().getIconWidth(), ((JLabel)component).getIcon().getIconHeight());
+//                        System.out.println(component.getSize().getHeight()*getScale(w));
+//                        System.out.println(component.getSize().getWidth()*getScale(w));
+//                        component.setSize((int)(component.getSize().getHeight()*getScale(w)), 10);
                     }
                     else component.setSize(component.getSize().width, component.getFont().getSize()+Y_MARGIN);
                     component.setBounds(createBounds(component.getX(), component.getY(), event.getComponent().getWidth(), component.getHeight()));
@@ -88,6 +92,15 @@ public class SwingWindowHandler implements WindowHandler
             private boolean isImage(Component component)
             {
                 return ((JLabel)component).getIcon() != null;
+            }
+
+            private java.awt.Image iconToImage(Icon icon)
+            {
+                BufferedImage image = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration().createCompatibleImage(icon.getIconWidth(), icon.getIconHeight());
+                Graphics2D graphics2D = image.createGraphics();
+                icon.paintIcon(null, graphics2D, 0, 0);
+                graphics2D.dispose();
+                return image;
             }
         });
         this.mainFrame.setMenuBar(new MenuController(this.eventHandler));
@@ -115,20 +128,20 @@ public class SwingWindowHandler implements WindowHandler
     {
 //        JLabel label = new JLabel(/*this.createIndentation(text.getIndentation()) + */text.getData());
 
-        System.out.println(text.getData());
-        System.out.println(text.getStyles());
+//        System.out.println(text.getData());
+//        System.out.println(text.getStyles());
         JLabel label = new JLabel(text.getData());
 
         Font font = this.defaultFont;
-        font = new Font(text.getStyles().get("font") == null ? "Helvetica" : text.getStyles().get("font"), Font.BOLD, text.getStyles().get("fontsize") == null ? DEFAULT_LABEL_HEIGHT : Integer.parseInt(text.getStyles().get("fontsize")));
+//        font = new Font(text.getStyles().get("font") == null ? "Helvetica" : text.getStyles().get("font"), Font.BOLD, text.getStyles().get("fontsize") == null ? DEFAULT_LABEL_HEIGHT : Integer.parseInt(text.getStyles().get("fontsize")));
         Rectangle area = new Rectangle(0, 0, slide.getWidth(), slide.getHeight());
         label.setFont(label.getFont().deriveFont(font.getSize() * this.getScale(area)));
         label.setBounds(this.createBounds(this.calculateIndentation(text.getIndentation()), this.previousComponentHeight, DEFAULT_LABEL_WIDTH-X_MARGIN, label.getFont().getSize()+Y_MARGIN));
         label.setBorder(new CompoundBorder(new EmptyBorder(0,0,0,0), new EmptyBorder(-7,0,0,0)));
+//        label.setBorder(new CompoundBorder(new LineBorder(Color.BLACK,1), new EmptyBorder(-7,0,0,0)));
         this.fontMap.put(label, font);
         this.slide.add(label);
         this.previousComponentHeight+=label.getHeight();
-
 //        if (this.previousComponentHeight+40 > DEFAULT_HEIGHT)
 //        {
 //            System.out.println("tsetse");
@@ -136,7 +149,9 @@ public class SwingWindowHandler implements WindowHandler
 //        this.mainFrame.setSize(this.previousComponentHeight > 400 ? (DEFAULT_HEIGHT=previousComponentHeight) : DEFAULT_HEIGHT, DEFAULT_WIDTH);
 //        this.mainFrame.setSize(this.previousComponentHeight < 400 ? DEFAULT_HEIGHT : (DEFAULT_HEIGHT=previousComponentHeight), DEFAULT_HEIGHT);
 
+
         this.slide.repaint();
+
         this.itemMap.put(label, text);
     }
 
@@ -217,6 +232,8 @@ public class SwingWindowHandler implements WindowHandler
     public void removeLastContent(Content content)
     {
         Component component = this.getValueByKey(((ContentList)content).getContent().get(0));
+
+
         if (component == null) return;
         this.previousComponentHeight-=component.getHeight();
         this.slide.remove(component);
