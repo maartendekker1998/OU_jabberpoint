@@ -14,7 +14,6 @@ public abstract class SlideShowComponent implements Iterable
         return Metadata.getInstance().metadata;
     }
 
-<<<<<<< Updated upstream
     public void addStyles(Map<String, String> styles){
         this.styles.putAll(styles);
     }
@@ -22,16 +21,4 @@ public abstract class SlideShowComponent implements Iterable
     public Map<String, String> getStyles() {
         return styles;
     }
-=======
-//    Map<String, String> style = new HashMap<>();
-//    {
-//        style.put("font", "Arial");
-//        style.put("size", "36");
-//
-//    }
-
-//    {
-//        Label .setFont(new Font(style.get("font") == null ? DEFAULT : style.get("font")));
-//    }
->>>>>>> Stashed changes
 }
