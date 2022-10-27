@@ -36,6 +36,8 @@ public class SwingWindowHandler implements WindowHandler
     private int previousComponentHeight = 5;
     private final SwingEventHandler eventHandler;
 
+    private BufferedImage bufferedImage;
+
     public SwingWindowHandler(SwingEventHandler eventHandler)
     {
         this.eventHandler = eventHandler;
@@ -57,14 +59,16 @@ public class SwingWindowHandler implements WindowHandler
                         Icon icon = ((JLabel)component).getIcon();
                         BufferedImage bufferedImage = new BufferedImage((int)(component.getWidth() * getScale(area)), (int)(component.getHeight()* getScale(area)), BufferedImage.TYPE_INT_RGB);
                         Graphics2D graphics2D = bufferedImage.createGraphics();
-                        graphics2D.drawImage(this.iconToImage(icon), 0, 0, (int)(component.getWidth() * getScale(area)), (int)(component.getHeight() * getScale(area)), null);
+                        graphics2D.drawImage(this.iconToImage(icon), 0, 0, (int)(component.getWidth() * getScale(area)), (int)(component.getHeight() * getScale(area)), slide);
+
+                        java.awt.Image newImage = this.iconToImage(icon).getScaledInstance((int)(154*getScale(area)), (int)(DEFAULT_LABEL_HEIGHT*10*getScale(area)), java.awt.Image.SCALE_DEFAULT);
 //                        JLabel image = new JLabel(new ImageIcon(bufferedImage));
 ////                        image.setBorder(new CompoundBorder(new LineBorder(Color.BLACK, 0), new EmptyBorder(0,0,0,0)));
 //                        image.setBounds(0, 0, 80, 80);
 //
 //                        System.out.println(itemMap.get(component) == null);
 
-                        ((JLabel) component).setIcon(new ImageIcon(this.iconToImage(icon)));
+                        ((JLabel) component).setIcon(new ImageIcon(newImage));
 //                        Content c = itemMap.remove(component);
 //                        component = image;
 
@@ -160,8 +164,13 @@ public class SwingWindowHandler implements WindowHandler
     {
         try
         {
-            java.awt.Image myPicture = ImageIO.read(new File(image.getData()));
-            java.awt.Image newImage = myPicture.getScaledInstance(54, DEFAULT_LABEL_HEIGHT, java.awt.Image.SCALE_DEFAULT);
+            bufferedImage = ImageIO.read(new File(image.getData()));
+            java.awt.Image newImage = bufferedImage.getScaledInstance(54, DEFAULT_LABEL_HEIGHT, java.awt.Image.SCALE_DEFAULT);
+            Rectangle area = new Rectangle(0, 0, slide.getWidth(), slide.getHeight());
+            int width =  X_MARGIN + (int) (image.getIndentation() * getScale(area));
+            int height = (int) (previousComponentHeight * getScale(area));
+            JLabel icon = new JLabel(new ImageIcon(newImage));
+            icon.setBounds(this.calculateIndentation(image.getIndentation()), this.previousComponentHeight,54, DEFAULT_LABEL_HEIGHT);
 
 //            BufferedImage myPicture = ImageIO.read(new File(image.getData()));
 //            BufferedImage output = new BufferedImage(54, DEFAULT_LABEL_HEIGHT, myPicture.getType());
@@ -173,12 +182,14 @@ public class SwingWindowHandler implements WindowHandler
 
 
 
-            JLabel icon = new JLabel(new ImageIcon(newImage));
-            icon.setBorder(new CompoundBorder(new EmptyBorder(0,0,0,0), new EmptyBorder(0,0,0,0)));
-            icon.setBounds(this.calculateIndentation(image.getIndentation()), this.previousComponentHeight,54, DEFAULT_LABEL_HEIGHT);
+//            JLabel icon = new JLabel(new ImageIcon(newImage));
+//            icon.setBorder(new CompoundBorder(new EmptyBorder(0,0,0,0), new EmptyBorder(0,0,0,0)));
+//            icon.setBounds(this.calculateIndentation(image.getIndentation()), this.previousComponentHeight,154, DEFAULT_LABEL_HEIGHT*10);
             this.previousComponentHeight+=icon.getHeight();
             this.slide.add(icon);
             this.slide.repaint();
+            icon.getGraphics().drawImage(bufferedImage, 600, 300,(int) (bufferedImage.getWidth(slide)), (int) (bufferedImage.getHeight(slide)), slide);
+
             this.itemMap.put(icon, image);
         }
         catch (Exception e)
