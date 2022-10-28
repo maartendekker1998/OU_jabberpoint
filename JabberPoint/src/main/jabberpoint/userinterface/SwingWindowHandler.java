@@ -35,7 +35,7 @@ public class SwingWindowHandler implements WindowHandler
     private final Map<Component, Font> fontMap = new HashMap<>();
     private final Map<Component, Content> itemMap = new HashMap<>();
     private final Map<Content, BufferedImage> imageMap = new HashMap<>();
-    private final Font defaultFont = new Font("Helvetica", Font.BOLD, DEFAULT_LABEL_HEIGHT);
+    private final Font defaultFont = new Font("Helvetica", Font.PLAIN, DEFAULT_LABEL_HEIGHT);
     private int previousComponentHeight = 5;
     private final SwingEventHandler eventHandler;
 
@@ -63,7 +63,7 @@ public class SwingWindowHandler implements WindowHandler
                     else
                     {
                         Font font = fontMap.get(component);
-                        component.setFont(this.isImage(component) ? null : font.deriveFont(font.getSize() * getScale(area)));
+                        component.setFont(font.deriveFont(font.getStyle(), font.getSize() * getScale(area)));
                         component.setSize(component.getSize().width, component.getFont().getSize()+Y_MARGIN);
                         component.setBounds(createBounds(component.getX(), component.getY(), event.getComponent().getWidth(), component.getHeight()));
                     }
@@ -104,7 +104,7 @@ public class SwingWindowHandler implements WindowHandler
         JLabel label = new JLabel(text.getData());
         Font font = this.defaultFont;
         Rectangle area = new Rectangle(0, 0, this.slide.getWidth(), this.slide.getHeight());
-        label.setFont(label.getFont().deriveFont(font.getSize() * this.getScale(area)));
+        label.setFont(label.getFont().deriveFont(font.getStyle(), font.getSize() * this.getScale(area)));
         label.setBounds(this.createBounds(this.calculateIndentation(text.getIndentation()), this.previousComponentHeight, DEFAULT_LABEL_WIDTH-X_MARGIN, label.getFont().getSize()+Y_MARGIN));
         label.setBorder(new CompoundBorder(new EmptyBorder(0,0,0,0), new EmptyBorder(-7,0,0,0)));
 //        label.setBorder(new CompoundBorder(new LineBorder(Color.BLACK,1), new EmptyBorder(-7,0,0,0)));
