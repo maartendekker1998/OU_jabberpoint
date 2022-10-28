@@ -50,9 +50,10 @@ public class Projector
     public List<SlideShowComponent> allContent()//ContentList.class
     {
         List<SlideShowComponent> list = new ArrayList<>();
-        for (; this.slideIterator.isDone(); this.slideIterator.next())
+        while (!this.slideIterator.isDone())
         {
-            list.add(slideIterator.current());
+            this.slideIterator.next();
+            list.add(this.slideIterator.current());
         }
         return list;
     }

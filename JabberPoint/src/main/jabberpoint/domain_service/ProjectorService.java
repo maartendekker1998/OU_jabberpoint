@@ -3,6 +3,8 @@ package main.jabberpoint.domain_service;
 import main.jabberpoint.domain.Projector;
 import main.jabberpoint.domain.SlideShowComponent;
 
+import java.util.List;
+
 public class ProjectorService
 {
     Projector projector = new Projector();
@@ -37,8 +39,8 @@ public class ProjectorService
 
     }
 
-    public void remainingContent()
+    public List<SlideShowComponent> remainingContent()
     {
-
+        return this.projector.allContent();
     }
 }

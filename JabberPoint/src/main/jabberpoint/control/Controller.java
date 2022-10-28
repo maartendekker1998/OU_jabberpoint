@@ -69,8 +69,8 @@ public class Controller
 
     }
 
-    public List<SlideShowComponent> remainingContent()
+    public void remainingContent()
     {
-        return new ArrayList<>();
+        this.userInterface.renderContent(this.projectorService.remainingContent());
     }
 }

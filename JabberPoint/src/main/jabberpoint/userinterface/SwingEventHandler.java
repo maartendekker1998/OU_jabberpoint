@@ -29,6 +29,9 @@ public class SwingEventHandler extends KeyAdapter implements EventHandler
             case KeyEvent.VK_UP:
                 if (this.transitions) new RemoveLastContentCommand().execute();
                 break;
+            case KeyEvent.VK_END:
+                if (this.transitions) new RemainingContentCommand().execute();
+                break;
         }
     }
 
