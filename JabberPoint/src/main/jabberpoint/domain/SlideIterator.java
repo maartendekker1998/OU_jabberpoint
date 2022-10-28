@@ -23,8 +23,10 @@ public class SlideIterator extends SlideShowCompositeIterator
                 chunkList.add(content);
                 buildingChunk = true;
             }
-            if (content.getIndentation() > 1){
-                chunkList.add(content);
+            if (content.getIndentation() > 1 && buildingChunk){
+                if (buildingChunk) {
+                    chunkList.add(content);
+                }
             }
         }
         if (!chunkList.isEmpty()) this.chunks.add(new ContentList(0, chunkList));
