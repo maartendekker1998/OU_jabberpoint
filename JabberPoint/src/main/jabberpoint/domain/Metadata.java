@@ -1,7 +1,5 @@
 package main.jabberpoint.domain;
 
-import main.jabberpoint.control.ControllerFactory;
-
 import java.util.Map;
 
 public class Metadata {

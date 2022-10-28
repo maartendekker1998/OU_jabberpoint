@@ -5,15 +5,6 @@ import java.util.List;
 
 public class ConcreteSlideShow extends SlideShowComposite
 {
-    ConcreteSlideShow(){
-
-    }
-
-    ConcreteSlideShow(List<ConcreteSlide> slides)
-    {
-        super.componentList.addAll(slides);
-    }
-
     public void addSlide(ConcreteSlide slide){
         super.componentList.add(slide);
     }
@@ -29,5 +20,4 @@ public class ConcreteSlideShow extends SlideShowComposite
     {
         return new ArrayList<>();
     }
-
 }

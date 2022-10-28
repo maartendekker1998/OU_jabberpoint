@@ -65,28 +65,6 @@ public class SlideIterator extends SlideShowCompositeIterator
         return this.chunks.get(this.index);
     }
 
-//    @Override
-//    public void reset()
-//    {
-//    }
-
-//
-//    void dsfsdF()
-//    {
-//        this.handle();
-//    }
-
-//    void handle(Content... contents)
-//    {
-//        this.SwingFrame.clear();
-//        this.actuallyWriteToDisplay(title);
-//        for (Content content : contents) {
-//            this.actuallyWriteToDisplay(content);
-//
-//        }
-//
-//    }
-
     @Override
     public SlideShowComponent first()
     {

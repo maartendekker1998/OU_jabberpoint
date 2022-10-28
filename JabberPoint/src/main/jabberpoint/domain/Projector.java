@@ -8,24 +8,8 @@ public class Projector
     private Iterator slideShowIterator;
     private Iterator slideIterator;
 
-    public Projector(){
-    }
-
-
     public void setSlideShow(SlideShowComponent slideshow){
         this.slideShowIterator = slideshow.createIterator();
-    }
-
-    public void start()
-    {
-//        StringBuilder stringBuilder = new StringBuilder();
-//        stringBuilder.append("<html><body>");
-//        for (this.iterator.first(); !this.iterator.isDone(); this.iterator.next())
-//        {
-//            stringBuilder.append(this.iterator.current().getContent());
-//        }
-//        stringBuilder.append("</body></html>");
-//        System.out.println(stringBuilder.toString());
     }
 
     public SlideShowComponent nextContent()//ContentList.class

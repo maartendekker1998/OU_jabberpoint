@@ -3,7 +3,6 @@ package main.jabberpoint.domain_service;
 import main.jabberpoint.domain.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class BuilderService {
 
@@ -72,7 +71,6 @@ public class BuilderService {
         builder.addStyle(key, value);
     }
 
-
     public void newMetaData(){
         builder.newMetadata();
     }
@@ -84,6 +82,4 @@ public class BuilderService {
     public void addMetadata(){
         builder.addMetadata();
     }
-
-
 }

@@ -17,28 +17,30 @@ import java.util.List;
 public class XMLDirectorStrategy implements DirectorStrategy {
 
     /** namen van xml tags of attributen */
-    protected static final String METADATA = "metadata";
-    protected static final String PRESENTER = "presenter";
-    protected static final String SHOWTITLE = "showtitle";
-    protected static final String FONT = "font";
-    protected static final String FONTSIZE = "fontsize";
-    protected static final String COLOR = "color";
+    private static final String METADATA = "metadata";
+    private static final String PRESENTER = "presenter";
+    private static final String SHOWTITLE = "showtitle";
+    private static final String FONT = "font";
+    private static final String FONTSIZE = "fontsize";
+    private static final String COLOR = "color";
 
 
-    protected static final String TRANSITIONS = "transitions";
-    protected static final String SLIDETITLE = "title";
-    protected static final String SLIDE = "slide";
-    protected static final String ITEM = "item";
-    protected static final String LEVEL = "level";
-    protected static final String KIND = "kind";
-    protected static final String TEXT = "text";
-    protected static final String IMAGE = "image";
-    protected static final String BULLETLIST = "bulletlist";
+    private static final String TRANSITIONS = "transitions";
+    private static final String SLIDETITLE = "title";
+    private static final String SLIDE = "slide";
+    private static final String ITEM = "item";
+    private static final String LEVEL = "level";
+    private static final String KIND = "kind";
+    private static final String TEXT = "text";
+    private static final String IMAGE = "image";
+    private static final String BULLETLIST = "bulletlist";
 
     /** tekst van messages */
-    protected static final String PCE = "Parser Configuration Exception";
-    protected static final String UNKNOWNTYPE = "Unknown Element type";
-    protected static final String NFE = "Number Format Exception";
+    private static final String PCE = "Parser Configuration Exception";
+    private static final String UNKNOWNTYPE = "Unknown Element type";
+    private static final String NFE = "Number Format Exception";
+
+    private boolean recursive = false;
 
     private String getTitle(Element element, String tagName) {
         NodeList titles = element.getElementsByTagName(tagName);
@@ -117,8 +119,6 @@ public class XMLDirectorStrategy implements DirectorStrategy {
             System.err.println(PCE);
         }
     }
-
-    private boolean recursive = false;
 
     private void prepareSlide(BuilderService builderService, Element xmlSlide, ContentComposite contents)
     {

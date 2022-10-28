@@ -19,6 +19,4 @@ public class XMLSwingFactory extends ControllerFactory
     public Infrastructure getInfraStructure() {
         return super.createInfra(new BuilderService(new SlideShowComponentBuilder()), new XMLDirectorStrategy());
     }
-
-
 }

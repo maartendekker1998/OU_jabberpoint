@@ -3,8 +3,6 @@ package main.jabberpoint.infrastructure;
 import main.jabberpoint.domain.SlideShowComponent;
 import main.jabberpoint.domain_service.BuilderService;
 
-import java.io.IOException;
-
 public class Infrastructure {
 
     public DirectorStrategy director;
@@ -16,10 +14,7 @@ public class Infrastructure {
     }
 
     public SlideShowComponent loadFile(String filename) {
-
         this.director.construct(builderService, filename);
         return this.builderService.getResults();
     }
-
-
 }

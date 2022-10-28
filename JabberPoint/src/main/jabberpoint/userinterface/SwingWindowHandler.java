@@ -189,23 +189,16 @@ public class SwingWindowHandler implements WindowHandler
     @Override
     public void removeLastContent(Content content)
     {
-        for (Content c : ((ContentList)content).getContent())
+        for (Content contentToRemove : ((ContentList)content).getContent())
         {
-            Component component = this.getKeyByValue(c);
-            if (component == null) continue;
-            this.previousComponentHeight-=component.getHeight();
-            this.slide.remove(component);
-            this.imageMap.remove(c);
-            this.itemMap.remove(component);
+            Component componentToRemove = this.getKeyByValue(contentToRemove);
+            if (componentToRemove == null) continue;
+            this.previousComponentHeight-=componentToRemove.getHeight();
+            this.slide.remove(componentToRemove);
+            this.imageMap.remove(contentToRemove);
+            this.itemMap.remove(componentToRemove);
         }
         this.slide.repaint();
-//        Component component = this.getKeyByValue(((ContentList)content).getContent().get(0));
-//        if (component == null) return;
-//        this.previousComponentHeight-=component.getHeight();
-//        this.slide.remove(component);
-//        this.imageMap.remove(((ContentList)content).getContent().get(0));
-//        this.itemMap.remove(component);
-//        this.slide.repaint();
     }
 
     private Component getKeyByValue(Content component)

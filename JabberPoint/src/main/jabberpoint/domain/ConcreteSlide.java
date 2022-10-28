@@ -23,7 +23,6 @@ public class ConcreteSlide extends SlideShowComposite
     {
         List<Content> list = new ArrayList<>();
         super.componentList.forEach(content -> list.add((Content) content));
-//        super.componentList.forEach(content -> list.addAll(content.getContent()));
         return list;
     }
 
