@@ -2,12 +2,12 @@
 <!DOCTYPE presentation SYSTEM "jabberpoint.dtd">
 <presentation>
 	<metadata kind="presenter">Bart &amp; Maarten</metadata>
-	<metadata kind="showtitle">Dikke JabberPoint</metadata>
+	<metadata kind="showtitle">JabberPoint presentatie Open Universiteit</metadata>
 
 	<slide transitions="true">
-		<title>JabberPoint XML-Demo</title>
-		<item kind="text" font="Arial" fontsize="50" color="#00FF00" level="2">Welkom bij Jabberpoint</item>
-		<item kind="text"  level="1">Copyright (c) 1996-2000 Ian Darwin</item>
+		<title font="Algerian" >JabberPoint XML-Demo</title>
+		<item kind="text"  level="2">Welkom bij Jabberpoint</item>
+		<item kind="text" font="Algerian" fontsize="50" color="#00FF00" level="1">Copyright (c) 1996-2000 Ian Darwin</item>
 		<item kind="text"  level="1">Herschreven door</item>
 		<item kind="text"  level="1">Gert Florijn, Mark van Elswijk, Marc Evers</item>
 		<item kind="text"  level="1">Fancy scalable image:</item>

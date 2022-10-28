@@ -49,7 +49,6 @@ public class SlideShowComponentBuilder implements Builder
             content.addStyles(this.styles);
             this.slide.addContent(content);
         }
-
     }
     @Override
     public void addTextContent(Integer indentation, String data){

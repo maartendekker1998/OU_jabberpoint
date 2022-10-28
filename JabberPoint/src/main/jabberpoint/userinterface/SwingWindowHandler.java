@@ -1,9 +1,8 @@
 package main.jabberpoint.userinterface;
 
-import main.jabberpoint.domain.Content;
-import main.jabberpoint.domain.ContentList;
+import main.jabberpoint.domain.*;
 import main.jabberpoint.domain.Image;
-import main.jabberpoint.domain.Text;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -29,13 +28,16 @@ public class SwingWindowHandler implements WindowHandler
     private final int Y_MARGIN = 5;
     private int DEFAULT_WIDTH = 720+(2*X_MARGIN);
     private int DEFAULT_HEIGHT = 1012;
-    private final int DEFAULT_LABEL_FONT_SIZE = 36;
+    private final int DEFAULT_FONT_SIZE = 36;
+    private final String DEFAULT_FONT = "Helvetica";
+    private final int DEFAULT_FONT_STYLE = Font.PLAIN;
+    private static final Color DEFAULT_FONT_COLOR = Color.BLACK;
     private int DEFAULT_LABEL_WIDTH = DEFAULT_WIDTH-(2*X_MARGIN);
 
     private final Map<Component, Font> fontMap = new HashMap<>();
     private final Map<Component, Content> itemMap = new HashMap<>();
     private final Map<Content, BufferedImage> imageMap = new HashMap<>();
-    private final Font defaultFont = new Font("Helvetica", Font.PLAIN, DEFAULT_LABEL_FONT_SIZE);
+    private final Font defaultFont = new Font(DEFAULT_FONT, DEFAULT_FONT_STYLE, DEFAULT_FONT_SIZE);
     private int previousComponentHeight = Y_MARGIN;
     private final SwingEventHandler eventHandler;
 
@@ -80,8 +82,11 @@ public class SwingWindowHandler implements WindowHandler
         this.mainFrame.setMenuBar(new MenuController(this.eventHandler));
         this.mainFrame.addKeyListener(this.eventHandler);
         this.mainFrame.setContentPane(this.slide);
-        this.mainFrame.setTitle("JabberPoint");
+        this.mainFrame.setTitle(
+                (Metadata.getInstance().metadata.get("showtitle") == null ? "JabberPoint" : Metadata.getInstance().metadata.get("showtitle")) + " by " +
+                (Metadata.getInstance().metadata.get("presenter") == null ? "JabberPoint" : Metadata.getInstance().metadata.get("presenter")));
         this.mainFrame.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        this.mainFrame.setIconImage(new ImageIcon("halloween.png").getImage());
         this.mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.mainFrame.setLayout(null);
     }
@@ -101,13 +106,11 @@ public class SwingWindowHandler implements WindowHandler
     public void addText(Text text)
     {
         JLabel label = new JLabel(text.getData());
-        Font font = this.defaultFont;
-        Rectangle area = new Rectangle(0, 0, this.slide.getWidth(), this.slide.getHeight());
-        label.setFont(label.getFont().deriveFont(font.getStyle(), font.getSize() * this.getScale(area)));
+        this.setStyles(text.getStyles(), label);
+//        label.setFont(label.getFont().deriveFont(font.getStyle(), font.getSize() * this.getScale(area)));
         label.setBounds(this.createBounds(this.calculateIndentation(text.getIndentation()), this.previousComponentHeight, DEFAULT_LABEL_WIDTH-X_MARGIN, label.getFont().getSize()+Y_MARGIN));
         label.setBorder(new CompoundBorder(new EmptyBorder(0,0,0,0), new EmptyBorder(-7,0,0,0)));
 //        label.setBorder(new CompoundBorder(new LineBorder(Color.BLACK,1), new EmptyBorder(-7,0,0,0)));
-        this.fontMap.put(label, font);
         this.slide.add(label);
         this.previousComponentHeight+=label.getHeight();
 //        if (this.previousComponentHeight+40 > DEFAULT_HEIGHT)
@@ -118,6 +121,30 @@ public class SwingWindowHandler implements WindowHandler
 //        this.mainFrame.setSize(this.previousComponentHeight < 400 ? DEFAULT_HEIGHT : (DEFAULT_HEIGHT=previousComponentHeight), DEFAULT_HEIGHT);
         this.slide.repaint();
         this.itemMap.put(label, text);
+    }
+
+    private void setStyles(Map<String, String> styles, JLabel label)
+    {
+        Font font = null;
+        try
+        {
+            font = new Font(
+                    (styles.get("font") == null ? DEFAULT_FONT : styles.get("font")),
+                    (DEFAULT_FONT_STYLE),
+                    (styles.get("fontsize") == null ? DEFAULT_FONT_SIZE : Integer.parseInt(styles.get("fontsize"))));
+            label.setForeground(styles.get("color") == null ? DEFAULT_FONT_COLOR : Color.decode(styles.get("color")));
+        }
+        catch (NumberFormatException e)
+        {
+            if (font == null) font = new Font(
+                (styles.get("font") == null ? DEFAULT_FONT : styles.get("font")),
+                (DEFAULT_FONT_STYLE),
+                (DEFAULT_FONT_SIZE));
+            label.setForeground(DEFAULT_FONT_COLOR);
+        }
+        Rectangle area = new Rectangle(0, 0, this.slide.getWidth(), this.slide.getHeight());
+        label.setFont(font.deriveFont(font.getStyle(), font.getSize() * this.getScale(area)));
+        this.fontMap.put(label, font);
     }
 
     @Override

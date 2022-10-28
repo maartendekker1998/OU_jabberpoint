@@ -35,7 +35,6 @@ public class SlideIterator extends SlideShowCompositeIterator
     {
         if ((this.index+1) >= this.chunks.size()) return;
         this.index++;
-        System.out.println("slide item next" + (this.index));
     }
 
     @Override
@@ -43,7 +42,6 @@ public class SlideIterator extends SlideShowCompositeIterator
     {
         if (this.index < 0) return;
         this.index--;
-        System.out.println("slide item prev" + (this.index));
     }
 
     @Override

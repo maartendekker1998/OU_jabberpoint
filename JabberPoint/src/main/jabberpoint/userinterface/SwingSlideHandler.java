@@ -11,7 +11,6 @@ public class SwingSlideHandler implements SlideHandler
     @Override
     public void renderSlide(ConcreteSlide slide)
     {
-        System.out.println("Title: " + slide.getTitle());
         this.windowHandler.clear(true);
         this.windowHandler.setTitle(slide.getTitle());
         this.windowHandler.setTransitions(slide.hasTransitions());
