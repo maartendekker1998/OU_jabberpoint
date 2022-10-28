@@ -16,9 +16,9 @@ public class Controller
 
     public void initialize(ControllerFactory factory) {
         this.infrastructure = factory.getInfraStructure();
-        this.userInterface = factory.getUI();
         this.projectorService = factory.getProjectorService();
         this.projectorService.setSlideShow(this.infrastructure.loadFile("test.xml"));
+        this.userInterface = factory.getUI();
         this.nextSlide();
     }
 
