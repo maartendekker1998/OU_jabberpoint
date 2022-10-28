@@ -9,7 +9,7 @@ public class SlideIterator extends SlideShowCompositeIterator
 
     SlideIterator(ConcreteSlide slideshow)
     {
-        Boolean buildingChunk = false;
+        boolean buildingChunk = false;
         List<Content> chunkList = new ArrayList<>();
 
         for (Content content : slideshow.getContent())
@@ -43,7 +43,7 @@ public class SlideIterator extends SlideShowCompositeIterator
     @Override
     public void previous()
     {
-//        if ((this.index - 2) < 0) return;
+        if (this.index < 0) return;
         this.index--;
         System.out.println("slide item prev" + (this.index));
     }
@@ -63,6 +63,7 @@ public class SlideIterator extends SlideShowCompositeIterator
     @Override
     public SlideShowComponent current()
     {
+        if (this.index < 0) return null;
         return this.chunks.get(this.index);
     }
 

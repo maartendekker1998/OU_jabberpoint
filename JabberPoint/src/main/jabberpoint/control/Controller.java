@@ -60,6 +60,7 @@ public class Controller
     public void removeLastContent()
     {
         SlideShowComponent content = this.projectorService.removeLastContent();
+        if (content == null) return;
         this.userInterface.removeLastContent(content);
     }
 

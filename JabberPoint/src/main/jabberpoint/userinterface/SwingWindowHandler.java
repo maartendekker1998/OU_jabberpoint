@@ -128,16 +128,16 @@ public class SwingWindowHandler implements WindowHandler
         {
             BufferedImage bufferedImage = ImageIO.read(new File(this.imageMap.containsKey(image) ? IMAGE_NOT_FOUND : image.getData()));
             Rectangle area = new Rectangle(0, 0, this.slide.getWidth(), this.slide.getHeight());
-            java.awt.Image scaledImage = bufferedImage.getScaledInstance((int)(bufferedImage.getWidth()*getScale(area)), (int)(bufferedImage.getHeight()*getScale(area)), java.awt.Image.SCALE_SMOOTH);
-            JLabel icon = new JLabel(new ImageIcon(scaledImage));
-            icon.setBounds(this.calculateIndentation(image.getIndentation()), this.previousComponentHeight, (int)(bufferedImage.getWidth()*getScale(area)), (int)(bufferedImage.getHeight()*getScale(area)));
+            java.awt.Image scaledImage = bufferedImage.getScaledInstance((int)(bufferedImage.getWidth()*this.getScale(area)), (int)(bufferedImage.getHeight()*this.getScale(area)), java.awt.Image.SCALE_SMOOTH);
+            JLabel imageLabel = new JLabel(new ImageIcon(scaledImage));
+            imageLabel.setBounds(this.calculateIndentation(image.getIndentation()), this.previousComponentHeight, (int)(bufferedImage.getWidth()*this.getScale(area)), (int)(bufferedImage.getHeight()*this.getScale(area)));
 //            icon.setBorder(new CompoundBorder(new LineBorder(Color.BLACK,1), new EmptyBorder(0,0,0,0)));
-            this.previousComponentHeight+=icon.getHeight();
-            this.slide.add(icon);
+            this.previousComponentHeight+=imageLabel.getHeight();
+            this.slide.add(imageLabel);
             this.slide.repaint();
-            icon.getGraphics().drawImage(bufferedImage, 0, 0, (int)(bufferedImage.getWidth()*getScale(area)), (int)(bufferedImage.getHeight()*getScale(area)), this.slide);
+            imageLabel.getGraphics().drawImage(bufferedImage, 0, 0, (int)(bufferedImage.getWidth()*this.getScale(area)), (int)(bufferedImage.getHeight()*this.getScale(area)), this.slide);
             this.imageMap.put(image, bufferedImage);
-            this.itemMap.put(icon, image);
+            this.itemMap.put(imageLabel, image);
         }
         catch (IOException e)
         {
@@ -189,13 +189,23 @@ public class SwingWindowHandler implements WindowHandler
     @Override
     public void removeLastContent(Content content)
     {
-        Component component = this.getKeyByValue(((ContentList)content).getContent().get(0));
-        if (component == null) return;
-        this.previousComponentHeight-=component.getHeight();
-        this.slide.remove(component);
-        this.imageMap.remove(((ContentList)content).getContent().get(0));
-        this.itemMap.remove(component);
+        for (Content c : ((ContentList)content).getContent())
+        {
+            Component component = this.getKeyByValue(c);
+            if (component == null) continue;
+            this.previousComponentHeight-=component.getHeight();
+            this.slide.remove(component);
+            this.imageMap.remove(c);
+            this.itemMap.remove(component);
+        }
         this.slide.repaint();
+//        Component component = this.getKeyByValue(((ContentList)content).getContent().get(0));
+//        if (component == null) return;
+//        this.previousComponentHeight-=component.getHeight();
+//        this.slide.remove(component);
+//        this.imageMap.remove(((ContentList)content).getContent().get(0));
+//        this.itemMap.remove(component);
+//        this.slide.repaint();
     }
 
     private Component getKeyByValue(Content component)
