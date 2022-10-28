@@ -36,7 +36,7 @@ public class ProjectorService
 
     public void removeAllContent()
     {
-
+        this.projector.removeContent();
     }
 
     public List<SlideShowComponent> remainingContent()

@@ -9,4 +9,5 @@ public interface SlideHandler
     void setWindowHandler(WindowHandler windowHandler);
     void renderContent(Content content);
     void removeLastContent(Content content);
+    void removeAllContent();
 }

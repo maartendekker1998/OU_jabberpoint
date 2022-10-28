@@ -55,7 +55,7 @@ public class SlideIterator extends SlideShowCompositeIterator
     @Override
     public void resetIndex()
     {
-        //        this.index = 0;
+        this.index = -1;
     }
 
     @Override

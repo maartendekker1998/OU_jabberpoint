@@ -29,14 +29,14 @@ public class SwingWindowHandler implements WindowHandler
     private final int Y_MARGIN = 5;
     private int DEFAULT_WIDTH = 720+(2*X_MARGIN);
     private int DEFAULT_HEIGHT = 1012;
-    private final int DEFAULT_LABEL_HEIGHT = 36;
+    private final int DEFAULT_LABEL_FONT_SIZE = 36;
     private int DEFAULT_LABEL_WIDTH = DEFAULT_WIDTH-(2*X_MARGIN);
 
     private final Map<Component, Font> fontMap = new HashMap<>();
     private final Map<Component, Content> itemMap = new HashMap<>();
     private final Map<Content, BufferedImage> imageMap = new HashMap<>();
-    private final Font defaultFont = new Font("Helvetica", Font.PLAIN, DEFAULT_LABEL_HEIGHT);
-    private int previousComponentHeight = 5;
+    private final Font defaultFont = new Font("Helvetica", Font.PLAIN, DEFAULT_LABEL_FONT_SIZE);
+    private int previousComponentHeight = Y_MARGIN;
     private final SwingEventHandler eventHandler;
 
     public SwingWindowHandler(SwingEventHandler eventHandler)
@@ -47,7 +47,6 @@ public class SwingWindowHandler implements WindowHandler
             @Override
             public void componentResized(ComponentEvent event)
             {
-                DEFAULT_LABEL_WIDTH = (slide.getWidth()+16)-(2*X_MARGIN);
                 Rectangle area = new Rectangle(0, 0, slide.getWidth(), slide.getHeight());
                 previousComponentHeight = Y_MARGIN;
                 boolean isTitle = true;
@@ -172,12 +171,17 @@ public class SwingWindowHandler implements WindowHandler
     }
 
     @Override
-    public void clear()
+    public void clear(boolean clearTitle)
     {
+        String title = null;
+        if (!clearTitle) title = ((JLabel)this.slide.getComponents()[0]).getText();
         this.slide.removeAll();
+        this.previousComponentHeight = Y_MARGIN;
         this.itemMap.clear();
+        this.fontMap.clear();
         this.imageMap.clear();
-        this.previousComponentHeight = 5;
+        if (!clearTitle) this.setTitle(title);
+        this.slide.repaint();
     }
 
     @Override

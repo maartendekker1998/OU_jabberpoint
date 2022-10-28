@@ -10,7 +10,7 @@ public interface WindowHandler
     void addText(Text text);
     void addImage(Image content);
     void setTitle(String title);
-    void clear();
+    void clear(boolean clearTitle);
 
     void setTransitions(boolean transitions);
     void removeLastContent(Content content);

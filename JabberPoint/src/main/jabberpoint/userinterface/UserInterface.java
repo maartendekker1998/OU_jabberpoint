@@ -54,8 +54,8 @@ public class UserInterface
         this.slideHandler.removeLastContent((Content) content);
     }
 
-    void removeAllContent()
+    public void removeAllContent()
     {
-
+        this.slideHandler.removeAllContent();
     }
 }

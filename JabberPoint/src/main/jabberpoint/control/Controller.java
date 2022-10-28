@@ -61,7 +61,8 @@ public class Controller
 
     public void removeAllContent()
     {
-
+        this.projectorService.removeAllContent();
+        this.userInterface.removeAllContent();
     }
 
     public void remainingContent()

@@ -12,7 +12,7 @@ public class SwingSlideHandler implements SlideHandler
     public void renderSlide(ConcreteSlide slide)
     {
         System.out.println("Title: " + slide.getTitle());
-        this.windowHandler.clear();
+        this.windowHandler.clear(true);
         this.windowHandler.setTitle(slide.getTitle());
         this.windowHandler.setTransitions(slide.hasTransitions());
         if (!slide.hasTransitions()) this.renderContent(slide.getContent());
@@ -47,5 +47,11 @@ public class SwingSlideHandler implements SlideHandler
     public void removeLastContent(Content content)
     {
         this.windowHandler.removeLastContent(content);
+    }
+
+    @Override
+    public void removeAllContent()
+    {
+        this.windowHandler.clear(false);
     }
 }
