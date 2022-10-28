@@ -1,5 +1,8 @@
 package main.jabberpoint.userinterface;
 
+import main.jabberpoint.domain.Metadata;
+
+import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -35,6 +38,9 @@ public class SwingEventHandler extends KeyAdapter implements EventHandler
             case KeyEvent.VK_HOME:
                 if (this.transitions) new RemoveAllContentCommand().execute();
                 break;
+            case KeyEvent.VK_Q:
+                System.exit(0);
+                break;
         }
     }
 
@@ -42,11 +48,32 @@ public class SwingEventHandler extends KeyAdapter implements EventHandler
     {
         switch (actionCommand)
         {
-            case "Next":
+            case "Next slide":
                 new NextSlideCommand().execute();
                 break;
-            case "Previous":
+            case "Previous slide":
                 new PreviousSlideCommand().execute();
+                break;
+            case "Next content":
+                new NextContentCommand().execute();
+                break;
+            case "Previous content":
+                new RemoveLastContentCommand().execute();
+                break;
+            case "Remaining content":
+                new RemainingContentCommand().execute();
+                break;
+            case "Remove content":
+                new RemoveAllContentCommand().execute();
+                break;
+            case "About":
+                JOptionPane.showMessageDialog(null,
+                        "This presentation is made by " + Metadata.getInstance().metadata.get("presenter")
+                                 + " for the Design for\nchange course of the Open Universiteit The Netherlands.",
+                        "About", JOptionPane.INFORMATION_MESSAGE);
+                break;
+            case "Exit":
+                System.exit(0);
                 break;
         }
     }

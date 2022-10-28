@@ -79,7 +79,7 @@ public class SwingWindowHandler implements WindowHandler
                 return ((JLabel)component).getIcon() != null;
             }
         });
-        this.mainFrame.setMenuBar(new MenuController(this.eventHandler));
+        this.mainFrame.setJMenuBar(new MenuController(this.eventHandler));
         this.mainFrame.addKeyListener(this.eventHandler);
         this.mainFrame.setContentPane(this.slide);
         this.mainFrame.setTitle(
