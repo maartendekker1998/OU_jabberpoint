@@ -6,7 +6,6 @@
 
 	<slide transitions="false">
 		<title font="Arial" fontsize="60" color="#303338">JabberPoint Demo Presentation</title>
-		<item kind="text" level="1"> </item>
 		<item kind="text" level="1">Welcome to JabberPoint!</item>
 		<item kind="text" level="1"> </item>
 		<item kind="text" level="1">Written by:</item>
@@ -94,7 +93,8 @@
 		<item kind="bulletlist" bullet="◇" level="2">
 			<item kind="text" level="2">This bullet list has ◇ as bullet</item>
 		</item>
-		<item kind="text" level="1">For more info see Help --> Troubleshooting</item>
+		<item kind="text" level="1"></item>
+		<item kind="text" level="1">For more info see Help → Troubleshooting</item>
 	</slide>
 
 

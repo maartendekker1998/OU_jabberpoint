@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.io.FileNotFoundException;
 
 public class SwingEventHandler extends KeyAdapter implements EventHandler
 {
@@ -55,16 +54,16 @@ public class SwingEventHandler extends KeyAdapter implements EventHandler
                 new PreviousSlideCommand().execute();
                 break;
             case "Next content":
-                new NextContentCommand().execute();
+                if (this.transitions) new NextContentCommand().execute();
                 break;
             case "Previous content":
-                new RemoveLastContentCommand().execute();
+                if (this.transitions) new RemoveLastContentCommand().execute();
                 break;
             case "Remaining content":
-                new RemainingContentCommand().execute();
+                if (this.transitions) new RemainingContentCommand().execute();
                 break;
             case "Remove content":
-                new RemoveAllContentCommand().execute();
+                if (this.transitions) new RemoveAllContentCommand().execute();
                 break;
             case "Troubleshooting":
                 JOptionPane.showMessageDialog(null,
