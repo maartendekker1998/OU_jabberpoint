@@ -37,7 +37,6 @@ public class SwingWindowHandler implements WindowHandler
     private final Map<Component, Font> fontMap = new HashMap<>();
     private final Map<Component, SlideShowComponent> itemMap = new HashMap<>();
     private final Map<SlideShowComponent, BufferedImage> imageMap = new HashMap<>();
-    private final Font defaultFont = new Font(DEFAULT_FONT, DEFAULT_FONT_STYLE, DEFAULT_FONT_SIZE);
     private int previousComponentHeight = Y_MARGIN;
     private final SwingEventHandler eventHandler;
 
@@ -198,14 +197,14 @@ public class SwingWindowHandler implements WindowHandler
     @Override
     public void clear(boolean clearTitle)
     {
-//        String title = null;
-//        if (!clearTitle) title = ((JLabel)this.slide.getComponents()[0]).getText();
+        ConcreteSlide title = null;
+        if (!clearTitle) title = (ConcreteSlide)this.itemMap.get(this.slide.getComponents()[0]);
         this.slide.removeAll();
         this.previousComponentHeight = Y_MARGIN;
         this.itemMap.clear();
         this.fontMap.clear();
         this.imageMap.clear();
-        if (!clearTitle) this.setTitle((ConcreteSlide) itemMap.get((JLabel)this.slide.getComponents()[0]));
+        if (!clearTitle) this.setTitle(title);
         this.slide.repaint();
     }
 
