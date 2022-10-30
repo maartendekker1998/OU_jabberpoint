@@ -12,6 +12,10 @@
 <!ELEMENT slide (title, item*)>
 <!ELEMENT title (#PCDATA)>
 
+<!ATTLIST title font CDATA #IMPLIED>
+<!ATTLIST title fontsize CDATA #IMPLIED>
+<!ATTLIST title color CDATA #IMPLIED>
+
 <!ATTLIST slide transitions CDATA #REQUIRED>
 <!ELEMENT item (#PCDATA|item)*>
 

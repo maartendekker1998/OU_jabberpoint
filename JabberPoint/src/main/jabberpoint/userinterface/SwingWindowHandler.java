@@ -35,8 +35,8 @@ public class SwingWindowHandler implements WindowHandler
     private int DEFAULT_LABEL_WIDTH = DEFAULT_WIDTH-(2*X_MARGIN);
 
     private final Map<Component, Font> fontMap = new HashMap<>();
-    private final Map<Component, Content> itemMap = new HashMap<>();
-    private final Map<Content, BufferedImage> imageMap = new HashMap<>();
+    private final Map<Component, SlideShowComponent> itemMap = new HashMap<>();
+    private final Map<SlideShowComponent, BufferedImage> imageMap = new HashMap<>();
     private final Font defaultFont = new Font(DEFAULT_FONT, DEFAULT_FONT_STYLE, DEFAULT_FONT_SIZE);
     private int previousComponentHeight = Y_MARGIN;
     private final SwingEventHandler eventHandler;
@@ -68,7 +68,7 @@ public class SwingWindowHandler implements WindowHandler
                         component.setSize(component.getSize().width, component.getFont().getSize()+Y_MARGIN);
                         component.setBounds(createBounds(component.getX(), component.getY(), event.getComponent().getWidth(), component.getHeight()));
                     }
-                    if (!isTitle) component.setLocation(calculateIndentation(itemMap.get(component).getIndentation()), previousComponentHeight);
+                    if (!isTitle) component.setLocation(calculateIndentation(((Content)itemMap.get(component)).getIndentation()), previousComponentHeight);
                     previousComponentHeight += component.getHeight();
                     isTitle = false;
                 }
@@ -178,18 +178,16 @@ public class SwingWindowHandler implements WindowHandler
     }
 
     @Override
-    public void setTitle(String title)
+    public void setTitle(ConcreteSlide slide)
     {
-        JLabel label = new JLabel(title);
-        Font font = this.defaultFont;
-        Rectangle area = new Rectangle(0, 0, this.slide.getWidth(), this.slide.getHeight());
-        label.setFont(font.deriveFont(font.getSize() * this.getScale(area)));
+        JLabel label = new JLabel(slide.getTitle());
+        setStyles(slide.getStyles(), label);
         label.setBounds(this.createBounds(X_MARGIN, this.previousComponentHeight, DEFAULT_LABEL_WIDTH-X_MARGIN, label.getFont().getSize()+Y_MARGIN));
         label.setBorder(new CompoundBorder(new EmptyBorder(0,0,0,0), new EmptyBorder(-7,0,0,0)));
-        this.fontMap.put(label, font);
         this.slide.add(label);
         this.previousComponentHeight+=label.getHeight();
         this.slide.repaint();
+        this.itemMap.put(label, slide);
     }
 
     private int calculateIndentation(int indentation)
@@ -200,14 +198,14 @@ public class SwingWindowHandler implements WindowHandler
     @Override
     public void clear(boolean clearTitle)
     {
-        String title = null;
-        if (!clearTitle) title = ((JLabel)this.slide.getComponents()[0]).getText();
+//        String title = null;
+//        if (!clearTitle) title = ((JLabel)this.slide.getComponents()[0]).getText();
         this.slide.removeAll();
         this.previousComponentHeight = Y_MARGIN;
         this.itemMap.clear();
         this.fontMap.clear();
         this.imageMap.clear();
-        if (!clearTitle) this.setTitle(title);
+        if (!clearTitle) this.setTitle((ConcreteSlide) itemMap.get((JLabel)this.slide.getComponents()[0]));
         this.slide.repaint();
     }
 
@@ -232,9 +230,9 @@ public class SwingWindowHandler implements WindowHandler
         this.slide.repaint();
     }
 
-    private Component getKeyByValue(Content component)
+    private Component getKeyByValue(SlideShowComponent component)
     {
-        for (Map.Entry<Component, Content> entry : this.itemMap.entrySet())
+        for (Map.Entry<Component, SlideShowComponent> entry : this.itemMap.entrySet())
         {
             if (entry.getValue().equals(component)) return entry.getKey();
         }

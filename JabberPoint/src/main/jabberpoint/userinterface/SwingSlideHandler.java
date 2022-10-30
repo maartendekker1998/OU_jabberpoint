@@ -12,7 +12,7 @@ public class SwingSlideHandler implements SlideHandler
     public void renderSlide(ConcreteSlide slide)
     {
         this.windowHandler.clear(true);
-        this.windowHandler.setTitle(slide.getTitle());
+        this.windowHandler.setTitle(slide);
         this.windowHandler.setTransitions(slide.hasTransitions());
         if (!slide.hasTransitions()) this.renderContent(slide.getContent());
     }

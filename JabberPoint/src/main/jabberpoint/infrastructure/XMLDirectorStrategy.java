@@ -42,8 +42,25 @@ public class XMLDirectorStrategy implements DirectorStrategy {
 
     private boolean recursive = false;
 
-    private String getTitle(Element element, String tagName) {
+    private String getTitle(BuilderService builderService ,Element element, String tagName) {
         NodeList titles = element.getElementsByTagName(tagName);
+
+        NamedNodeMap attributes = titles.item(0).getAttributes();
+
+        if (attributes.getLength() == 0) return titles.item(0).getTextContent();
+
+        builderService.newStyles();
+
+        if (attributes.getNamedItem(FONT) != null) {
+            builderService.addStyle(FONT, attributes.getNamedItem(FONT).getTextContent());
+        }
+        if (attributes.getNamedItem(FONTSIZE) != null) {
+            builderService.addStyle(FONTSIZE, attributes.getNamedItem(FONTSIZE).getTextContent());
+        }
+        if (attributes.getNamedItem(COLOR) != null) {
+            builderService.addStyle(COLOR, attributes.getNamedItem(COLOR).getTextContent());
+        }
+
         return titles.item(0).getTextContent();
     }
 
@@ -96,7 +113,7 @@ public class XMLDirectorStrategy implements DirectorStrategy {
                 Element xmlSlide = (Element) slides.item(slideNumber);
 
                 builderService.newSlide();
-                builderService.addSlideTitle(getTitle(xmlSlide, SLIDETITLE));
+                builderService.addSlideTitle(getTitle(builderService ,xmlSlide, SLIDETITLE));
 
                 NamedNodeMap slideAttributes = xmlSlide.getAttributes();
                 String transitions = slideAttributes.getNamedItem(TRANSITIONS).getTextContent();

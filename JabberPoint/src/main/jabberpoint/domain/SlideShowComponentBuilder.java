@@ -34,7 +34,12 @@ public class SlideShowComponentBuilder implements Builder
     }
     @Override
     public void addSlideTitle(String title){
-        this.slide.setTitle(title);
+        if (this.styles.isEmpty()){
+            this.slide.setTitle(title);
+        }else{
+            slide.addStyles(this.styles);
+            this.slide.setTitle(title);
+        }
     }
     @Override
     public void setSlideTransitions(Boolean transitions){
