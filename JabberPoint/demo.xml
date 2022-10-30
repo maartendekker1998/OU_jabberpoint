@@ -20,7 +20,7 @@
 			<item kind="text" level="2">If slides have transitions:</item>
 			<item kind="bulletlist" bullet="○" level="3">
 				<item kind="text" level="3">Go through content by using: ↑ &amp; ↓</item>
-				<item kind="text" level="3">Go to begin or and of the slide by using: Home &amp; End</item>
+				<item kind="text" level="3">Go to begin or end of the slide by using: Home &amp; End</item>
 			</item>
 		</item>
 		<item kind="text" level="1"> </item>
@@ -96,6 +96,4 @@
 		<item kind="text" level="1"></item>
 		<item kind="text" level="1">For more info see Help → Troubleshooting</item>
 	</slide>
-
-
 </presentation>
