@@ -10,8 +10,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
@@ -28,7 +26,7 @@ public class SwingWindowHandler implements WindowHandler
     private final int X_MARGIN = 50;
     private final int Y_MARGIN = 5;
     private int DEFAULT_WIDTH = 1000+(2*X_MARGIN);
-    private int DEFAULT_HEIGHT = 720;
+    private int DEFAULT_HEIGHT = 800;
     private final int DEFAULT_FONT_SIZE = 36;
     private final String DEFAULT_FONT = "Helvetica";
     private final int DEFAULT_FONT_STYLE = Font.PLAIN;
@@ -50,6 +48,7 @@ public class SwingWindowHandler implements WindowHandler
             @Override
             public void componentResized(ComponentEvent event)
             {
+                if (itemMap.isEmpty()) return;
                 Rectangle area = new Rectangle(0, 0, slide.getWidth(), slide.getHeight());
                 previousComponentHeight = Y_MARGIN+TITLE_WHITESPACE;
                 boolean isTitle = true;
@@ -88,10 +87,6 @@ public class SwingWindowHandler implements WindowHandler
         this.mainFrame.setTitle(
                 (Metadata.getInstance().metadata.get("showtitle") == null ? "JabberPoint" : Metadata.getInstance().metadata.get("showtitle")) + " by " +
                 (Metadata.getInstance().metadata.get("presenter") == null ? "JabberPoint" : Metadata.getInstance().metadata.get("presenter")));
-        this.mainFrame.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {}
-        });
         this.mainFrame.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         this.mainFrame.setIconImage(new ImageIcon("halloween.png").getImage());
         this.mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -118,8 +113,7 @@ public class SwingWindowHandler implements WindowHandler
         label.setBorder(new CompoundBorder(new EmptyBorder(0,0,0,0), new EmptyBorder(-7,0,0,0)));
         this.slide.add(label);
         this.previousComponentHeight+=label.getHeight();
-        this.slide.repaint();
-        this.itemMap.put(label, text);
+        SwingUtilities.invokeLater(() -> this.itemMap.put(label, text));
     }
 
     private void setStyles(Map<String, String> styles, JLabel label)
