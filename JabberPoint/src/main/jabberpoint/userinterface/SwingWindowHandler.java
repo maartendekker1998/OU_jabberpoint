@@ -32,8 +32,6 @@ public class SwingWindowHandler implements WindowHandler
     private final int DEFAULT_FONT_STYLE = Font.PLAIN;
     private final int TITLE_WHITESPACE = 20;
     private static final Color DEFAULT_FONT_COLOR = Color.BLACK;
-    private int DEFAULT_LABEL_WIDTH = DEFAULT_WIDTH-(2*X_MARGIN);
-
     private final Map<Component, Font> fontMap = new HashMap<>();
     private final Map<Component, SlideShowComponent> itemMap = new HashMap<>();
     private final Map<SlideShowComponent, BufferedImage> imageMap = new HashMap<>();
@@ -109,7 +107,7 @@ public class SwingWindowHandler implements WindowHandler
     {
         JLabel label = new JLabel(text.getData());
         this.setStyles(text.getStyles(), label);
-        label.setBounds(this.createBounds(this.calculateIndentation(text.getIndentation()), this.previousComponentHeight, DEFAULT_LABEL_WIDTH-X_MARGIN, label.getFont().getSize()+Y_MARGIN));
+        label.setBounds(this.createBounds(this.calculateIndentation(text.getIndentation()), this.previousComponentHeight, this.slide.getWidth()-X_MARGIN, label.getFont().getSize()+Y_MARGIN));
         label.setBorder(new CompoundBorder(new EmptyBorder(0,0,0,0), new EmptyBorder(-7,0,0,0)));
         this.slide.add(label);
         this.previousComponentHeight+=label.getHeight();
@@ -180,7 +178,7 @@ public class SwingWindowHandler implements WindowHandler
     {
         JLabel label = new JLabel(slide.getTitle());
         this.setStyles(slide.getStyles(), label);
-        label.setBounds(this.createBounds(X_MARGIN, (this.previousComponentHeight), DEFAULT_LABEL_WIDTH-X_MARGIN, label.getFont().getSize()+Y_MARGIN));
+        label.setBounds(this.createBounds(X_MARGIN, (this.previousComponentHeight), this.slide.getWidth()-X_MARGIN, label.getFont().getSize()+Y_MARGIN));
         this.slide.add(label);
         this.previousComponentHeight+=(label.getHeight()+TITLE_WHITESPACE);
         this.slide.repaint();
