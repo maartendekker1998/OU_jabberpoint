@@ -1,5 +1,6 @@
 package main.jabberpoint.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -90,5 +91,17 @@ public class SlideShowComponentBuilder implements Builder
     @Override
     public void addMetadata() {
         Metadata.getInstance().initialize(this.metadata);
+    }
+
+
+    @Override
+    public BulletList newBulletList(int indentation){
+        if (this.styles.isEmpty()){
+            return new BulletList(indentation, new ArrayList<>());
+        }else{
+            BulletList bulletList = new BulletList(indentation, new ArrayList<>());
+            bulletList.addStyles(this.styles);
+            return bulletList;
+        }
     }
 }

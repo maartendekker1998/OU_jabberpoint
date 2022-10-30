@@ -58,9 +58,9 @@ public class BuilderService {
         return builder.getSlideShow();
     }
 
-    public BulletList createBulletList(int indentation)
+    public BulletList newBulletList(int indentation)
     {
-        return new BulletList(indentation, new ArrayList<>());
+        return builder.newBulletList(indentation);
     }
 
     public void newStyles(){

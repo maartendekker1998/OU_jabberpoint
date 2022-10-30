@@ -23,7 +23,7 @@ public class XMLDirectorStrategy implements DirectorStrategy {
     private static final String FONT = "font";
     private static final String FONTSIZE = "fontsize";
     private static final String COLOR = "color";
-
+    private static final String BULLET = "bullet";
 
     private static final String TRANSITIONS = "transitions";
     private static final String SLIDETITLE = "title";
@@ -164,6 +164,9 @@ public class XMLDirectorStrategy implements DirectorStrategy {
             if (attributes.getNamedItem(COLOR)!= null)  {
                 builderService.addStyle(COLOR, attributes.getNamedItem(COLOR).getTextContent());
             }
+            if (attributes.getNamedItem(BULLET)!= null)  {
+                builderService.addStyle(BULLET, attributes.getNamedItem(BULLET).getTextContent());
+            }
 
             String type = attributes.getNamedItem(KIND).getTextContent();
             if (TEXT.equals(type))
@@ -180,13 +183,13 @@ public class XMLDirectorStrategy implements DirectorStrategy {
             {
                 if (recursive)
                 {
-                    ContentComposite bulletList = builderService.createBulletList(indentation);
+                    ContentComposite bulletList = builderService.newBulletList(indentation);
                     this.prepareSlide(builderService, element, bulletList);
                     contents.addContent(bulletList);
                     continue;
                 }
                 recursive = true;
-                BulletList bulletList = builderService.createBulletList(indentation);
+                BulletList bulletList = builderService.newBulletList(indentation);
                 this.prepareSlide(builderService, element, bulletList);
                 builderService.addBulletList(indentation, bulletList);
                 recursive = false;

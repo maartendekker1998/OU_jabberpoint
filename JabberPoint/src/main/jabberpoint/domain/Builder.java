@@ -24,4 +24,6 @@ public interface Builder
     void addSlide();
     SlideShowComponent getSlideShow();
     void addBulletList(Integer indentation, BulletList contentList);
+
+    BulletList newBulletList(int indentation);
 }

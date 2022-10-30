@@ -23,6 +23,8 @@
 <!ATTLIST item font CDATA #IMPLIED>
 <!ATTLIST item fontsize CDATA #IMPLIED>
 <!ATTLIST item color CDATA #IMPLIED>
+<!ATTLIST item bullet CDATA #IMPLIED>
+
 
 <!ATTLIST item level CDATA #REQUIRED>
 

@@ -15,15 +15,15 @@
 		<item kind="text"  level="2">Volgende slide: PgDn or Enter</item>
 		<item kind="text"  level="2">Vorige slide: PgUp or up-arrow</item>
 		<item kind="text"  level="2">Stoppen: q or Q</item>
-		<item kind="bulletlist" level="1">
+		<item kind="bulletlist" bullet="*" level="1">
 			<item kind="text"  level="1">BulletItem1</item>
 			<item kind="text"  level="1">BulletItem2</item>
-			<item kind="bulletlist" level="2">
+			<item kind="bulletlist" bullet=">" level="2">
 				<item kind="text" level="2">NestedBul1</item>
 				<item kind="image" level="3">nl.png</item>
-				<item kind="bulletlist" level="3">
+				<item kind="bulletlist" bullet="$" level="3">
 					<item kind="text" level="3">Even deeper</item>
-					<item kind="bulletlist" level="4">
+					<item kind="bulletlist" bullet="@" level="4">
 						<item kind="text" level="4">What? even more deeper!</item>
 					</item>
 					<item kind="text"  level="3">item na en voor bullet op indentation 3</item>
