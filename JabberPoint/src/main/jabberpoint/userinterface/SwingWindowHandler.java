@@ -113,7 +113,8 @@ public class SwingWindowHandler implements WindowHandler
         label.setBorder(new CompoundBorder(new EmptyBorder(0,0,0,0), new EmptyBorder(-7,0,0,0)));
         this.slide.add(label);
         this.previousComponentHeight+=label.getHeight();
-        SwingUtilities.invokeLater(() -> this.itemMap.put(label, text));
+        this.itemMap.put(label, text);
+        this.slide.repaint();
     }
 
     private void setStyles(Map<String, String> styles, JLabel label)
@@ -183,7 +184,7 @@ public class SwingWindowHandler implements WindowHandler
         this.slide.add(label);
         this.previousComponentHeight+=(label.getHeight()+TITLE_WHITESPACE);
         this.slide.repaint();
-        this.itemMap.put(label, slide);
+        SwingUtilities.invokeLater(() -> this.itemMap.put(label, slide));
     }
 
     private int calculateIndentation(int indentation)
