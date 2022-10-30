@@ -2,7 +2,9 @@ package main.jabberpoint.userinterface;
 
 import main.jabberpoint.domain.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SwingSlideHandler implements SlideHandler
 {
@@ -23,7 +25,17 @@ public class SwingSlideHandler implements SlideHandler
         {
             if (content instanceof Text) this.windowHandler.addText((Text)content);
             if (content instanceof Image) this.windowHandler.addImage((Image)content);
-            if (content instanceof ContentComposite) this.renderContent(((ContentComposite)content).getData());
+            if (content instanceof BulletList)
+            {
+                for (Content c : ((ContentComposite)content).getContent())
+                {
+                    Map<String, String> style = new HashMap<>();
+                    style.put("bullet", content.getStyles().get("bullet") == null ? "-" : content.getStyles().get("bullet"));
+                    c.addStyles(style);
+                }
+                this.renderContent(((ContentComposite)content).getData());
+            }
+            if (content instanceof ContentList) this.renderContent(((ContentComposite)content).getData());
         }
     }
 

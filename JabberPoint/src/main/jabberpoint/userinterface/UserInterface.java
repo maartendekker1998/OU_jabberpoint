@@ -9,21 +9,18 @@ import java.util.List;
 
 public class UserInterface
 {
-    private HandlerFactory handlerFactory;
     private SlideHandler slideHandler;
     private WindowHandler windowHandler;
 
     public UserInterface(HandlerFactory handlerFactory)
     {
-        this.handlerFactory = handlerFactory;
-        this.slideHandler = this.handlerFactory.createSlideHandler();
-        this.windowHandler = this.handlerFactory.createWindowHandler();
-
+        this.slideHandler = handlerFactory.createSlideHandler();
+        this.windowHandler = handlerFactory.createWindowHandler();
         this.slideHandler.setWindowHandler(this.windowHandler);
         this.renderUI();
     }
 
-    public void renderUI()
+    private void renderUI()
     {
         this.windowHandler.renderUI();
     }
@@ -42,7 +39,7 @@ public class UserInterface
     {
         for (SlideShowComponent chunks : contents)
         {
-            for (Content content : ((ContentList)chunks).getContent())
+            for (Content content : ((ContentList)chunks).getData())
             {
                 this.slideHandler.renderContent(content);
             }

@@ -13,6 +13,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,8 +27,8 @@ public class SwingWindowHandler implements WindowHandler
 
     private final int X_MARGIN = 50;
     private final int Y_MARGIN = 5;
-    private int DEFAULT_WIDTH = 720+(2*X_MARGIN);
-    private int DEFAULT_HEIGHT = 1012;
+    private int DEFAULT_WIDTH = 1000+(2*X_MARGIN);
+    private int DEFAULT_HEIGHT = 720;
     private final int DEFAULT_FONT_SIZE = 36;
     private final String DEFAULT_FONT = "Helvetica";
     private final int DEFAULT_FONT_STYLE = Font.PLAIN;
@@ -55,10 +56,12 @@ public class SwingWindowHandler implements WindowHandler
                 {
                     if (this.isImage(component))
                     {
+                        Font font = fontMap.get(component);
                         BufferedImage bufferedImage = imageMap.get(itemMap.get(component));
                         java.awt.Image image = bufferedImage.getScaledInstance((int)(bufferedImage.getWidth()*getScale(area)), (int)(bufferedImage.getHeight()*getScale(area)), java.awt.Image.SCALE_SMOOTH);
                         ((JLabel)component).setIcon(new ImageIcon(image));
-                        component.setSize((int)(bufferedImage.getWidth()*getScale(area)), (int)(bufferedImage.getHeight()*getScale(area)));
+                        component.setFont(font.deriveFont(font.getStyle(), font.getSize() * getScale(area)));
+                        component.setSize((int)(bufferedImage.getWidth()*getScale(area))+(int)(((JLabel)component).getText().length()*20* getScale(area)), (int)(bufferedImage.getHeight()*getScale(area)));
                     }
                     else
                     {
@@ -106,18 +109,10 @@ public class SwingWindowHandler implements WindowHandler
     {
         JLabel label = new JLabel(text.getData());
         this.setStyles(text.getStyles(), label);
-//        label.setFont(label.getFont().deriveFont(font.getStyle(), font.getSize() * this.getScale(area)));
         label.setBounds(this.createBounds(this.calculateIndentation(text.getIndentation()), this.previousComponentHeight, DEFAULT_LABEL_WIDTH-X_MARGIN, label.getFont().getSize()+Y_MARGIN));
         label.setBorder(new CompoundBorder(new EmptyBorder(0,0,0,0), new EmptyBorder(-7,0,0,0)));
-//        label.setBorder(new CompoundBorder(new LineBorder(Color.BLACK,1), new EmptyBorder(-7,0,0,0)));
         this.slide.add(label);
         this.previousComponentHeight+=label.getHeight();
-//        if (this.previousComponentHeight+40 > DEFAULT_HEIGHT)
-//        {
-//            System.out.println("test");
-//        }
-//        this.mainFrame.setSize(this.previousComponentHeight > 400 ? (DEFAULT_HEIGHT=previousComponentHeight) : DEFAULT_HEIGHT, DEFAULT_WIDTH);
-//        this.mainFrame.setSize(this.previousComponentHeight < 400 ? DEFAULT_HEIGHT : (DEFAULT_HEIGHT=previousComponentHeight), DEFAULT_HEIGHT);
         this.slide.repaint();
         this.itemMap.put(label, text);
     }
@@ -140,9 +135,11 @@ public class SwingWindowHandler implements WindowHandler
                 (DEFAULT_FONT_STYLE),
                 (DEFAULT_FONT_SIZE));
             label.setForeground(DEFAULT_FONT_COLOR);
+            showMessageDialog(this.mainFrame, "There is an error in the XML styling, refer to help\n for extra information.");
         }
         Rectangle area = new Rectangle(0, 0, this.slide.getWidth(), this.slide.getHeight());
         label.setFont(font.deriveFont(font.getStyle(), font.getSize() * this.getScale(area)));
+        label.setText((styles.get("bullet") == null ? "" : styles.get("bullet") + " ") + (label.getText() == null ? "" : label.getText()));
         this.fontMap.put(label, font);
     }
 
@@ -154,9 +151,10 @@ public class SwingWindowHandler implements WindowHandler
             BufferedImage bufferedImage = ImageIO.read(new File(this.imageMap.containsKey(image) ? IMAGE_NOT_FOUND : image.getData()));
             Rectangle area = new Rectangle(0, 0, this.slide.getWidth(), this.slide.getHeight());
             java.awt.Image scaledImage = bufferedImage.getScaledInstance((int)(bufferedImage.getWidth()*this.getScale(area)), (int)(bufferedImage.getHeight()*this.getScale(area)), java.awt.Image.SCALE_SMOOTH);
-            JLabel imageLabel = new JLabel(new ImageIcon(scaledImage));
-            imageLabel.setBounds(this.calculateIndentation(image.getIndentation()), this.previousComponentHeight, (int)(bufferedImage.getWidth()*this.getScale(area)), (int)(bufferedImage.getHeight()*this.getScale(area)));
-//            icon.setBorder(new CompoundBorder(new LineBorder(Color.BLACK,1), new EmptyBorder(0,0,0,0)));
+            JLabel imageLabel = new JLabel( new ImageIcon(scaledImage));
+            this.setStyles(image.getStyles(), imageLabel);
+            imageLabel.setHorizontalTextPosition(SwingConstants.LEFT);
+            imageLabel.setBounds(this.calculateIndentation(image.getIndentation()), this.previousComponentHeight,(int)(imageLabel.getText().length()*20* getScale(area))+(int)(bufferedImage.getWidth()*this.getScale(area)), (int)(bufferedImage.getHeight()*this.getScale(area)));
             this.previousComponentHeight+=imageLabel.getHeight();
             this.slide.add(imageLabel);
             this.slide.repaint();
@@ -164,15 +162,16 @@ public class SwingWindowHandler implements WindowHandler
             this.imageMap.put(image, bufferedImage);
             this.itemMap.put(imageLabel, image);
         }
-        catch (IOException e)
+        catch (Exception e)
         {
             if (this.imageMap.containsKey(image))
             {
-                showMessageDialog(this.mainFrame, "Serious image error.");
+                showMessageDialog(this.mainFrame, "There has occurred an error.");
                 return;
             }
             this.imageMap.put(image, null);
             this.addImage(image);
+            showMessageDialog(this.mainFrame, "The image \"" + image.getData() + "\" cannot be found, refer to\n help for extra information.");
         }
     }
 
@@ -180,9 +179,8 @@ public class SwingWindowHandler implements WindowHandler
     public void setTitle(ConcreteSlide slide)
     {
         JLabel label = new JLabel(slide.getTitle());
-        setStyles(slide.getStyles(), label);
+        this.setStyles(slide.getStyles(), label);
         label.setBounds(this.createBounds(X_MARGIN, this.previousComponentHeight, DEFAULT_LABEL_WIDTH-X_MARGIN, label.getFont().getSize()+Y_MARGIN));
-        label.setBorder(new CompoundBorder(new EmptyBorder(0,0,0,0), new EmptyBorder(-7,0,0,0)));
         this.slide.add(label);
         this.previousComponentHeight+=label.getHeight();
         this.slide.repaint();
