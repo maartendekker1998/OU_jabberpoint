@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<!DOCTYPE presentation SYSTEM "jabberpoint.dtd">
+<presentation>
+	<metadata kind="presenter">Bart &amp; Maarten</metadata>
+	<metadata kind="showtitle">JabberPoint Presentation - Open Universiteit</metadata>
+
+	<slide transitions="false">
+		<title font="Arial" fontsize="60" color="#303338">JabberPoint Demo Presentation</title>
+		<item kind="text"  level="1"> </item>
+		<item kind="text"  level="1">Welcome to JabberPoint!</item>
+		<item kind="text"  level="1"> </item>
+		<item kind="text"  level="1">Written by:</item>
+		<item kind="bulletlist" bullet="●" level="2">
+			<item kind="text" level="2">Maarten Dekker</item>
+			<item kind="text" level="2">Bart Janssen</item>
+		</item>
+		<item kind="text"  level="1"> </item>
+		<item kind="text" level="1">Controls:</item>
+		<item kind="bulletlist" bullet="●" level="2">
+			<item kind="text" level="2">Switching Slides: ← &amp; → </item>
+			<item kind="text" level="2">If slides have transitions:</item>
+			<item kind="bulletlist" bullet="○" level="3">
+				<item kind="text" level="3">Go through content by using: ↑ &amp; ↓</item>
+				<item kind="text" level="3">Go to begin or and of the slide by using: Home &amp; End</item>
+			</item>
+		</item>
+		<item kind="text" level="1"> </item>
+		<item kind="image"  level="3">ou.png</item>
+		<item kind="text" level="1"> </item>
+	</slide>
+
+	<slide transitions="true">
+		<title font="Arial" fontsize="60" color="#303338">Transition tutorial (press ↓)</title>
+		<item kind="text"  level="1">You've rendered the first item! Now press ↓ again</item>
+		<item kind="text"  level="1">You've rendered a chunk</item>
+		<item kind="text"  level="2">As you can see you can also render a chunk of items</item>
+		<item kind="text"  level="2">It contains all items with a higher level than the root</item>
+		<item kind="text"  level="2">Now press 'End'</item>
+		<item kind="text"  level="1">This renders the entire slide</item>
+		<item kind="text"  level="1">You can go back though the items by using:</item>
+		<item kind="bulletlist" bullet="●" level="1">
+			<item kind="text" level="2">↑ to go backwards step by step</item>
+			<item kind="text" level="2">'Home' to go back to the start of the slide</item>
+		</item>
+		<item kind="text"  level="1"></item>
+		<item kind="text"  level="2">(enough practice? go to the next slide!)</item>
+	</slide>
+
+	<slide transitions="false">
+		<title font="Arial" fontsize="60" color="#303338">Menu overview</title>
+		<item kind="text"  level="1">When you don't have a keyboard, just use the Menu!</item>
+		<item kind="text" level="1"> </item>
+		<item kind="text"  level="1">You can use the follwing dropdown menus:</item>
+		<item kind="bulletlist" bullet="●" level="2">
+			<item kind="text" level="2">Application</item>
+			<item kind="bulletlist" bullet="○" level="3">
+				<item kind="text" level="3">to load a new JabberPoint presentation</item>
+				<item kind="text" level="3">to exit JabberPoint</item>
+			</item>
+			<item kind="text" level="2">Slide</item>
+			<item kind="bulletlist" bullet="○" level="3">
+				<item kind="text" level="3">to go back and forth between slides</item>
+			</item>
+			<item kind="text" level="2">Content</item>
+			<item kind="bulletlist" bullet="○" level="3">
+				<item kind="text" level="3">to iterate over content</item>
+				<item kind="text" level="3">to go to the beginning or end of the slide</item>
+			</item>
+			<item kind="text" level="2">Help</item>
+			<item kind="bulletlist" bullet="○" level="3">
+				<item kind="text" level="3">to see information about JabberPoint</item>
+				<item kind="text" level="3">to read troubleshooting information</item>
+			</item>
+		</item>
+	</slide>
+
+</presentation>

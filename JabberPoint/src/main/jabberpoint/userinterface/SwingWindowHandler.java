@@ -10,6 +10,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -71,7 +73,7 @@ public class SwingWindowHandler implements WindowHandler
                         component.setBounds(createBounds(component.getX(), component.getY(), event.getComponent().getWidth(), component.getHeight()));
                     }
                     if (!isTitle) component.setLocation(calculateIndentation(((Content)itemMap.get(component)).getIndentation()), previousComponentHeight);
-                    previousComponentHeight += component.getHeight();
+                    previousComponentHeight += component.getHeight() + (this.isImage(component) ? 5 : 0);
                     isTitle = false;
                 }
             }
@@ -87,6 +89,10 @@ public class SwingWindowHandler implements WindowHandler
         this.mainFrame.setTitle(
                 (Metadata.getInstance().metadata.get("showtitle") == null ? "JabberPoint" : Metadata.getInstance().metadata.get("showtitle")) + " by " +
                 (Metadata.getInstance().metadata.get("presenter") == null ? "JabberPoint" : Metadata.getInstance().metadata.get("presenter")));
+        this.mainFrame.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {}
+        });
         this.mainFrame.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         this.mainFrame.setIconImage(new ImageIcon("halloween.png").getImage());
         this.mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -155,7 +161,7 @@ public class SwingWindowHandler implements WindowHandler
             this.setStyles(image.getStyles(), imageLabel);
             imageLabel.setHorizontalTextPosition(SwingConstants.LEFT);
             imageLabel.setBounds(this.calculateIndentation(image.getIndentation()), this.previousComponentHeight,(int)(imageLabel.getText().length()*20* getScale(area))+(int)(bufferedImage.getWidth()*this.getScale(area)), (int)(bufferedImage.getHeight()*this.getScale(area)));
-            this.previousComponentHeight+=imageLabel.getHeight();
+            this.previousComponentHeight+=bufferedImage.getHeight() + 5;
             this.slide.add(imageLabel);
             this.slide.repaint();
             imageLabel.getGraphics().drawImage(bufferedImage, 0, 0, (int)(bufferedImage.getWidth()*this.getScale(area)), (int)(bufferedImage.getHeight()*this.getScale(area)), this.slide);

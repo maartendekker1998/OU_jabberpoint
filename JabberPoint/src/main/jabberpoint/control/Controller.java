@@ -14,10 +14,10 @@ public class Controller
 
     private Controller(){}
 
-    public void initialize(ControllerFactory factory) {
+    public void initialize(ControllerFactory factory, String filename) {
         this.infrastructure = factory.getInfraStructure();
         this.projectorService = factory.getProjectorService();
-        this.projectorService.setSlideShow(this.infrastructure.loadFile("test.xml"));
+        this.projectorService.setSlideShow(this.infrastructure.loadFile(filename));
         this.userInterface = factory.getUI();
         this.nextSlide();
     }
@@ -32,8 +32,10 @@ public class Controller
         return instance;
     }
 
-    private void loadFile(String uri) {
+    public void loadFile(String uri) {
         SlideShowComponent slideshow = this.infrastructure.loadFile(uri);
+        this.projectorService.setSlideShow(slideshow);
+        this.nextSlide();
     }
 
     public void nextSlide()

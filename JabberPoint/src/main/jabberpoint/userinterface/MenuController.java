@@ -10,11 +10,16 @@ public class MenuController extends JMenuBar
         JMenuBar mainMenuBar = new JMenuBar();
 
         JMenu application = new JMenu("Application");
+
         JMenuItem exit = new JMenuItem("Exit");
         exit.setAccelerator(KeyStroke.getKeyStroke('Q', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         exit.addActionListener(actionEvent -> eventHandler.menuItemClick("Exit"));
         application.add(exit);
 
+        JMenuItem open = new JMenuItem("Open");
+        open.setAccelerator(KeyStroke.getKeyStroke('O', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        open.addActionListener(actionEvent -> eventHandler.menuItemClick("Open"));
+        application.add(open);
 
 
         JMenu presentation = new JMenu("Slide");

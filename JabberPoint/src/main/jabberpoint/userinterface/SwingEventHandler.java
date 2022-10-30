@@ -5,6 +5,8 @@ import main.jabberpoint.domain.Metadata;
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class SwingEventHandler extends KeyAdapter implements EventHandler
 {
@@ -71,6 +73,17 @@ public class SwingEventHandler extends KeyAdapter implements EventHandler
                         "This presentation is made by " + Metadata.getInstance().metadata.get("presenter")
                                  + " for the Design for\nchange course of the Open Universiteit The Netherlands.",
                         "About", JOptionPane.INFORMATION_MESSAGE);
+                break;
+            case "Open":
+                String filename = JOptionPane.showInputDialog("Enter the filename");
+
+                if (filename != null && new File(filename).exists()){
+                    new OpenFileCommand(filename).execute();
+                    break;
+                }
+                JOptionPane.showMessageDialog(null,
+                        "The file you are trying to open does not exist.",
+                        "Error opening file", JOptionPane.INFORMATION_MESSAGE);
                 break;
             case "Exit":
                 System.exit(0);
