@@ -6,10 +6,10 @@
 
 	<slide transitions="false">
 		<title font="Arial" fontsize="60" color="#303338">JabberPoint Demo Presentation</title>
-		<item kind="text"  level="1"> </item>
-		<item kind="text"  level="1">Welcome to JabberPoint!</item>
-		<item kind="text"  level="1"> </item>
-		<item kind="text"  level="1">Written by:</item>
+		<item kind="text" level="1"> </item>
+		<item kind="text" level="1">Welcome to JabberPoint!</item>
+		<item kind="text" level="1"> </item>
+		<item kind="text" level="1">Written by:</item>
 		<item kind="bulletlist" bullet="●" level="2">
 			<item kind="text" level="2">Maarten Dekker</item>
 			<item kind="text" level="2">Bart Janssen</item>
@@ -31,13 +31,13 @@
 
 	<slide transitions="true">
 		<title font="Arial" fontsize="60" color="#303338">Transition tutorial (press ↓)</title>
-		<item kind="text"  level="1">You've rendered the first item! Now press ↓ again</item>
-		<item kind="text"  level="1">You've rendered a chunk</item>
-		<item kind="text"  level="2">As you can see you can also render a chunk of items</item>
-		<item kind="text"  level="2">It contains all items with a higher level than the root</item>
-		<item kind="text"  level="2">Now press 'End'</item>
-		<item kind="text"  level="1">This renders the entire slide</item>
-		<item kind="text"  level="1">You can go back though the items by using:</item>
+		<item kind="text" level="1">You've rendered the first item! Now press ↓ again</item>
+		<item kind="text" level="1">You've rendered a chunk</item>
+		<item kind="text" level="2">As you can see you can also render a chunk of items</item>
+		<item kind="text" level="2">It contains all items with a higher level than the root</item>
+		<item kind="text" level="2">Now press 'End'</item>
+		<item kind="text" level="1">This renders the entire slide</item>
+		<item kind="text" level="1">You can go back though the items by using:</item>
 		<item kind="bulletlist" bullet="●" level="1">
 			<item kind="text" level="2">↑ to go backwards step by step</item>
 			<item kind="text" level="2">'Home' to go back to the start of the slide</item>
@@ -73,5 +73,29 @@
 			</item>
 		</item>
 	</slide>
+
+	<slide transitions="false">
+		<title font="Arial" fontsize="60" color="#303338">Styling Tutorial</title>
+		<item kind="text" level="1">Styles can be set for content and slide-titles:</item>
+		<item kind="bulletlist" bullet="●" level="1">
+			<item kind="text" level="2">Font can be set (the OS must have the font installed)</item>
+			<item kind="text" level="2">Fontsize can be set</item>
+			<item kind="text" level="2">Color can be set</item>
+		</item>
+		<item kind="text" level="1"></item>
+		<item kind="text" level="1">A few examples :</item>
+		<item kind="text" font="Comic Sans MS" fontsize="24" color="#fc0317" level="2">This is comic sans 24 in red</item>
+		<item kind="text" font="Algerian" fontsize="35" color="#030ffc" level="2">This is algerian 35 in blue</item>
+		<item kind="text" level="1"></item>
+		<item kind="text" level="1">Styles can also be used to freely set the bulletlist icon:</item>
+		<item kind="bulletlist" bullet="●" level="2">
+			<item kind="text" level="2">This bullet list has ● as bullet</item>
+		</item>
+		<item kind="bulletlist" bullet="◇" level="2">
+			<item kind="text" level="2">This bullet list has ◇ as bullet</item>
+		</item>
+		<item kind="text" level="1">For more info see Help --> Troubleshooting</item>
+	</slide>
+
 
 </presentation>
