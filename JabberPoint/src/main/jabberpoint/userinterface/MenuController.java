@@ -58,17 +58,17 @@ public class MenuController extends JMenuBar
 
         JMenu help = new JMenu("Help");
 
+        JMenuItem troubleShooting = new JMenuItem("Troubleshooting");
+        troubleShooting.setAccelerator(KeyStroke.getKeyStroke('T', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
+        troubleShooting.addActionListener(actionEvent -> eventHandler.menuItemClick("Troubleshooting"));
+        help.add(troubleShooting);
+        help.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+
         JMenuItem about = new JMenuItem("About");
         about.setAccelerator(KeyStroke.getKeyStroke('Z', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
         about.addActionListener(actionEvent -> eventHandler.menuItemClick("About"));
         help.add(about);
         help.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-
-//        JMenuItem about = new JMenuItem("About");
-//        about.setAccelerator(KeyStroke.getKeyStroke('Z', Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()));
-//        about.addActionListener(actionEvent -> eventHandler.menuItemClick("About"));
-//        help.add(about);
-//        help.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 
         mainMenuBar.add(application);
         mainMenuBar.add(presentation);

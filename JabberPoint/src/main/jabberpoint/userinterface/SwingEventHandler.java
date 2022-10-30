@@ -1,7 +1,5 @@
 package main.jabberpoint.userinterface;
 
-import main.jabberpoint.domain.Metadata;
-
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -68,10 +66,51 @@ public class SwingEventHandler extends KeyAdapter implements EventHandler
             case "Remove content":
                 new RemoveAllContentCommand().execute();
                 break;
+            case "Troubleshooting":
+                JOptionPane.showMessageDialog(null,
+                        "XML:\n" +
+                                 "JabberPoint uses XML files as source of the presentations. There are various keywords that can be used:\n" +
+                                 "   <metadata></metadata> is extra information on the slideshow;\n" +
+                                 "Properties that can be used on metadata are:\n" +
+                                 "    - \"presenter\", this is the name of the presenter of the presentation;\n" +
+                                 "    - \"showtitle\", this is the title of the presentation.\n" +
+                                 "   <slide></slide> is a new slide and can contain content such as text items, bullet lists and images, it should be at\n" +
+                                 "      the same XML level as metadata;\n" +
+                                 "Properties that can be used on a slide are:\n" +
+                                 "    - \"transitions\", this can be set to a value of \"true\" or \"false\"  to set the presentation to show content\n" +
+                                 "           one by one in stead of a full slide at once.\n" +
+                                 "   <item></item> may contain data to show on a slide, these are child's of slide items;\n" +
+                                 "Properties that can be used on items are:\n" +
+                                 "    - \"kind\", this is the type of content, this can be \"text\", \"image\" or \"bulletlist\" (required);\n" +
+                                 "    - \"level\", this sets the indentation of the content, this must be a positive number (required);\n" +
+                                 "    - \"font\", sets the font, this must be installed on the computer (optional);\n" +
+                                 "    - \"fontsize\", this will be set to the size of the characters, this must be a number (optional);\n" +
+                                 "    - \"color\", sets the color of the characters, this must be presented as hex, example: (#FG65A3) (optional);\n" +
+                                 "    - \"bullet\" (only on kind bulletlist), this can be set to a character that will be shown in front of content (optional).\n" +
+                                 "\n" +
+                                 "Bulletlists can be stacked as far as you like to, it is recommended to set the indentation of the bulletlist, the same as\n" +
+                                 "   the content it contains.\n" +
+                                 "If a value is not provided as described above, an error message is raised and a default value will be used.\n" +
+                                 "Image and bulletlist ignores the font, fontsize and color properties.\n" +
+                                 "If an image cannot be found, an error message is raised and a default image (indicating cannot find image) will be used.\n" +
+                                 "\n" +
+                                 "Keys:\n" +
+                                 "The short keys that can be used are as following\n" +
+                                 "    - Q, exits JabberPoint;\n" +
+                                 "    - O, opens an input field to open a new presentation file;\n" +
+                                 "    - W, removes last added content (only when slide has transitions);\n" +
+                                 "    - S, adds next content (only when slide has transitions);\n" +
+                                 "    - A, go to previous slide;\n" +
+                                 "    - D, go to next slide;\n" +
+                                 "    - X, adds remaining content (only when slide has transitions);\n" +
+                                 "    - C, clears all content (only when slide has transitions);\n" +
+                                 "    - Z, shows information about JabberPoint;\n" +
+                                 "    - T, shows troubleshooting help.\n",
+                        "Troubleshooting", JOptionPane.INFORMATION_MESSAGE);
+                break;
             case "About":
                 JOptionPane.showMessageDialog(null,
-                        "This presentation is made by " + Metadata.getInstance().metadata.get("presenter")
-                                 + " for the Design for\nchange course of the Open Universiteit The Netherlands.",
+                        "JabberPoint is made by Bart Janssen and Maarten Dekker as an assignment\nfor the \'Design for change\' course of the Open Universiteit The Netherlands.",
                         "About", JOptionPane.INFORMATION_MESSAGE);
                 break;
             case "Open":

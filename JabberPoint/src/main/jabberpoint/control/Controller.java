@@ -40,7 +40,9 @@ public class Controller
 
     public void nextSlide()
     {
-        this.userInterface.renderSlide(this.projectorService.getNextSlide());
+        SlideShowComponent slide = this.projectorService.getNextSlide();
+        if (slide == null) return;
+        this.userInterface.renderSlide(slide);
     }
 
     public void previousSlide()
@@ -48,10 +50,9 @@ public class Controller
         this.userInterface.renderSlide(this.projectorService.getPreviousSlide());
     }
 
-    public SlideShowComponent nextContent()
+    public void nextContent()
     {
         this.userInterface.renderContent(this.projectorService.nextContent());
-        return null;
     }
 
     public void removeLastContent()

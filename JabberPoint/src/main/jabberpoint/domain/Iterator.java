@@ -7,6 +7,5 @@ public interface Iterator
     boolean isDone();
     void resetIndex();
     SlideShowComponent current();
-
     SlideShowComponent first();
 }

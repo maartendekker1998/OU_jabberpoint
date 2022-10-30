@@ -24,7 +24,7 @@ public class SlideShowIterator extends SlideShowCompositeIterator
     @Override
     public boolean isDone()
     {
-        return this.index >= this.iterable.componentList.size();
+        return (this.index+1) >= this.iterable.componentList.size();
     }
 
     @Override

@@ -14,8 +14,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,6 +32,7 @@ public class SwingWindowHandler implements WindowHandler
     private final int DEFAULT_FONT_SIZE = 36;
     private final String DEFAULT_FONT = "Helvetica";
     private final int DEFAULT_FONT_STYLE = Font.PLAIN;
+    private final int TITLE_WHITESPACE = 20;
     private static final Color DEFAULT_FONT_COLOR = Color.BLACK;
     private int DEFAULT_LABEL_WIDTH = DEFAULT_WIDTH-(2*X_MARGIN);
 
@@ -52,7 +51,7 @@ public class SwingWindowHandler implements WindowHandler
             public void componentResized(ComponentEvent event)
             {
                 Rectangle area = new Rectangle(0, 0, slide.getWidth(), slide.getHeight());
-                previousComponentHeight = Y_MARGIN;
+                previousComponentHeight = Y_MARGIN+TITLE_WHITESPACE;
                 boolean isTitle = true;
                 for (Component component : mainFrame.getContentPane().getComponents())
                 {
@@ -157,11 +156,11 @@ public class SwingWindowHandler implements WindowHandler
             BufferedImage bufferedImage = ImageIO.read(new File(this.imageMap.containsKey(image) ? IMAGE_NOT_FOUND : image.getData()));
             Rectangle area = new Rectangle(0, 0, this.slide.getWidth(), this.slide.getHeight());
             java.awt.Image scaledImage = bufferedImage.getScaledInstance((int)(bufferedImage.getWidth()*this.getScale(area)), (int)(bufferedImage.getHeight()*this.getScale(area)), java.awt.Image.SCALE_SMOOTH);
-            JLabel imageLabel = new JLabel( new ImageIcon(scaledImage));
+            JLabel imageLabel = new JLabel(new ImageIcon(scaledImage));
             this.setStyles(image.getStyles(), imageLabel);
             imageLabel.setHorizontalTextPosition(SwingConstants.LEFT);
             imageLabel.setBounds(this.calculateIndentation(image.getIndentation()), this.previousComponentHeight,(int)(imageLabel.getText().length()*20* getScale(area))+(int)(bufferedImage.getWidth()*this.getScale(area)), (int)(bufferedImage.getHeight()*this.getScale(area)));
-            this.previousComponentHeight+=bufferedImage.getHeight() + 5;
+            this.previousComponentHeight+=(imageLabel.getHeight()+5);
             this.slide.add(imageLabel);
             this.slide.repaint();
             imageLabel.getGraphics().drawImage(bufferedImage, 0, 0, (int)(bufferedImage.getWidth()*this.getScale(area)), (int)(bufferedImage.getHeight()*this.getScale(area)), this.slide);
@@ -186,9 +185,9 @@ public class SwingWindowHandler implements WindowHandler
     {
         JLabel label = new JLabel(slide.getTitle());
         this.setStyles(slide.getStyles(), label);
-        label.setBounds(this.createBounds(X_MARGIN, this.previousComponentHeight, DEFAULT_LABEL_WIDTH-X_MARGIN, label.getFont().getSize()+Y_MARGIN));
+        label.setBounds(this.createBounds(X_MARGIN, (this.previousComponentHeight), DEFAULT_LABEL_WIDTH-X_MARGIN, label.getFont().getSize()+Y_MARGIN));
         this.slide.add(label);
-        this.previousComponentHeight+=label.getHeight();
+        this.previousComponentHeight+=(label.getHeight()+TITLE_WHITESPACE);
         this.slide.repaint();
         this.itemMap.put(label, slide);
     }
@@ -224,6 +223,7 @@ public class SwingWindowHandler implements WindowHandler
         for (Content contentToRemove : ((ContentList)content).getContent())
         {
             Component componentToRemove = this.getKeyByValue(contentToRemove);
+            if (contentToRemove instanceof Image) this.previousComponentHeight-=5;
             if (componentToRemove == null) continue;
             this.previousComponentHeight-=componentToRemove.getHeight();
             this.slide.remove(componentToRemove);

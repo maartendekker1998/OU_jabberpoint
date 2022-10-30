@@ -149,6 +149,7 @@ public class XMLDirectorStrategy implements DirectorStrategy {
             if (indentationText != null) {
                 try {
                     indentation = Integer.parseInt(indentationText);
+                    if (indentation < 0) indentation = 0;
                 }
                 catch(NumberFormatException x) {
                     System.err.println(NFE);

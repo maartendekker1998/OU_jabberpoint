@@ -12,7 +12,7 @@ public class Projector
         this.slideShowIterator = slideshow.createIterator();
     }
 
-    public SlideShowComponent nextContent()//ContentList.class
+    public SlideShowComponent nextContent()
     {
         if (this.slideIterator.isDone()) return null;
         this.slideIterator.next();
@@ -31,7 +31,7 @@ public class Projector
         this.slideIterator.resetIndex();
     }
 
-    public List<SlideShowComponent> allContent()//ContentList.class
+    public List<SlideShowComponent> allContent()
     {
         List<SlideShowComponent> list = new ArrayList<>();
         while (!this.slideIterator.isDone())
@@ -44,6 +44,7 @@ public class Projector
 
     public SlideShowComponent getNextSlide()
     {
+        if (this.slideShowIterator.isDone()) return null;
         this.slideShowIterator.next();
         SlideShowComponent slide = this.slideShowIterator.current();
         this.slideIterator = slide.createIterator();
