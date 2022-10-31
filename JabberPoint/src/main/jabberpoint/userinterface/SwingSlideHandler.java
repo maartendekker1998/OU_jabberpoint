@@ -55,7 +55,7 @@ public class SwingSlideHandler implements SlideHandler
     }
 
     @Override
-    public void removeLastContent(Content content)
+    public void removeContent(Content content)
     {
         this.windowHandler.removeLastContent(content);
     }

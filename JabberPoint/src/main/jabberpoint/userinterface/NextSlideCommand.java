@@ -7,6 +7,6 @@ public class NextSlideCommand implements Command
     @Override
     public void execute()
     {
-        Controller.getInstance().nextSlide();
+        Controller.getInstance().getNextSlide();
     }
 }

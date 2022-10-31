@@ -10,20 +10,25 @@ public class BuilderService {
         this.builder = builder;
     }
 
+
     public void newSlideShow(){
         builder.newSlideShow();
+    }
+
+    public SlideShowComponent getSlideShow() {
+        return builder.getSlideShow();
     }
 
     public void newSlide(){
         builder.newSlide();
     }
 
-    public void addSlideTitle(String title){
-        builder.addSlideTitle(title);
-    }
-
     public void setTransitions(Boolean transitions){
         builder.setSlideTransitions(transitions);
+    }
+
+    public void addSlideTitle(String title){
+        builder.addSlideTitle(title);
     }
 
     public void addTextContent(Integer indentation, String data){
@@ -32,6 +37,11 @@ public class BuilderService {
 
     public void addImageContent(Integer indentation, String data){
         builder.addImageContent(indentation, data);
+    }
+
+    public BulletList newBulletList(int indentation)
+    {
+        return builder.newBulletList(indentation);
     }
 
     public void addBulletList(Integer indentation, BulletList contentList){
@@ -50,15 +60,6 @@ public class BuilderService {
 
     public void addSlide(){
         builder.addSlide();
-    }
-
-    public SlideShowComponent getResults() {
-        return builder.getSlideShow();
-    }
-
-    public BulletList newBulletList(int indentation)
-    {
-        return builder.newBulletList(indentation);
     }
 
     public void newStyles(){

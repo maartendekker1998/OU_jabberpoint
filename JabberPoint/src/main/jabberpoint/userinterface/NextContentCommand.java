@@ -7,6 +7,6 @@ public class NextContentCommand implements Command
     @Override
     public void execute()
     {
-        Controller.getInstance().nextContent();
+        Controller.getInstance().getNextContent();
     }
 }

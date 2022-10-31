@@ -46,9 +46,9 @@ public class UserInterface
         }
     }
 
-    public void removeLastContent(SlideShowComponent content)
+    public void removeContent(SlideShowComponent content)
     {
-        this.slideHandler.removeLastContent((Content) content);
+        this.slideHandler.removeContent((Content) content);
     }
 
     public void removeAllContent()

@@ -8,6 +8,6 @@ public interface SlideHandler
     void renderSlide(ConcreteSlide slide);
     void setWindowHandler(WindowHandler windowHandler);
     void renderContent(Content content);
-    void removeLastContent(Content content);
+    void removeContent(Content content);
     void removeAllContent();
 }

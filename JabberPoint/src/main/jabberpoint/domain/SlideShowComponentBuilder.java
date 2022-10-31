@@ -15,20 +15,18 @@ public class SlideShowComponentBuilder implements Builder
     public void newSlideShow() {
         this.slideShow = new ConcreteSlideShow();
     }
-
     @Override
     public SlideShowComponent getSlideShow(){
         return this.slideShow;
     }
-
-
+    
     @Override
     public void newSlide() {
         this.slide = new ConcreteSlide();
     }
     @Override
-    public void addSlide() {
-        this.slideShow.addSlide(this.slide);
+    public void setSlideTransitions(Boolean transitions){
+        this.slide.setHasTransitions(transitions);
     }
     @Override
     public void addSlideTitle(String title){
@@ -37,12 +35,6 @@ public class SlideShowComponentBuilder implements Builder
         }
         this.slide.setTitle(title);
     }
-    @Override
-    public void setSlideTransitions(Boolean transitions){
-        this.slide.setHasTransitions(transitions);
-    }
-
-    // Content related functions
     private void addContent(Content content) {
         if (this.styles.isEmpty()){
             this.slide.addContent(content);
@@ -60,15 +52,28 @@ public class SlideShowComponentBuilder implements Builder
         this.addContent(new Image(indentation, data));
     }
     @Override
+    public BulletList newBulletList(int indentation){
+        if (this.styles.isEmpty()){
+            return new BulletList(indentation, new ArrayList<>());
+        }else{
+            BulletList bulletList = new BulletList(indentation, new ArrayList<>());
+            bulletList.addStyles(this.styles);
+            return bulletList;
+        }
+    }
+    @Override
     public void addBulletList(Integer indentation, BulletList contentList) {
         this.addContent(contentList);
+    }
+    @Override
+    public void addSlide() {
+        this.slideShow.addSlide(this.slide);
     }
 
     @Override
     public void newStyles(){
         this.styles = new HashMap<>();
     }
-
     @Override
     public void addStyle(String key, String value){
         this.styles.put(key, value);
@@ -85,16 +90,5 @@ public class SlideShowComponentBuilder implements Builder
     @Override
     public void addMetadata() {
         Metadata.getInstance().initialize(this.metadata);
-    }
-
-    @Override
-    public BulletList newBulletList(int indentation){
-        if (this.styles.isEmpty()){
-            return new BulletList(indentation, new ArrayList<>());
-        }else{
-            BulletList bulletList = new BulletList(indentation, new ArrayList<>());
-            bulletList.addStyles(this.styles);
-            return bulletList;
-        }
     }
 }

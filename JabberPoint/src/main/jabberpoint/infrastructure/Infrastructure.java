@@ -13,8 +13,14 @@ public class Infrastructure {
         this.director = director;
     }
 
-    public SlideShowComponent loadFile(String filename) {
-        this.director.construct(builderService, filename);
-        return this.builderService.getResults();
+    /**
+     * This function receives a filepath and instructs the director to construct the domain
+     *
+     * @param filepath
+     * @return A reference to the fully constructed slideshow
+     */
+    public SlideShowComponent loadFile(String filepath) {
+        this.director.construct(builderService, filepath);
+        return this.builderService.getSlideShow();
     }
 }

@@ -7,6 +7,6 @@ public class RemainingContentCommand implements Command
     @Override
     public void execute()
     {
-        Controller.getInstance().remainingContent();
+        Controller.getInstance().getRemainingContent();
     }
 }

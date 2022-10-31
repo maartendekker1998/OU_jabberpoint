@@ -7,6 +7,9 @@ import main.jabberpoint.infrastructure.Infrastructure;
 import main.jabberpoint.userinterface.HandlerFactory;
 import main.jabberpoint.userinterface.UserInterface;
 
+/**
+ * This abstract class defines an abstraction of the needed configuration for the program to run
+ */
 public abstract class ControllerFactory
 {
     public abstract UserInterface getUI();

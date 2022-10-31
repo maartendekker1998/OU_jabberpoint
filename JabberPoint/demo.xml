@@ -90,8 +90,8 @@
 		<item kind="bulletlist" bullet="●" level="2">
 			<item kind="text" level="2">This bullet list has ● as bullet</item>
 		</item>
-		<item kind="bulletlist" bullet="◇" level="2">
-			<item kind="text" level="2">This bullet list has ◇ as bullet</item>
+		<item kind="bulletlist" bullet="○" level="2">
+			<item kind="text" level="2">This bullet list has ○ as bullet</item>
 		</item>
 		<item kind="text" level="1"> </item>
 		<item kind="text" level="1">For more info see Help → Troubleshooting</item>
