@@ -11,7 +11,6 @@ public class SlideShowComponentBuilder implements Builder
     private Map<String, String> metadata;
     private Map<String, String> styles;
 
-    //Slideshow related functions
     @Override
     public void newSlideShow() {
         this.slideShow = new ConcreteSlideShow();
@@ -23,10 +22,8 @@ public class SlideShowComponentBuilder implements Builder
     }
 
 
-    //Slide related functions
     @Override
     public void newSlide() {
-        //reset function for slide
         this.slide = new ConcreteSlide();
     }
     @Override
@@ -35,12 +32,10 @@ public class SlideShowComponentBuilder implements Builder
     }
     @Override
     public void addSlideTitle(String title){
-        if (this.styles.isEmpty()){
-            this.slide.setTitle(title);
-        }else{
+        if (!this.styles.isEmpty()) {
             slide.addStyles(this.styles);
-            this.slide.setTitle(title);
         }
+        this.slide.setTitle(title);
     }
     @Override
     public void setSlideTransitions(Boolean transitions){
@@ -79,7 +74,6 @@ public class SlideShowComponentBuilder implements Builder
         this.styles.put(key, value);
     }
 
-    // Metadata related functions
     @Override
     public void newMetadata(){
         this.metadata = new HashMap<>();
@@ -92,7 +86,6 @@ public class SlideShowComponentBuilder implements Builder
     public void addMetadata() {
         Metadata.getInstance().initialize(this.metadata);
     }
-
 
     @Override
     public BulletList newBulletList(int indentation){

@@ -2,9 +2,9 @@ package main.jabberpoint.domain;
 
 public abstract class Content<T> extends SlideShowComponent
 {
-    private T data;
+    private final T data;
 
-    private int indentation;
+    private final int indentation;
 
     Content(int indentation, T data)
     {

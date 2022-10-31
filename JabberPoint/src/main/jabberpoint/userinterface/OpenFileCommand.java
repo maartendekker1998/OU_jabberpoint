@@ -4,7 +4,7 @@ import main.jabberpoint.control.Controller;
 
 public class OpenFileCommand implements Command
 {
-    private String file;
+    private final String file;
 
     public OpenFileCommand(String file){
         this.file = file;

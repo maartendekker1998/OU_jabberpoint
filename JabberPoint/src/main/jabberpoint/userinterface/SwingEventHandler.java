@@ -3,7 +3,6 @@ package main.jabberpoint.userinterface;
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.io.File;
 
 public class SwingEventHandler extends KeyAdapter implements EventHandler
 {

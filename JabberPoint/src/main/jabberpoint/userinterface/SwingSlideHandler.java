@@ -27,11 +27,11 @@ public class SwingSlideHandler implements SlideHandler
             if (content instanceof Image) this.windowHandler.addImage((Image)content);
             if (content instanceof BulletList)
             {
-                for (Content c : ((ContentComposite)content).getContent())
+                for (Content bulletContent : content.getContent())
                 {
                     Map<String, String> style = new HashMap<>();
                     style.put("bullet", content.getStyles().get("bullet") == null ? "-" : content.getStyles().get("bullet"));
-                    c.addStyles(style);
+                    bulletContent.addStyles(style);
                 }
                 this.renderContent(((ContentComposite)content).getData());
             }

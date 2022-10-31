@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ProjectorService
 {
-    private Projector projector = new Projector();
+    private final Projector projector = new Projector();
 
     public void setSlideShow(SlideShowComponent slideShow)
     {

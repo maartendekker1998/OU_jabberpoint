@@ -2,11 +2,9 @@ package main.jabberpoint.domain_service;
 
 import main.jabberpoint.domain.*;
 
-import java.util.ArrayList;
-
 public class BuilderService {
 
-    private Builder builder;
+    private final Builder builder;
 
     public BuilderService(Builder builder){
         this.builder = builder;

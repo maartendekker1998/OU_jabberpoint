@@ -6,7 +6,7 @@ import java.util.Map;
 
 public abstract class SlideShowComponent implements Iterable
 {
-    private Map<String , String > styles = new HashMap<>();
+    private final Map<String, String> styles = new HashMap<>();
 
     public abstract List<? extends Content> getContent();
 

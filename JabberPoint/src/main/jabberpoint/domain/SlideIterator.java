@@ -5,7 +5,7 @@ import java.util.List;
 
 public class SlideIterator extends SlideShowCompositeIterator
 {
-    private List<ContentList> chunks = new ArrayList<>();
+    private final List<ContentList> chunks = new ArrayList<>();
 
     SlideIterator(ConcreteSlide slideshow)
     {

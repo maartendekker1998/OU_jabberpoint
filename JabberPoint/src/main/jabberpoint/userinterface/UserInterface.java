@@ -9,8 +9,8 @@ import java.util.List;
 
 public class UserInterface
 {
-    private SlideHandler slideHandler;
-    private WindowHandler windowHandler;
+    private final SlideHandler slideHandler;
+    private final WindowHandler windowHandler;
 
     public UserInterface(HandlerFactory handlerFactory)
     {

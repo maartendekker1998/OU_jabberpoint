@@ -33,6 +33,7 @@ public class SwingWindowHandler implements WindowHandler
     private final String DEFAULT_FONT = "Arial";
     private final int DEFAULT_FONT_STYLE = Font.PLAIN;
     private final int TITLE_WHITESPACE = 20;
+    private final int IMAGE_BOTTOM_MARGIN = 5;
     private static final Color DEFAULT_FONT_COLOR = Color.BLACK;
     private final Map<Component, Font> fontMap = new HashMap<>();
     private final Map<Component, SlideShowComponent> itemMap = new HashMap<>();
@@ -71,7 +72,7 @@ public class SwingWindowHandler implements WindowHandler
                         component.setBounds(createBounds(component.getX(), component.getY(), event.getComponent().getWidth(), component.getHeight()));
                     }
                     if (!isTitle) component.setLocation(calculateIndentation(((Content)itemMap.get(component)).getIndentation()), previousComponentHeight);
-                    previousComponentHeight += component.getHeight() + (this.isImage(component) ? 5 : 0);
+                    previousComponentHeight += component.getHeight() + (this.isImage(component) ? IMAGE_BOTTOM_MARGIN : 0);
                     isTitle = false;
                 }
             }
@@ -170,7 +171,7 @@ public class SwingWindowHandler implements WindowHandler
             this.setStyles(image.getStyles(), imageLabel);
             imageLabel.setHorizontalTextPosition(SwingConstants.LEFT);
             imageLabel.setBounds(this.calculateIndentation(image.getIndentation()), this.previousComponentHeight,(int)(imageLabel.getText().length()*20* getScale(area))+(int)(bufferedImage.getWidth()*this.getScale(area)), (int)(bufferedImage.getHeight()*this.getScale(area)));
-            this.previousComponentHeight+=(imageLabel.getHeight()+5);
+            this.previousComponentHeight+=(imageLabel.getHeight()+IMAGE_BOTTOM_MARGIN);
             this.slide.add(imageLabel);
             this.slide.repaint();
             imageLabel.getGraphics().drawImage(bufferedImage, 0, 0, (int)(bufferedImage.getWidth()*this.getScale(area)), (int)(bufferedImage.getHeight()*this.getScale(area)), this.slide);
@@ -233,7 +234,7 @@ public class SwingWindowHandler implements WindowHandler
         for (Content contentToRemove : ((ContentList)content).getContent())
         {
             Component componentToRemove = this.getKeyByValue(contentToRemove);
-            if (contentToRemove instanceof Image) this.previousComponentHeight-=5;
+            if (contentToRemove instanceof Image) this.previousComponentHeight-=IMAGE_BOTTOM_MARGIN;
             if (componentToRemove == null) continue;
             this.previousComponentHeight-=componentToRemove.getHeight();
             this.slide.remove(componentToRemove);
