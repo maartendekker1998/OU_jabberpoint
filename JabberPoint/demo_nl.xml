@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<!DOCTYPE presentation SYSTEM "jabberpoint.dtd">
+<presentation>
+	<metadata kind="presenter">Bart &amp; Maarten</metadata>
+	<metadata kind="showtitle">JabberPoint Presentatie - Open Universiteit</metadata>
+
+	<slide transitions="false">
+		<title font="Arial" fontsize="60" color="#303338">JabberPoint Demo Presentatie (NL)</title>
+		<item kind="text" level="1">Welkom bij JabberPoint!</item>
+		<item kind="text" level="1"> </item>
+		<item kind="text" level="1">Geschreven door:</item>
+		<item kind="bulletlist" bullet="●" level="2">
+			<item kind="text" level="2">Maarten Dekker</item>
+			<item kind="text" level="2">Bart Janssen</item>
+		</item>
+		<item kind="text" level="1"> </item>
+		<item kind="text" level="1">Besturing:</item>
+		<item kind="bulletlist" bullet="●" level="2">
+			<item kind="text" level="2">Switchen van dia's: ← &amp; → </item>
+			<item kind="text" level="2">Als een dia transities heeft:</item>
+			<item kind="bulletlist" bullet="○" level="3">
+				<item kind="text" level="3">Loop door de inhoud met behulp van: ↑ &amp; ↓</item>
+				<item kind="text" level="3">Ga naar het begin of einde van de dia met: Home &amp; End</item>
+			</item>
+		</item>
+		<item kind="text" level="1"> </item>
+		<item kind="image" level="3">ou.png</item>
+		<item kind="text" level="1"> </item>
+	</slide>
+
+	<slide transitions="true">
+		<title font="Arial" fontsize="60" color="#303338">Transitie oefening (druk op ↓)</title>
+		<item kind="text" level="1">Je hebt het eerste content gerendered! Druk nu opnieuw op ↓</item>
+		<item kind="text" level="1">Je hebt nu een blok gerendered</item>
+		<item kind="text" level="2">Zoals je kan zien, kan je gehele blokken met items renderen</item>
+		<item kind="text" level="2">Het bevat alle content die een hoger level heeft dan de orginele</item>
+		<item kind="text" level="2">Druk nu op 'End'</item>
+		<item kind="text" level="1">Dit renderd het overige van de dia</item>
+		<item kind="text" level="1">Je kan terug door de items gaan door gebruik te maken van:</item>
+		<item kind="bulletlist" bullet="●" level="2">
+			<item kind="text" level="2">↑ om stap voor stap omhoog te gaan</item>
+			<item kind="text" level="2">'Home' om terug naar het begin van de slide te gaan</item>
+		</item>
+		<item kind="text" level="1"> </item>
+		<item kind="text" level="2">(genoeg oefening? ga naar de volgende dia!)</item>
+	</slide>
+
+	<slide transitions="false">
+		<title font="Arial" fontsize="60" color="#303338">Menu overzicht</title>
+		<item kind="text" level="1">Als je geen toetsenbord hebt, gebruik dan het Menu!</item>
+		<item kind="text" level="1"> </item>
+		<item kind="text" level="1">Je kan de volgende selectie menu's gebruiken:</item>
+		<item kind="bulletlist" bullet="●" level="2">
+			<item kind="text" level="2">Application</item>
+			<item kind="bulletlist" bullet="○" level="3">
+				<item kind="text" level="3">om een nieuwe JabberPoint presentatie te laden</item>
+				<item kind="text" level="3">om JabberPoint af te sluiten</item>
+			</item>
+			<item kind="text" level="2">Slide</item>
+			<item kind="bulletlist" bullet="○" level="3">
+				<item kind="text" level="3">om te kunnen switchen tussen dia's</item>
+			</item>
+			<item kind="text" level="2">Content</item>
+			<item kind="bulletlist" bullet="○" level="3">
+				<item kind="text" level="3">om over de content te itereren</item>
+				<item kind="text" level="3">om naar het begin of einde van de dia te gaan</item>
+			</item>
+			<item kind="text" level="2">Help</item>
+			<item kind="bulletlist" bullet="○" level="3">
+				<item kind="text" level="3">om informatie over JabberPoint te zien</item>
+				<item kind="text" level="3">om informatie te zien over probleemoplossingen</item>
+			</item>
+		</item>
+	</slide>
+
+	<slide transitions="false">
+		<title font="Arial" fontsize="60" color="#303338">Stijl Oefening</title>
+		<item kind="text" level="1">Stijlen kunnen gezet worden voor content en de dia title:</item>
+		<item kind="bulletlist" bullet="●" level="2">
+			<item kind="text" level="2">Lettertype (het OS moet deze wel geïnstalleerd hebben)</item>
+			<item kind="text" level="2">Grote voor de grote van het lettertype</item>
+			<item kind="text" level="2">Kleur voor de kleur van het lettertype</item>
+		</item>
+		<item kind="text" level="1"> </item>
+		<item kind="text" level="1">Een paar voorbeelden:</item>
+		<item kind="text" font="Comic Sans MS" fontsize="24" color="#fc0317" level="2">Dit is comic sans 24 in rood</item>
+		<item kind="text" font="Algerian" fontsize="35" color="#030ffc" level="2">Dit is algerian 35 in blauw</item>
+		<item kind="text" level="1"> </item>
+		<item kind="text" level="1">Met stijlen kan ook een bulletlist icoon gezet worden:</item>
+		<item kind="bulletlist" bullet="●" level="2">
+			<item kind="text" level="2">Deze bullet list heeft een ● als icoon</item>
+		</item>
+		<item kind="bulletlist" bullet="◇" level="2">
+			<item kind="text" level="2">Deze bullet list heeft ◇ als icoon</item>
+		</item>
+		<item kind="text" level="1"> </item>
+		<item kind="text" level="1">Voor meer info, zie Help → Troubleshooting</item>
+	</slide>
+</presentation>
