@@ -4,15 +4,32 @@ import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * Part of Abstract Factory Pattern
+ * Role: Concrete class that will be created by the HandleFactory
+ * @see HandlerFactory
+ * Concrete Swing related EventHandler that handles events, this class is responsible for handling UI events
+ * This function extends from KeyAdapter so it can be used as a parameter of MenuController
+ * @see MenuController
+ */
 public class SwingEventHandler extends KeyAdapter implements EventHandler
 {
     private boolean transitions = false;
 
-    void setTransitions(boolean transitions)
+    /**
+     * Setter for transitions
+     * @param transitions a value to determine if a slide has transitions
+     */
+    @Override
+    public void setTransitions(boolean transitions)
     {
         this.transitions = transitions;
     }
 
+    /**
+     * Override function from KeyAdapter, this handles the key presses
+     * @param keyEvent Contains information about which key is pressed
+     */
     @Override
     public void keyPressed(KeyEvent keyEvent)
     {
@@ -42,6 +59,11 @@ public class SwingEventHandler extends KeyAdapter implements EventHandler
         }
     }
 
+    /**
+     * Handles the commands send by the menu bar
+     * @param actionCommand Contains information about which command is used
+     * @see MenuController
+     */
     void menuItemClick(String actionCommand)
     {
         switch (actionCommand)

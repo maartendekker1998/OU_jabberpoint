@@ -19,12 +19,17 @@ import java.util.Map;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
+/**
+ * Part of Abstract Factory Pattern
+ * Role: Concrete class that will be created by the HandleFactory
+ * @see HandlerFactory
+ * This class is responsible for rendering the actual UI items on the window
+ */
 public class SwingWindowHandler implements WindowHandler
 {
     private static final String IMAGE_NOT_FOUND = "noimage.jpg";
     private final JFrame mainFrame = new JFrame();
     private final JPanel slide = new JPanel();
-
     private final int X_MARGIN = 50;
     private final int Y_MARGIN = 5;
     private int DEFAULT_WIDTH = 1000+(2*X_MARGIN);
@@ -41,7 +46,11 @@ public class SwingWindowHandler implements WindowHandler
     private int previousComponentHeight = Y_MARGIN;
     private final SwingEventHandler eventHandler;
 
-    public SwingWindowHandler(SwingEventHandler eventHandler)
+    /**
+     * Prepares the UI, this also contains the functionality to be scalable
+     * @param eventHandler an event handler used to handler key presses and menu clicks
+     */
+    SwingWindowHandler(SwingEventHandler eventHandler)
     {
         this.eventHandler = eventHandler;
         this.slide.addComponentListener(new ComponentAdapter()
@@ -94,31 +103,47 @@ public class SwingWindowHandler implements WindowHandler
         this.mainFrame.setLayout(null);
     }
 
-    private BufferedImage getImageIcon(String image)
+    /**
+     * Sets the eventHandler information if the slide contains transitions or not
+     * @param transitions transitions of the slide
+     * @see EventHandler
+     */
+    @Override
+    public void setTransitions(boolean transitions)
     {
-        try
-        {
-            InputStream inputStream = super.getClass().getClassLoader().getResourceAsStream(image);
-            if (inputStream == null) return null;
-            return ImageIO.read(inputStream);
-        }
-        catch (IOException e)
-        {
-            return null;
-        }
+        this.eventHandler.setTransitions(transitions);
     }
 
-    private float getScale(Rectangle area)
-    {
-        return Math.min(((float)area.width) / ((float)DEFAULT_WIDTH), ((float)area.height) / ((float)DEFAULT_HEIGHT));
-    }
-
+    /**
+     * Sets the window visible, the window is prepared in the constructor
+     */
     @Override
     public void renderUI()
     {
         this.mainFrame.setVisible(true);
     }
 
+    /**
+     * Sets the title of the slide, this is always executed whether the slide has transitions or not
+     * @param slide a concrete slide type content
+     */
+    @Override
+    public void setTitle(ConcreteSlide slide)
+    {
+        JLabel label = new JLabel(slide.getTitle());
+        this.setStyles(slide.getStyles(), label);
+        label.setBounds(this.createBounds(X_MARGIN, (this.previousComponentHeight), this.slide.getWidth()-X_MARGIN, label.getFont().getSize()+Y_MARGIN));
+        this.slide.add(label);
+        this.previousComponentHeight+=(label.getHeight()+TITLE_WHITESPACE);
+        this.slide.repaint();
+        SwingUtilities.invokeLater(() -> this.itemMap.put(label, slide));
+    }
+
+    /**
+     * Adds a text type content to the slide, this will create a label with styles initiated
+     * It also sets the bounds and location of the label
+     * @param text a text type content
+     */
     @Override
     public void addText(Text text)
     {
@@ -132,32 +157,15 @@ public class SwingWindowHandler implements WindowHandler
         this.slide.repaint();
     }
 
-    private void setStyles(Map<String, String> styles, JLabel label)
-    {
-        Font font = null;
-        try
-        {
-            font = new Font(
-                    (styles.get("font") == null ? DEFAULT_FONT : styles.get("font")),
-                    (DEFAULT_FONT_STYLE),
-                    (styles.get("fontsize") == null ? DEFAULT_FONT_SIZE : Integer.parseInt(styles.get("fontsize"))));
-            label.setForeground(styles.get("color") == null ? DEFAULT_FONT_COLOR : Color.decode(styles.get("color")));
-        }
-        catch (NumberFormatException e)
-        {
-            if (font == null) font = new Font(
-                (styles.get("font") == null ? DEFAULT_FONT : styles.get("font")),
-                (DEFAULT_FONT_STYLE),
-                (DEFAULT_FONT_SIZE));
-            label.setForeground(DEFAULT_FONT_COLOR);
-            showMessageDialog(this.mainFrame, "There is an error in the XML styling, refer to help → troubleshooting\n for extra information.");
-        }
-        Rectangle area = new Rectangle(0, 0, this.slide.getWidth(), this.slide.getHeight());
-        label.setFont(font.deriveFont(font.getStyle(), font.getSize() * this.getScale(area)));
-        label.setText((styles.get("bullet") == null ? "" : styles.get("bullet") + " ") + (label.getText() == null ? "" : label.getText()));
-        this.fontMap.put(label, font);
-    }
-
+    /**
+     * Adds an image type content to the slide, this will create a label with styles initiated
+     * An image is loaded in the label, it is also possible that the label contains text and an image
+     * this is so that the BulletList styles can be set on images as well
+     * It also sets the bounds and location of the label
+     * If the image provided cannot be found, the user will be notified with a message and a default image will be used in stead
+     * @param image an image type content
+     * @see BulletList
+     */
     @Override
     public void addImage(Image image)
     {
@@ -191,23 +199,30 @@ public class SwingWindowHandler implements WindowHandler
         }
     }
 
+    /**
+     * Removes the last added content from the window
+     * @param content Content item to remove
+     */
     @Override
-    public void setTitle(ConcreteSlide slide)
+    public void removeLastContent(ContentList content)
     {
-        JLabel label = new JLabel(slide.getTitle());
-        this.setStyles(slide.getStyles(), label);
-        label.setBounds(this.createBounds(X_MARGIN, (this.previousComponentHeight), this.slide.getWidth()-X_MARGIN, label.getFont().getSize()+Y_MARGIN));
-        this.slide.add(label);
-        this.previousComponentHeight+=(label.getHeight()+TITLE_WHITESPACE);
+        for (Content contentToRemove : content.getContent())
+        {
+            Component componentToRemove = this.getKeyByValue(contentToRemove);
+            if (contentToRemove instanceof Image) this.previousComponentHeight-=IMAGE_BOTTOM_MARGIN;
+            if (componentToRemove == null) continue;
+            this.previousComponentHeight-=componentToRemove.getHeight();
+            this.slide.remove(componentToRemove);
+            this.imageMap.remove(contentToRemove);
+            this.itemMap.remove(componentToRemove);
+        }
         this.slide.repaint();
-        SwingUtilities.invokeLater(() -> this.itemMap.put(label, slide));
     }
 
-    private int calculateIndentation(int indentation)
-    {
-        return X_MARGIN + (int)(X_MARGIN/2.6d*indentation);
-    }
-
+    /**
+     * Clears the slide, this can be provided information whether it should remove of preserve the title
+     * @param clearTitle boolean to determine if it should remove the title as well
+     */
     @Override
     public void clear(boolean clearTitle)
     {
@@ -222,28 +237,85 @@ public class SwingWindowHandler implements WindowHandler
         this.slide.repaint();
     }
 
-    @Override
-    public void setTransitions(boolean transitions)
+    /**
+     * Sets styles which are optionally provided on a Content type
+     * It will use default values if the styles parameter is empty or if certain styles are not provided
+     * If one of the styles contains an error, it will notify the user with this information and fallback to a default style
+     * @param styles the map containing styles of an Content item
+     * @param label the label to set the styles to
+     * @see SlideShowComponent
+     */
+    private void setStyles(Map<String, String> styles, JLabel label)
     {
-        this.eventHandler.setTransitions(transitions);
-    }
-
-    @Override
-    public void removeLastContent(Content content)
-    {
-        for (Content contentToRemove : ((ContentList)content).getContent())
+        Font font = null;
+        try
         {
-            Component componentToRemove = this.getKeyByValue(contentToRemove);
-            if (contentToRemove instanceof Image) this.previousComponentHeight-=IMAGE_BOTTOM_MARGIN;
-            if (componentToRemove == null) continue;
-            this.previousComponentHeight-=componentToRemove.getHeight();
-            this.slide.remove(componentToRemove);
-            this.imageMap.remove(contentToRemove);
-            this.itemMap.remove(componentToRemove);
+            font = new Font(
+                    (styles.get("font") == null ? DEFAULT_FONT : styles.get("font")),
+                    (DEFAULT_FONT_STYLE),
+                    (styles.get("fontsize") == null ? DEFAULT_FONT_SIZE : Integer.parseInt(styles.get("fontsize"))));
+            label.setForeground(styles.get("color") == null ? DEFAULT_FONT_COLOR : Color.decode(styles.get("color")));
         }
-        this.slide.repaint();
+        catch (NumberFormatException e)
+        {
+            if (font == null) font = new Font(
+                    (styles.get("font") == null ? DEFAULT_FONT : styles.get("font")),
+                    (DEFAULT_FONT_STYLE),
+                    (DEFAULT_FONT_SIZE));
+            label.setForeground(DEFAULT_FONT_COLOR);
+            showMessageDialog(this.mainFrame, "There is an error in the XML styling, refer to help → troubleshooting\n for extra information.");
+        }
+        Rectangle area = new Rectangle(0, 0, this.slide.getWidth(), this.slide.getHeight());
+        label.setFont(font.deriveFont(font.getStyle(), font.getSize() * this.getScale(area)));
+        label.setText((styles.get("bullet") == null ? "" : styles.get("bullet") + " ") + (label.getText() == null ? "" : label.getText()));
+        this.fontMap.put(label, font);
     }
 
+    /**
+     * Loads an image from the resource folder
+     * @param image the name of an image, example: 'text.png'
+     * @return an instance of a BufferedImage, or null if the image does not exist
+     */
+    private BufferedImage getImageIcon(String image)
+    {
+        try
+        {
+            InputStream inputStream = super.getClass().getClassLoader().getResourceAsStream(image);
+            if (inputStream == null) return null;
+            return ImageIO.read(inputStream);
+        }
+        catch (IOException e)
+        {
+            return null;
+        }
+    }
+
+    /**
+     * Calculates a scale that can be used to scale content with the scaling of the window
+     * @param area this contains the width and height of the current window
+     * @return a float type number that is the factor of the scaling
+     */
+    private float getScale(Rectangle area)
+    {
+        return Math.min(((float)area.width) / ((float)DEFAULT_WIDTH), ((float)area.height) / ((float)DEFAULT_HEIGHT));
+    }
+
+    /**
+     * Calculates the X coordinate to determine where the UI item should be rendered at
+     * @param indentation the indentation as provided in the Content
+     * @return x coordinate
+     * @see Content
+     */
+    private int calculateIndentation(int indentation)
+    {
+        return X_MARGIN + (int)(X_MARGIN/2.6d*indentation);
+    }
+
+    /**
+     * Extracts the key of a map by the use of a value from the itemMap
+     * @param component a component to find a key
+     * @return the key of the corresponding component value
+     */
     private Component getKeyByValue(SlideShowComponent component)
     {
         for (Map.Entry<Component, SlideShowComponent> entry : this.itemMap.entrySet())
@@ -253,6 +325,14 @@ public class SwingWindowHandler implements WindowHandler
         return null;
     }
 
+    /**
+     * Creates bounds for an UI item, mainly used to make sure the UI item size will not exceed the window size
+     * @param x x coordinate of the UI item
+     * @param y y coordinate of the UI item
+     * @param width width of the UI item
+     * @param height height of the UI item
+     * @return a rectangle containing the bounds for the UI item
+     */
     private Rectangle createBounds(int x, int y, int width, int height)
     {
         return new Rectangle(x, y, width-(2*X_MARGIN), height);

@@ -3,9 +3,17 @@ package main.jabberpoint.userinterface;
 import javax.swing.*;
 import java.awt.*;
 
-public class MenuController extends JMenuBar
+/**
+ * Class that extends JMenuBar so it can be used as a Swing MenuBar on the setJMenuBar of a JFrame, it builds the menu bar of JabberPoint
+ * @see JFrame
+ */
+class MenuController extends JMenuBar
 {
-    public MenuController(SwingEventHandler eventHandler)
+    /**
+     * Builds and shows the menu bar on top of the application
+     * @param eventHandler the event handler that will be triggered by certain key presses or menu selections
+     */
+    MenuController(SwingEventHandler eventHandler)
     {
         JMenuBar mainMenuBar = new JMenuBar();
 
