@@ -1,6 +1,6 @@
 package main.jabberpoint.control;
 
-import main.jabberpoint.domain.SlideShowComponent;
+import main.jabberpoint.domain.components.SlideShowComponent;
 import main.jabberpoint.domain_service.ProjectorService;
 import main.jabberpoint.infrastructure.Infrastructure;
 import main.jabberpoint.userinterface.UserInterface;

@@ -1,11 +1,11 @@
-package main.jabberpoint.domain;
+package main.jabberpoint.domain.components;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContentList extends ContentComposite
+public class BulletList extends ContentComposite
 {
-    ContentList(int indentation, List<Content> contents)
+    public BulletList(int indentation, List<Content> contents)
     {
         super(indentation, contents);
     }

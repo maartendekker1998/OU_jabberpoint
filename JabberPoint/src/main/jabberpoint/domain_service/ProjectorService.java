@@ -1,7 +1,7 @@
 package main.jabberpoint.domain_service;
 
 import main.jabberpoint.domain.Projector;
-import main.jabberpoint.domain.SlideShowComponent;
+import main.jabberpoint.domain.components.SlideShowComponent;
 
 import java.util.List;
 

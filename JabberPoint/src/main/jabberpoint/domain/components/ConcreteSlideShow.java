@@ -1,4 +1,6 @@
-package main.jabberpoint.domain;
+package main.jabberpoint.domain.components;
+
+import main.jabberpoint.domain.iterators.SlideShowIterator;
 
 import java.util.ArrayList;
 import java.util.List;

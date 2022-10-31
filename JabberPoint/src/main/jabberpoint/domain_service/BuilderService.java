@@ -1,6 +1,7 @@
 package main.jabberpoint.domain_service;
 
-import main.jabberpoint.domain.*;
+import main.jabberpoint.domain.builder.Builder;
+import main.jabberpoint.domain.components.*;
 
 public class BuilderService {
 

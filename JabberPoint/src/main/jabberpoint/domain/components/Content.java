@@ -1,4 +1,6 @@
-package main.jabberpoint.domain;
+package main.jabberpoint.domain.components;
+
+import main.jabberpoint.domain.iterators.Iterator;
 
 public abstract class Content<T> extends SlideShowComponent
 {

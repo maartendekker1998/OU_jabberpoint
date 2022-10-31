@@ -1,8 +1,11 @@
-package main.jabberpoint.domain;
+package main.jabberpoint.domain.iterators;
+
+import main.jabberpoint.domain.components.ConcreteSlideShow;
+import main.jabberpoint.domain.components.SlideShowComponent;
 
 public class SlideShowIterator extends SlideShowCompositeIterator
 {
-    SlideShowIterator(ConcreteSlideShow iterable)
+    public SlideShowIterator(ConcreteSlideShow iterable)
     {
         this.iterable = iterable;
     }

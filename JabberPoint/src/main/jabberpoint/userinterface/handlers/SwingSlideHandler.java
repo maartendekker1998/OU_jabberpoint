@@ -1,6 +1,6 @@
 package main.jabberpoint.userinterface.handlers;
 
-import main.jabberpoint.domain.*;
+import main.jabberpoint.domain.components.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;

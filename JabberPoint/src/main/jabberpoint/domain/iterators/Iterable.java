@@ -1,4 +1,4 @@
-package main.jabberpoint.domain;
+package main.jabberpoint.domain.iterators;
 
 public interface Iterable
 {

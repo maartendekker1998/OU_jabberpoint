@@ -1,4 +1,6 @@
-package main.jabberpoint.domain;
+package main.jabberpoint.domain.iterators;
+
+import main.jabberpoint.domain.components.SlideShowComponent;
 
 public interface Iterator
 {

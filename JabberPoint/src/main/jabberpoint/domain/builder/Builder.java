@@ -1,4 +1,7 @@
-package main.jabberpoint.domain;
+package main.jabberpoint.domain.builder;
+
+import main.jabberpoint.domain.components.BulletList;
+import main.jabberpoint.domain.components.SlideShowComponent;
 
 public interface Builder
 {

@@ -1,6 +1,7 @@
 package main.jabberpoint.infrastructure;
 
-import main.jabberpoint.domain.*;
+import main.jabberpoint.domain.components.BulletList;
+import main.jabberpoint.domain.components.ContentComposite;
 import main.jabberpoint.domain_service.BuilderService;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;

@@ -1,9 +1,9 @@
 package main.jabberpoint.userinterface;
 
-import main.jabberpoint.domain.ConcreteSlide;
-import main.jabberpoint.domain.Content;
-import main.jabberpoint.domain.ContentList;
-import main.jabberpoint.domain.SlideShowComponent;
+import main.jabberpoint.domain.components.ConcreteSlide;
+import main.jabberpoint.domain.components.Content;
+import main.jabberpoint.domain.components.ContentList;
+import main.jabberpoint.domain.components.SlideShowComponent;
 import main.jabberpoint.userinterface.handlers.HandlerFactory;
 import main.jabberpoint.userinterface.handlers.SlideHandler;
 import main.jabberpoint.userinterface.handlers.WindowHandler;

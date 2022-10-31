@@ -1,7 +1,8 @@
 package main.jabberpoint.userinterface.handlers;
 
 import main.jabberpoint.domain.*;
-import main.jabberpoint.domain.Image;
+import main.jabberpoint.domain.components.*;
+import main.jabberpoint.domain.components.Image;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

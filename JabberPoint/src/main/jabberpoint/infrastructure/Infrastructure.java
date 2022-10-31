@@ -1,6 +1,6 @@
 package main.jabberpoint.infrastructure;
 
-import main.jabberpoint.domain.SlideShowComponent;
+import main.jabberpoint.domain.components.SlideShowComponent;
 import main.jabberpoint.domain_service.BuilderService;
 
 public class Infrastructure {

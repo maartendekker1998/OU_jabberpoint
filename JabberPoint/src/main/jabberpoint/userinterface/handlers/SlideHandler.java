@@ -1,8 +1,8 @@
 package main.jabberpoint.userinterface.handlers;
 
-import main.jabberpoint.domain.ConcreteSlide;
-import main.jabberpoint.domain.Content;
-import main.jabberpoint.domain.ContentList;
+import main.jabberpoint.domain.components.ConcreteSlide;
+import main.jabberpoint.domain.components.Content;
+import main.jabberpoint.domain.components.ContentList;
 
 /**
  * Part of Abstract Factory Pattern

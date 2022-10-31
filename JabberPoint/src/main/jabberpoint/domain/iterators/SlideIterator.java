@@ -1,4 +1,9 @@
-package main.jabberpoint.domain;
+package main.jabberpoint.domain.iterators;
+
+import main.jabberpoint.domain.components.ConcreteSlide;
+import main.jabberpoint.domain.components.Content;
+import main.jabberpoint.domain.components.ContentList;
+import main.jabberpoint.domain.components.SlideShowComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +12,7 @@ public class SlideIterator extends SlideShowCompositeIterator
 {
     private final List<ContentList> chunks = new ArrayList<>();
 
-    SlideIterator(ConcreteSlide slideshow)
+    public SlideIterator(ConcreteSlide slideshow)
     {
         boolean buildingChunk = false;
         List<Content> chunkList = new ArrayList<>();
