@@ -1,4 +1,4 @@
-package main.jabberpoint.userinterface;
+package main.jabberpoint.userinterface.command;
 
 /**
  * Part of Command Pattern

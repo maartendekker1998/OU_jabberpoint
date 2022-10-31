@@ -1,4 +1,6 @@
-package main.jabberpoint.userinterface;
+package main.jabberpoint.userinterface.handlers;
+
+import main.jabberpoint.userinterface.command.*;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
@@ -10,7 +12,7 @@ import java.awt.event.KeyEvent;
  * @see HandlerFactory
  * Concrete Swing related EventHandler that handles events, this class is responsible for handling UI events
  * This function extends from KeyAdapter so it can be used as a parameter of MenuController
- * @see MenuController
+ * @see SwingMenuHandler
  */
 public class SwingEventHandler extends KeyAdapter implements EventHandler
 {
@@ -62,7 +64,7 @@ public class SwingEventHandler extends KeyAdapter implements EventHandler
     /**
      * Handles the commands send by the menu bar
      * @param actionCommand Contains information about which command is used
-     * @see MenuController
+     * @see SwingMenuHandler
      */
     void menuItemClick(String actionCommand)
     {

@@ -1,4 +1,4 @@
-package main.jabberpoint.userinterface;
+package main.jabberpoint.userinterface.handlers;
 
 import main.jabberpoint.domain.*;
 import main.jabberpoint.domain.Image;
@@ -48,11 +48,11 @@ public class SwingWindowHandler implements WindowHandler
 
     /**
      * Prepares the UI, this also contains the functionality to be scalable
-     * @param eventHandler an event handler used to handler key presses and menu clicks
+     * @param menuHandler an menu handler used to handle key presses and menu clicks
      */
-    SwingWindowHandler(SwingEventHandler eventHandler)
+    SwingWindowHandler(SwingMenuHandler menuHandler)
     {
-        this.eventHandler = eventHandler;
+        this.eventHandler = menuHandler.getEventHandler();
         this.slide.addComponentListener(new ComponentAdapter()
         {
             @Override
@@ -91,7 +91,7 @@ public class SwingWindowHandler implements WindowHandler
                 return ((JLabel)component).getIcon() != null;
             }
         });
-        this.mainFrame.setJMenuBar(new MenuController(this.eventHandler));
+        this.mainFrame.setJMenuBar(new SwingMenuHandler(this.eventHandler));
         this.mainFrame.addKeyListener(this.eventHandler);
         this.mainFrame.setContentPane(this.slide);
         this.mainFrame.setTitle(

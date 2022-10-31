@@ -4,6 +4,9 @@ import main.jabberpoint.domain.ConcreteSlide;
 import main.jabberpoint.domain.Content;
 import main.jabberpoint.domain.ContentList;
 import main.jabberpoint.domain.SlideShowComponent;
+import main.jabberpoint.userinterface.handlers.HandlerFactory;
+import main.jabberpoint.userinterface.handlers.SlideHandler;
+import main.jabberpoint.userinterface.handlers.WindowHandler;
 
 import java.util.List;
 
@@ -17,7 +20,7 @@ public class UserInterface
 
     /**
      * Creates Handlers through a HandlerFactory, this will also tell the windowHandler to render
-     * @param handlerFactory a factory to create handlers
+     * @param handlerFactory a handlers to create handlers
      * @see HandlerFactory
      */
     public UserInterface(HandlerFactory handlerFactory)

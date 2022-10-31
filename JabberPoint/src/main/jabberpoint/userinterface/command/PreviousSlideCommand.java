@@ -1,4 +1,4 @@
-package main.jabberpoint.userinterface;
+package main.jabberpoint.userinterface.command;
 
 import main.jabberpoint.control.Controller;
 

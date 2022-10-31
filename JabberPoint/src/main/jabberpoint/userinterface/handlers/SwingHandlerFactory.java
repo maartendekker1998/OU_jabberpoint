@@ -1,4 +1,4 @@
-package main.jabberpoint.userinterface;
+package main.jabberpoint.userinterface.handlers;
 
 /**
  * Part of Abstract Factory Pattern
@@ -24,6 +24,6 @@ public class SwingHandlerFactory implements HandlerFactory
     @Override
     public WindowHandler createWindowHandler()
     {
-        return new SwingWindowHandler(new SwingEventHandler());
+        return new SwingWindowHandler(new SwingMenuHandler(new SwingEventHandler()));
     }
 }

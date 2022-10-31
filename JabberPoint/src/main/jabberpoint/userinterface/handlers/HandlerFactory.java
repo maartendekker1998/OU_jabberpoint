@@ -1,4 +1,4 @@
-package main.jabberpoint.userinterface;
+package main.jabberpoint.userinterface.handlers;
 
 /**
  * Part of Abstract Factory Pattern

@@ -1,4 +1,4 @@
-package main.jabberpoint.userinterface;
+package main.jabberpoint.userinterface.handlers;
 
 import main.jabberpoint.domain.ConcreteSlide;
 import main.jabberpoint.domain.Content;

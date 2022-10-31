@@ -4,7 +4,7 @@ import main.jabberpoint.domain_service.BuilderService;
 import main.jabberpoint.domain_service.ProjectorService;
 import main.jabberpoint.infrastructure.DirectorStrategy;
 import main.jabberpoint.infrastructure.Infrastructure;
-import main.jabberpoint.userinterface.HandlerFactory;
+import main.jabberpoint.userinterface.handlers.HandlerFactory;
 import main.jabberpoint.userinterface.UserInterface;
 
 /**

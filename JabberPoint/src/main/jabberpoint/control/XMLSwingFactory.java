@@ -4,7 +4,7 @@ import main.jabberpoint.domain.SlideShowComponentBuilder;
 import main.jabberpoint.domain_service.BuilderService;
 import main.jabberpoint.infrastructure.Infrastructure;
 import main.jabberpoint.infrastructure.XMLDirectorStrategy;
-import main.jabberpoint.userinterface.SwingHandlerFactory;
+import main.jabberpoint.userinterface.handlers.SwingHandlerFactory;
 import main.jabberpoint.userinterface.UserInterface;
 
 /**

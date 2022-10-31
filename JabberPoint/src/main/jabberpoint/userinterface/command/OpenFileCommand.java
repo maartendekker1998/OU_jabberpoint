@@ -1,4 +1,4 @@
-package main.jabberpoint.userinterface;
+package main.jabberpoint.userinterface.command;
 
 import main.jabberpoint.control.Controller;
 
@@ -14,7 +14,7 @@ public class OpenFileCommand implements Command
      * Creates an instance of OpenFileCommand and initiates an file location
      * @param file the name of the file to be opened
      */
-    OpenFileCommand(String file){
+    public OpenFileCommand(String file){
         this.file = file;
     }
 
