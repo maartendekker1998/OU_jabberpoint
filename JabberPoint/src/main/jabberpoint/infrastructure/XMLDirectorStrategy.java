@@ -15,6 +15,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class reads and parses presentation files in XML format, and acts as an director for builder that builds the slideshow
+ *
+ * Part of Strategy Pattern
+ * Role : ConcreteStrategy
+ *
+ * Part of Builder Pattern
+ * Role : Director
+ */
 public class XMLDirectorStrategy implements DirectorStrategy {
 
     /**
@@ -38,7 +47,6 @@ public class XMLDirectorStrategy implements DirectorStrategy {
     private static final String BULLETLIST = "bulletlist";
     private static final String TRUE = "true";
 
-
     /**
      * names of error messages
      */
@@ -50,8 +58,9 @@ public class XMLDirectorStrategy implements DirectorStrategy {
 
     /**
      * Parses the style attributes and sets them via the builder service
-     * @param builderService
-     * @param attributes
+     * @param builderService a builder to build slideshows
+     * @see BuilderService
+     * @param attributes containing style items
      */
     private void parseStyles(BuilderService builderService, NamedNodeMap attributes){
         if (attributes.getNamedItem(FONT) != null) {
@@ -70,8 +79,9 @@ public class XMLDirectorStrategy implements DirectorStrategy {
 
     /**
      * Parses the metadata and sets this data via the builder service
-     * @param builderService
-     * @param metadata
+     * @param builderService a builder to build slideshows
+     * @see BuilderService
+     * @param metadata an element containing metadata fields
      */
     public void parseMetadata(BuilderService builderService, NodeList metadata){
         for (int i = 0; i < metadata.getLength() ; i++) {
@@ -95,9 +105,10 @@ public class XMLDirectorStrategy implements DirectorStrategy {
 
     /**
      * Parses the slide title with accompanying styles and sets them via the builder service
-     * @param builderService
-     * @param element
-     * @return
+     * @param builderService a builder to build slideshows
+     * @see BuilderService
+     * @param element that contains the slide title
+     * @return the slide title
      */
     private String getTitle(BuilderService builderService ,Element element) {
         NodeList titles = element.getElementsByTagName(SLIDETITLE);
@@ -111,9 +122,9 @@ public class XMLDirectorStrategy implements DirectorStrategy {
 
     /**
      * Get only the first level of child nodes with a certain name from an element
-     * @param parent
-     * @param name
-     * @return
+     * @param parent the node that we want to extract the children from
+     * @param name the name of the nodes that we want to extract
+     * @return a list of elements
      */
     public List<Element> getChildrenByTagName(Element parent, String name) {
         List<Element> nodeList = new ArrayList<>();
@@ -129,15 +140,16 @@ public class XMLDirectorStrategy implements DirectorStrategy {
     /**
      * Opens an XML file and directs the construction of the domain by using the builder service
      *
-     * @param builderService
-     * @param filename
+     * @param builderService a builder to build slideshows
+     * @see BuilderService
+     * @param filepath the filepath to the file we wish to load
      */
     @Override
-    public void construct(BuilderService builderService, String filename) {
+    public void construct(BuilderService builderService, String filepath) {
 
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            Document document = builder.parse(new File(filename));
+            Document document = builder.parse(new File(filepath));
             Element doc = document.getDocumentElement();
 
             builderService.newMetaData();
@@ -181,9 +193,10 @@ public class XMLDirectorStrategy implements DirectorStrategy {
      * Parses all the slide items of a slide
      * This function is used recursively to build bullet lists
      *
-     * @param builderService
-     * @param xmlSlide
-     * @param contents
+     * @param builderService a builder to build slideshows
+     * @see BuilderService
+     * @param xmlSlide a slide tag with all its elements
+     * @param contents used to pass content composites when used recursively
      */
     private void prepareSlide(BuilderService builderService, Element xmlSlide, ContentComposite contents)
     {
