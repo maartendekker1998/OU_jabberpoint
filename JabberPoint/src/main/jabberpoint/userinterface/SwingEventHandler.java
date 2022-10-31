@@ -98,7 +98,7 @@ public class SwingEventHandler extends KeyAdapter implements EventHandler
                                  "Keys:\n" +
                                  "The short keys that can be used are as following\n" +
                                  "    - Q, exits JabberPoint;\n" +
-                                 "    - O, opens an input field to open a new presentation file;\n" +
+                                 "    - O, opens an file selection for opening a new presentation file;\n" +
                                  "    - W, removes last added content (only when slide has transitions);\n" +
                                  "    - S, adds next content (only when slide has transitions);\n" +
                                  "    - A, go to previous slide;\n" +
