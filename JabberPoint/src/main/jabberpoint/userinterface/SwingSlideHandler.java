@@ -85,22 +85,7 @@ public class SwingSlideHandler implements SlideHandler
      * @param content can be of type BulletList or single content
      */
     @Override
-    public void removeLastContent(ContentList content)
-    {
-        this.windowHandler = windowHandler;
-    }
-
-    @Override
-    public void renderContent(Content content)
-    {
-        if (content == null) return;
-        List<Content> contentList = new ArrayList<>();
-        contentList.add(content);
-        this.renderContent(contentList);
-    }
-
-    @Override
-    public void removeContent(Content content)
+    public void removeContent(ContentList content)
     {
         this.windowHandler.removeLastContent(content);
     }

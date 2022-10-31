@@ -78,7 +78,7 @@ public class UserInterface
      */
     public void removeContent(SlideShowComponent content)
     {
-        this.slideHandler.removeContent((Content) content);
+        this.slideHandler.removeContent((ContentList) content);
     }
 
     /**

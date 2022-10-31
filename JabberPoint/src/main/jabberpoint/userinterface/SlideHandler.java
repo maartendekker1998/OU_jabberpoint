@@ -29,12 +29,12 @@ public interface SlideHandler
      * @param content Contains one type of Content
      */
     void renderContent(Content content);
-    void removeContent(Content content);
 
     /**
      * Removes the last added content, if this is of type BulletList, it will also remove all its children
      * @param content can be of type BulletList or single content
      */
+    void removeContent(ContentList content);
 
     /**
      * Removes all rendered content
