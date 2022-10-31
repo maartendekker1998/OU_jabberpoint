@@ -92,6 +92,8 @@ public class SwingEventHandler extends KeyAdapter implements EventHandler
                                  "If a value is not provided as described above, an error message is raised and a default value will be used.\n" +
                                  "Image and bulletlist ignores the font, fontsize and color properties.\n" +
                                  "If an image cannot be found, an error message is raised and a default image (indicating cannot find image) will be used.\n" +
+                                 "The location of an image can either be provided as a full path to an image, or just the name of the image if it can be\n" +
+                                 "found in the root directory where the JabberPoint is located. It is recommended to use a full path.\n" +
                                  "\n" +
                                  "Keys:\n" +
                                  "The short keys that can be used are as following\n" +

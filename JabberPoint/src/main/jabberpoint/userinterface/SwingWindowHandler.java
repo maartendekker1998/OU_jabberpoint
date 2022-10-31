@@ -12,6 +12,8 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -86,9 +88,23 @@ public class SwingWindowHandler implements WindowHandler
                 (Metadata.getInstance().metadata.get("showtitle") == null ? "JabberPoint" : Metadata.getInstance().metadata.get("showtitle")) + " by " +
                 (Metadata.getInstance().metadata.get("presenter") == null ? "JabberPoint" : Metadata.getInstance().metadata.get("presenter")));
         this.mainFrame.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-        this.mainFrame.setIconImage(new ImageIcon("halloween.png").getImage());
+        this.mainFrame.setIconImage(this.getImageIcon("halloween.png"));
         this.mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.mainFrame.setLayout(null);
+    }
+
+    private BufferedImage getImageIcon(String image)
+    {
+        try
+        {
+            InputStream inputStream = super.getClass().getClassLoader().getResourceAsStream(image);
+            if (inputStream == null) return null;
+            return ImageIO.read(inputStream);
+        }
+        catch (IOException e)
+        {
+            return null;
+        }
     }
 
     private float getScale(Rectangle area)
@@ -146,7 +162,8 @@ public class SwingWindowHandler implements WindowHandler
     {
         try
         {
-            BufferedImage bufferedImage = ImageIO.read(new File(this.imageMap.containsKey(image) ? IMAGE_NOT_FOUND : image.getData()));
+            BufferedImage bufferedImage = this.imageMap.containsKey(image) ? this.getImageIcon(IMAGE_NOT_FOUND) : ImageIO.read(new File(image.getData()));
+            if (bufferedImage == null) throw new IOException();
             Rectangle area = new Rectangle(0, 0, this.slide.getWidth(), this.slide.getHeight());
             java.awt.Image scaledImage = bufferedImage.getScaledInstance((int)(bufferedImage.getWidth()*this.getScale(area)), (int)(bufferedImage.getHeight()*this.getScale(area)), java.awt.Image.SCALE_SMOOTH);
             JLabel imageLabel = new JLabel(new ImageIcon(scaledImage));

@@ -7,7 +7,7 @@
 	<slide transitions="false">
 		<title font="Arial" fontsize="60" color="#303338">JabberPoint Demo Presentatie (NL)</title>
 		<item kind="text" level="1">Welkom bij JabberPoint!</item>
-		<item kind="text" level="1"> </item>
+		<item kind="image" level="1">D:\ou\OU_jabberpoint\JabberPoint\nl.png</item>
 		<item kind="text" level="1">Geschreven door:</item>
 		<item kind="bulletlist" bullet="●" level="2">
 			<item kind="text" level="2">Maarten Dekker</item>
@@ -24,7 +24,7 @@
 			</item>
 		</item>
 		<item kind="text" level="1"> </item>
-		<item kind="image" level="3">ou.png</item>
+		<item kind="image" level="3">D:\ou\OU_jabberpoint\JabberPoint\ou.png</item>
 		<item kind="text" level="1"> </item>
 	</slide>
 
