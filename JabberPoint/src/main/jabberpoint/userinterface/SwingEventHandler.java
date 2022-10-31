@@ -113,10 +113,10 @@ public class SwingEventHandler extends KeyAdapter implements EventHandler
                         "About", JOptionPane.INFORMATION_MESSAGE);
                 break;
             case "Open":
-                String filename = JOptionPane.showInputDialog("Enter the filename");
-
-                if (filename != null && new File(filename).exists()){
-                    new OpenFileCommand(filename).execute();
+                JFileChooser fileChooser = new JFileChooser();
+                if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION)
+                {
+                    new OpenFileCommand(fileChooser.getSelectedFile().getAbsolutePath()).execute();
                     break;
                 }
                 JOptionPane.showMessageDialog(null,

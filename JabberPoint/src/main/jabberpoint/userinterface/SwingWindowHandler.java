@@ -28,7 +28,7 @@ public class SwingWindowHandler implements WindowHandler
     private int DEFAULT_WIDTH = 1000+(2*X_MARGIN);
     private int DEFAULT_HEIGHT = 800;
     private final int DEFAULT_FONT_SIZE = 36;
-    private final String DEFAULT_FONT = "Helvetica";
+    private final String DEFAULT_FONT = "Arial";
     private final int DEFAULT_FONT_STYLE = Font.PLAIN;
     private final int TITLE_WHITESPACE = 20;
     private static final Color DEFAULT_FONT_COLOR = Color.BLACK;
@@ -133,7 +133,7 @@ public class SwingWindowHandler implements WindowHandler
                 (DEFAULT_FONT_STYLE),
                 (DEFAULT_FONT_SIZE));
             label.setForeground(DEFAULT_FONT_COLOR);
-            showMessageDialog(this.mainFrame, "There is an error in the XML styling, refer to help\n for extra information.");
+            showMessageDialog(this.mainFrame, "There is an error in the XML styling, refer to help → troubleshooting\n for extra information.");
         }
         Rectangle area = new Rectangle(0, 0, this.slide.getWidth(), this.slide.getHeight());
         label.setFont(font.deriveFont(font.getStyle(), font.getSize() * this.getScale(area)));
