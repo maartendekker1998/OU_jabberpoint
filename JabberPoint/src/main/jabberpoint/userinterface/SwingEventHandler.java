@@ -109,7 +109,7 @@ public class SwingEventHandler extends KeyAdapter implements EventHandler
                 break;
             case "About":
                 JOptionPane.showMessageDialog(null,
-                        "JabberPoint is made by Bart Janssen and Maarten Dekker as an assignment\nfor the \'Design for change\' course of the Open Universiteit The Netherlands.",
+                        "JabberPoint is made by Bart Janssen and Maarten Dekker as an assignment\nfor the 'Design for change' course of the Open Universiteit The Netherlands.",
                         "About", JOptionPane.INFORMATION_MESSAGE);
                 break;
             case "Open":
