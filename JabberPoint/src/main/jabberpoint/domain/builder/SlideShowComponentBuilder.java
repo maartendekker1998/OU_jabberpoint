@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Part of Builder Pattern
+ * Role: Concrete builder
+ */
 public class SlideShowComponentBuilder implements Builder
 {
     private ConcreteSlideShow slideShow;
@@ -15,7 +19,7 @@ public class SlideShowComponentBuilder implements Builder
     private Map<String, String> styles;
 
     /**
-     * creates a new slideshow
+     * creates a new empty slideshow
      */
     @Override
     public void newSlideShow() {
@@ -32,7 +36,7 @@ public class SlideShowComponentBuilder implements Builder
     }
 
     /**
-     * creates a new slide
+     * creates a new empty slide
      */
     @Override
     public void newSlide() {
@@ -65,12 +69,10 @@ public class SlideShowComponentBuilder implements Builder
      * @param content a text/image/bulletlist
      */
     private void addContent(Content content) {
-        if (this.styles.isEmpty()){
-            this.slide.addContent(content);
-        }else{
+        if (!this.styles.isEmpty()) {
             content.addStyles(this.styles);
-            this.slide.addContent(content);
         }
+        this.slide.addContent(content);
     }
 
     /**
@@ -96,7 +98,7 @@ public class SlideShowComponentBuilder implements Builder
     }
 
     /**
-     * creates a new bullet list
+     * creates a new empty bullet list
      * @param indentation to specify the indentation of the item
      * @return a new bulletlist
      */
@@ -112,7 +114,7 @@ public class SlideShowComponentBuilder implements Builder
     }
 
     /**
-     * adds a Bulletlist item
+     * adds a BulletList item
      * @see BulletList
      * @param indentation to specify the indentation of the item
      * @param contentList to specify the actual content
@@ -131,7 +133,7 @@ public class SlideShowComponentBuilder implements Builder
     }
 
     /**
-     * creates a new styles map
+     * creates a new empty styles map
      */
     @Override
     public void newStyles(){
@@ -149,7 +151,7 @@ public class SlideShowComponentBuilder implements Builder
     }
 
     /**
-     * creates a new metadata map
+     * creates a new empty metadata map
      */
     @Override
     public void newMetadata(){
