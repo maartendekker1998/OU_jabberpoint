@@ -14,7 +14,7 @@ public class ProjectorService
 
     /**
      * This function inserts a slideshow into the projector
-     * @param slideShow
+     * @param slideShow slideshow to be set
      */
     public void setSlideShow(SlideShowComponent slideShow)
     {
@@ -67,7 +67,7 @@ public class ProjectorService
 
     /**
      * Fetches the remaining content items that need to be rendered to complete the slide
-     * @return
+     * @return List of remaining content
      */
     public List<SlideShowComponent> getRemainingContent()
     {

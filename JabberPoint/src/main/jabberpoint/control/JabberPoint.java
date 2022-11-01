@@ -1,5 +1,8 @@
 package main.jabberpoint.control;
 
+/**
+ * JabberPoint, the main class where the main function is found
+ */
 public class JabberPoint
 {
     /** sets the path to the demo presentation  */
@@ -9,7 +12,7 @@ public class JabberPoint
      * This is the main function of this application.
      * The program can take one argument being a path to a presentation file.
      * If no argument is given, a default demo presentation will be loaded.
-     * @param args
+     * @param args optional file location
      */
     public static void main(String[] args) {
 

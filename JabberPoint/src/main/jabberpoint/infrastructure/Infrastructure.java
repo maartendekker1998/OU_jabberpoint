@@ -14,7 +14,12 @@ public class Infrastructure {
     public DirectorStrategy director;
     public BuilderService builderService;
 
-    public Infrastructure(BuilderService builderService ,DirectorStrategy director){
+    /**
+     * Constructs the infrastructure instance
+     * @param builderService service to build slideshows
+     * @param director director to determine how the slideshow should be build
+     */
+    public Infrastructure(BuilderService builderService, DirectorStrategy director){
         this.builderService = builderService;
         this.director = director;
     }

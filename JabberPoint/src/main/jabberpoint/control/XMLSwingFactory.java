@@ -8,6 +8,9 @@ import main.jabberpoint.userinterface.handlers.SwingHandlerFactory;
 import main.jabberpoint.userinterface.UserInterface;
 
 /**
+ * Part of Factory pattern
+ * Role: Concrete factory for XML
+ *
  * This class defines a concrete configuration of what the program needs to run
  * This concrete class returns a configuration where XML presentations can be used together with the UI framework Swing
  */

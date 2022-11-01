@@ -8,6 +8,9 @@ import main.jabberpoint.userinterface.handlers.HandlerFactory;
 import main.jabberpoint.userinterface.UserInterface;
 
 /**
+ * Part of Factory pattern
+ * Role: Abstract Factory
+ *
  * This abstract class defines an abstraction of the needed configuration for the program to run
  */
 public abstract class ControllerFactory
