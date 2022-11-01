@@ -19,15 +19,16 @@ public class SlideIterator extends SlideShowCompositeIterator
     /**
      * Creates chunks of content items, this is because if a content is iterated, it should be able to get
      * all the items which have a higher indentation then the previous content
-     * @param slideshow slide that contains content
+     * @param slide slide that contains content
      */
-    public SlideIterator(ConcreteSlide slideshow)
+    public SlideIterator(ConcreteSlide slide)
     {
         boolean buildingChunk = false;
         List<Content> chunkList = new ArrayList<>();
 
-        for (Content content : slideshow.getContent())
+        for (SlideShowComponent slideContent : slide.getContent())
         {
+            Content content = (Content)slideContent;
             if (content.getIndentation() == 1 && buildingChunk){
                 this.chunks.add(new ContentList(0, chunkList));
                 chunkList = new ArrayList<>();

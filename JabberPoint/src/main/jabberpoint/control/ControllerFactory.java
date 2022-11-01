@@ -15,21 +15,21 @@ import main.jabberpoint.userinterface.UserInterface;
  */
 public abstract class ControllerFactory
 {
-    public abstract UserInterface getUI();
+    public abstract UserInterface getUserInterface();
 
-    public abstract Infrastructure getInfraStructure();
+    public abstract Infrastructure getInfrastructure();
 
     final ProjectorService getProjectorService()
     {
         return new ProjectorService();
     }
 
-    final UserInterface createUI(HandlerFactory handlerFactory)
+    final UserInterface createUserInterface(HandlerFactory handlerFactory)
     {
         return new UserInterface(handlerFactory);
     }
 
-    final Infrastructure createInfra(BuilderService builderService, DirectorStrategy strategy)
+    final Infrastructure createInfrastructure(BuilderService builderService, DirectorStrategy strategy)
     {
         return new Infrastructure(builderService, strategy);
     }

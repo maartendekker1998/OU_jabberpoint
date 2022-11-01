@@ -28,15 +28,15 @@ public class UserInterface
         this.slideHandler = handlerFactory.createSlideHandler();
         this.windowHandler = handlerFactory.createWindowHandler();
         this.slideHandler.setWindowHandler(this.windowHandler);
-        this.renderUI();
+        this.renderUserInterface();
     }
 
     /**
      * Tells the windowHandler to render the UI
      */
-    private void renderUI()
+    private void renderUserInterface()
     {
-        this.windowHandler.renderUI();
+        this.windowHandler.renderUserInterface();
     }
 
     /**

@@ -17,13 +17,13 @@ import main.jabberpoint.userinterface.UserInterface;
 public class XMLSwingFactory extends ControllerFactory
 {
     @Override
-    public UserInterface getUI()
+    public UserInterface getUserInterface()
     {
-        return super.createUI(new SwingHandlerFactory());
+        return super.createUserInterface(new SwingHandlerFactory());
     }
 
     @Override
-    public Infrastructure getInfraStructure() {
-        return super.createInfra(new BuilderService(new SlideShowComponentBuilder()), new XMLDirectorStrategy());
+    public Infrastructure getInfrastructure() {
+        return super.createInfrastructure(new BuilderService(new SlideShowComponentBuilder()), new XMLDirectorStrategy());
     }
 }

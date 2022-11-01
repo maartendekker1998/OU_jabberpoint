@@ -7,7 +7,7 @@ import java.awt.*;
  * Class that extends JMenuBar so it can be used as a Swing MenuBar on the setJMenuBar of a JFrame, it builds the menu bar of JabberPoint
  * @see JFrame
  */
-class SwingMenuHandler extends JMenuBar
+class SwingMenuHandler extends JMenuBar implements MenuHandler
 {
     private final SwingEventHandler eventHandler;
 
@@ -94,7 +94,8 @@ class SwingMenuHandler extends JMenuBar
      * Gets the event handler instance
      * @return event handler instance
      */
-    SwingEventHandler getEventHandler()
+    @Override
+    public SwingEventHandler getEventHandler()
     {
         return this.eventHandler;
     }

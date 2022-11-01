@@ -66,7 +66,8 @@ public class SwingEventHandler extends KeyAdapter implements EventHandler
      * @param actionCommand Contains information about which command is used
      * @see SwingMenuHandler
      */
-    void menuItemClick(String actionCommand)
+    @Override
+    public void menuItemClick(String actionCommand)
     {
         switch (actionCommand)
         {

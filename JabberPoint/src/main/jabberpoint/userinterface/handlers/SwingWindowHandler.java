@@ -32,6 +32,7 @@ public class SwingWindowHandler implements WindowHandler
      * UI related variables, this conrains the main frame which is shown and default values
      */
     private static final String IMAGE_NOT_FOUND = "noimage.jpg";
+    private static final String DEFAULT_JABBER_POINT_TITLE = "JabberPoint";
     private final JFrame mainFrame = new JFrame();
     private final JPanel slide = new JPanel();
     private final int X_MARGIN = 50;
@@ -95,12 +96,10 @@ public class SwingWindowHandler implements WindowHandler
                 return ((JLabel)component).getIcon() != null;
             }
         });
-        this.mainFrame.setJMenuBar(new SwingMenuHandler(this.eventHandler));
+        this.mainFrame.setJMenuBar(menuHandler);
         this.mainFrame.addKeyListener(this.eventHandler);
         this.mainFrame.setContentPane(this.slide);
-        this.mainFrame.setTitle(
-                (Metadata.getInstance().metadata.get("showtitle") == null ? "JabberPoint" : Metadata.getInstance().metadata.get("showtitle")) + " by " +
-                (Metadata.getInstance().metadata.get("presenter") == null ? "JabberPoint" : Metadata.getInstance().metadata.get("presenter")));
+        this.mainFrame.setTitle(DEFAULT_JABBER_POINT_TITLE);
         this.mainFrame.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
         this.mainFrame.setIconImage(this.getImageIcon("halloween.png"));
         this.mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -122,7 +121,7 @@ public class SwingWindowHandler implements WindowHandler
      * Sets the window visible, the window is prepared in the constructor
      */
     @Override
-    public void renderUI()
+    public void renderUserInterface()
     {
         this.mainFrame.setVisible(true);
     }
@@ -134,6 +133,10 @@ public class SwingWindowHandler implements WindowHandler
     @Override
     public void setTitle(ConcreteSlide slide)
     {
+        if (slide.getMetadata().get("showtitle") == null && slide.getMetadata().get("presenter") == null) this.mainFrame.setTitle(DEFAULT_JABBER_POINT_TITLE);
+        else this.mainFrame.setTitle(
+            (slide.getMetadata().get("showtitle") == null ? "JabberPoint" : Metadata.getInstance().metadata.get("showtitle")) + " by " +
+            (slide.getMetadata().get("presenter") == null ? "JabberPoint" : Metadata.getInstance().metadata.get("presenter")));
         JLabel label = new JLabel(slide.getTitle());
         this.setStyles(slide.getStyles(), label);
         label.setBounds(this.createBounds(X_MARGIN, (this.previousComponentHeight), this.slide.getWidth()-X_MARGIN, label.getFont().getSize()+Y_MARGIN));
@@ -166,7 +169,7 @@ public class SwingWindowHandler implements WindowHandler
      * An image is loaded in the label, it is also possible that the label contains text and an image
      * this is so that the BulletList styles can be set on images as well
      * It also sets the bounds and location of the label
-     * If the image provided cannot be found, the user will be notified with a message and a default image will be used in stead
+     * If the image provided cannot be found, the user will be notified with a message and a default image will be used instead
      * @param image an image type content
      * @see BulletList
      */
@@ -210,7 +213,7 @@ public class SwingWindowHandler implements WindowHandler
     @Override
     public void removeLastContent(ContentList content)
     {
-        for (Content contentToRemove : content.getContent())
+        for (SlideShowComponent contentToRemove : content.getContent())
         {
             Component componentToRemove = this.getKeyByValue(contentToRemove);
             if (contentToRemove instanceof Image) this.previousComponentHeight-=IMAGE_BOTTOM_MARGIN;

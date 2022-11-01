@@ -56,13 +56,14 @@ public class XMLDirectorStrategy implements DirectorStrategy {
 
     private boolean recursive = false;
 
+    private BuilderService builderService;
+
     /**
      * Parses the style attributes and sets them via the builder service
-     * @param builderService a builder to build slideshows
      * @see BuilderService
      * @param attributes containing style items
      */
-    private void parseStyles(BuilderService builderService, NamedNodeMap attributes){
+    private void parseStyles(NamedNodeMap attributes){
         if (attributes.getNamedItem(FONT) != null) {
             builderService.addStyle(FONT, attributes.getNamedItem(FONT).getTextContent());
         }
@@ -79,11 +80,10 @@ public class XMLDirectorStrategy implements DirectorStrategy {
 
     /**
      * Parses the metadata and sets this data via the builder service
-     * @param builderService a builder to build slideshows
      * @see BuilderService
      * @param metadata an element containing metadata fields
      */
-    private void parseMetadata(BuilderService builderService, NodeList metadata){
+    private void parseMetadata(NodeList metadata){
         for (int i = 0; i < metadata.getLength() ; i++) {
 
             Element metadataField = (Element) metadata.item(i);
@@ -105,17 +105,16 @@ public class XMLDirectorStrategy implements DirectorStrategy {
 
     /**
      * Parses the slide title with accompanying styles and sets them via the builder service
-     * @param builderService a builder to build slideshows
      * @see BuilderService
      * @param element that contains the slide title
      * @return the slide title
      */
-    private String getTitle(BuilderService builderService ,Element element) {
+    private String getTitle(Element element) {
         NodeList titles = element.getElementsByTagName(SLIDETITLE);
         NamedNodeMap attributes = titles.item(0).getAttributes();
         if (attributes.getLength() == 0) return titles.item(0).getTextContent();
         builderService.newStyles();
-        parseStyles(builderService, attributes);
+        parseStyles(attributes);
         return titles.item(0).getTextContent();
     }
 
@@ -139,7 +138,6 @@ public class XMLDirectorStrategy implements DirectorStrategy {
 
     /**
      * Opens an XML file and directs the construction of the domain by using the builder service
-     *
      * @param builderService a builder to build slideshows
      * @see BuilderService
      * @param filepath the filepath to the file we wish to load
@@ -147,13 +145,14 @@ public class XMLDirectorStrategy implements DirectorStrategy {
     @Override
     public void construct(BuilderService builderService, String filepath) {
 
+        this.builderService = builderService;
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document document = builder.parse(new File(filepath));
             Element doc = document.getDocumentElement();
 
-            builderService.newMetaData();
-            parseMetadata(builderService, doc.getElementsByTagName(METADATA));
+            builderService.newMetadata();
+            parseMetadata(doc.getElementsByTagName(METADATA));
 
             builderService.newSlideShow();
 
@@ -164,14 +163,14 @@ public class XMLDirectorStrategy implements DirectorStrategy {
                 Element xmlSlide = (Element) slides.item(slideNumber);
 
                 builderService.newSlide();
-                builderService.addSlideTitle(getTitle(builderService ,xmlSlide));
+                builderService.addSlideTitle(getTitle(xmlSlide));
 
                 NamedNodeMap slideAttributes = xmlSlide.getAttributes();
                 String transitions = slideAttributes.getNamedItem(TRANSITIONS).getTextContent();
 
                 builderService.setTransitions(transitions.equals(TRUE));
 
-                this.prepareSlide(builderService, xmlSlide, null);
+                this.prepareSlide(xmlSlide, null);
                 builderService.addSlide();
             }
 
@@ -188,13 +187,11 @@ public class XMLDirectorStrategy implements DirectorStrategy {
     /**
      * Parses all the slide items of a slide
      * This function is used recursively to build bullet lists
-     *
-     * @param builderService a builder to build slideshows
      * @see BuilderService
      * @param xmlSlide a slide tag with all its elements
      * @param contents used to pass content composites when used recursively
      */
-    private void prepareSlide(BuilderService builderService, Element xmlSlide, ContentComposite contents)
+    private void prepareSlide(Element xmlSlide, ContentComposite contents)
     {
         List<Element> slideItems = this.getChildrenByTagName(xmlSlide, ITEM);
         for (Element element : slideItems)
@@ -213,7 +210,7 @@ public class XMLDirectorStrategy implements DirectorStrategy {
             }
 
             builderService.newStyles();
-            parseStyles(builderService, attributes);
+            parseStyles(attributes);
 
             String type = attributes.getNamedItem(KIND).getTextContent();
             if (TEXT.equals(type))
@@ -231,13 +228,13 @@ public class XMLDirectorStrategy implements DirectorStrategy {
                 if (recursive)
                 {
                     ContentComposite bulletList = builderService.newBulletList(indentation);
-                    this.prepareSlide(builderService, element, bulletList);
+                    this.prepareSlide(element, bulletList);
                     contents.addContent(bulletList);
                     continue;
                 }
                 recursive = true;
                 BulletList bulletList = builderService.newBulletList(indentation);
-                this.prepareSlide(builderService, element, bulletList);
+                this.prepareSlide(element, bulletList);
                 builderService.addBulletList(indentation, bulletList);
                 recursive = false;
             }

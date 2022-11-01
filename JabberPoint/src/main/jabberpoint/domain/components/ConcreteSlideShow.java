@@ -16,7 +16,7 @@ public class ConcreteSlideShow extends SlideShowComposite
      * @param slide Concrete slide to add
      */
     public void addSlide(ConcreteSlide slide){
-        super.componentList.add(slide);
+        super.getContent().add(slide);
     }
 
     /**
@@ -27,16 +27,5 @@ public class ConcreteSlideShow extends SlideShowComposite
     public SlideShowIterator createIterator()
     {
         return new SlideShowIterator(this);
-    }
-
-    /**
-     * Returns a new empty list, this function will not be used on the ConcreteSlideShow since its
-     * content will be accessed through the iterator
-     * @return empty list
-     */
-    @Override
-    public List<Content> getContent()
-    {
-        return new ArrayList<>();
     }
 }

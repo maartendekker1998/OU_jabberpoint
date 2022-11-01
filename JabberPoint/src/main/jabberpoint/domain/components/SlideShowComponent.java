@@ -1,5 +1,6 @@
 package main.jabberpoint.domain.components;
 
+import main.jabberpoint.domain.Metadata;
 import main.jabberpoint.domain.iterators.Iterable;
 import java.util.HashMap;
 import java.util.List;
@@ -17,7 +18,7 @@ public abstract class SlideShowComponent implements Iterable
      * Abstract function for all its children to inherit, it gets the content of the concrete item
      * @return a list with items that must extend from Content
      */
-    public abstract List<? extends Content> getContent();
+    public abstract List<? extends SlideShowComponent> getContent();
 
     /**
      * Add styles to the Content item
@@ -33,5 +34,9 @@ public abstract class SlideShowComponent implements Iterable
      */
     public Map<String, String> getStyles() {
         return styles;
+    }
+
+    public Map<String, String> getMetadata() {
+        return Metadata.getInstance().metadata;
     }
 }

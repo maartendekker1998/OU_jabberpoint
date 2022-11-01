@@ -23,10 +23,10 @@ public class Controller
      * @param filepath location to a file
      */
     void initialize(ControllerFactory factory, String filepath) {
-        this.infrastructure = factory.getInfraStructure();
+        this.infrastructure = factory.getInfrastructure();
         this.projectorService = factory.getProjectorService();
         this.projectorService.setSlideShow(this.infrastructure.loadFile(filepath));
-        this.userInterface = factory.getUI();
+        this.userInterface = factory.getUserInterface();
         this.getNextSlide();
     }
 

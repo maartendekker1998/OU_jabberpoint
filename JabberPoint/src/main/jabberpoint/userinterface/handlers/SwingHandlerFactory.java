@@ -18,8 +18,9 @@ public class SwingHandlerFactory implements HandlerFactory
 
     /**
      * Creates a SwingWindowHandler with a SwingEventHandler as parameter
-     * @return an instance of a SwingWindowHandler with therein a SwingEventHandler
+     * @return an instance of a SwingWindowHandler with therein a SwingMenuHandler
      * @see SwingWindowHandler
+     * @see SwingMenuHandler
      */
     @Override
     public WindowHandler createWindowHandler()

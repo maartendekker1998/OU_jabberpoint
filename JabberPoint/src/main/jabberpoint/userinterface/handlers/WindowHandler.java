@@ -12,7 +12,7 @@ public interface WindowHandler
     /**
      * Sets the window visible, the window is prepared in the constructor
      */
-    void renderUI();
+    void renderUserInterface();
 
     /**
      * Adds a text type content to the slide, this will create a label with styles initiated
@@ -26,7 +26,7 @@ public interface WindowHandler
      * An image is loaded in the label, it is also possible that the label contains text and an image
      * this is so that the BulletList styles can be set on images as well
      * It also sets the bounds and location of the label
-     * If the image provided cannot be found, the user will be notified with a message and a default image will be used in stead
+     * If the image provided cannot be found, the user will be notified with a message and a default image will be used instead
      * @param image an image type content
      * @see BulletList
      */

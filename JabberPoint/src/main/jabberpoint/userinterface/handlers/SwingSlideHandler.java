@@ -38,7 +38,12 @@ public class SwingSlideHandler implements SlideHandler
         this.windowHandler.clear(true);
         this.windowHandler.setTitle(slide);
         this.windowHandler.setTransitions(slide.hasTransitions());
-        if (!slide.hasTransitions()) this.renderContent(slide.getContent());
+        if (!slide.hasTransitions())
+        {
+            List<Content> contents = new ArrayList<>();
+            slide.getContent().forEach(content -> contents.add((Content)content));
+            this.renderContent(contents);
+        }
     }
 
     /**
@@ -69,7 +74,7 @@ public class SwingSlideHandler implements SlideHandler
             if (content instanceof Image) this.windowHandler.addImage((Image)content);
             if (content instanceof BulletList)
             {
-                for (Content bulletContent : content.getContent())
+                for (SlideShowComponent bulletContent : content.getContent())
                 {
                     Map<String, String> style = new HashMap<>();
                     style.put("bullet", content.getStyles().get("bullet") == null ? "-" : content.getStyles().get("bullet"));
