@@ -18,8 +18,8 @@ public class Projector
     private Iterator slideIterator;
 
     /**
-     * Sets the slideshow that the projector will interface with
-     * @param slideshow
+     * Sets the slideshow iterator that the projector will interface with
+     * @param slideshow slideshow to get the iterator from
      */
     public void setSlideShow(SlideShowComponent slideshow){
         this.slideShowIterator = slideshow.createIterator();
