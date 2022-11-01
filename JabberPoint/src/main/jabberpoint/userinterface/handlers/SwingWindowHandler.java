@@ -28,6 +28,9 @@ import static javax.swing.JOptionPane.showMessageDialog;
  */
 public class SwingWindowHandler implements WindowHandler
 {
+    /**
+     * UI related variables, this conrains the main frame which is shown and default values
+     */
     private static final String IMAGE_NOT_FOUND = "noimage.jpg";
     private final JFrame mainFrame = new JFrame();
     private final JPanel slide = new JPanel();
