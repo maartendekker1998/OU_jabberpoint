@@ -3,6 +3,10 @@ package main.jabberpoint.domain.iterators;
 import main.jabberpoint.domain.components.ConcreteSlideShow;
 import main.jabberpoint.domain.components.SlideShowComponent;
 
+/**
+ * Part of Iterator Pattern
+ * Role: Concrete SlideShowCompositeIterator
+ */
 public class SlideShowIterator extends SlideShowCompositeIterator
 {
     public SlideShowIterator(ConcreteSlideShow iterable)
@@ -10,6 +14,9 @@ public class SlideShowIterator extends SlideShowCompositeIterator
         this.iterable = iterable;
     }
 
+    /**
+     * Iterates to the next item of the iterator
+     */
     @Override
     public void next()
     {
@@ -17,6 +24,9 @@ public class SlideShowIterator extends SlideShowCompositeIterator
         this.index++;
     }
 
+    /**
+     * Iterates to the previous item of the iterator
+     */
     @Override
     public void previous()
     {
@@ -24,18 +34,29 @@ public class SlideShowIterator extends SlideShowCompositeIterator
         this.index--;
     }
 
+    /**
+     * Checks if the iterator is at its highest index and thus determine if it cannot iterate further
+     * @return boolean value whether the iterator is done
+     */
     @Override
     public boolean isDone()
     {
         return (this.index+1) >= this.iterable.componentList.size();
     }
 
+    /**
+     * Resets the index to the start of the iterator
+     */
     @Override
     public void resetIndex()
     {
         this.index = 0;
     }
 
+    /**
+     * Gets the current item where the index of the iterator is
+     * @return current item or the first item if the index < 0
+     */
     @Override
     public SlideShowComponent current()
     {
@@ -43,6 +64,10 @@ public class SlideShowIterator extends SlideShowCompositeIterator
         return this.iterable.componentList.get(this.index);
     }
 
+    /**
+     * Gets the first item of the iterator
+     * @return first item
+     */
     @Override
     public SlideShowComponent first()
     {
