@@ -177,17 +177,13 @@ public class XMLDirectorStrategy implements DirectorStrategy {
 
             builderService.addMetadata();
         }
-        catch (IOException iox) {
-            System.err.println(iox);
-        }
-        catch (SAXException sax) {
-            System.err.println(sax.getMessage());
+        catch (IOException | SAXException iox) {
+            System.err.println(iox.getMessage());
         }
         catch (ParserConfigurationException pcx) {
             System.err.println(PCE);
         }
     }
-
 
     /**
      * Parses all the slide items of a slide
