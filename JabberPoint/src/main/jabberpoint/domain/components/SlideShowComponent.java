@@ -21,7 +21,7 @@ public abstract class SlideShowComponent implements Iterable
 
     /**
      * Add styles to the Content item
-     * @param styles a map containing tyles to be set
+     * @param styles a map containing styles to be set
      */
     public void addStyles(Map<String, String> styles){
         this.styles.putAll(styles);
