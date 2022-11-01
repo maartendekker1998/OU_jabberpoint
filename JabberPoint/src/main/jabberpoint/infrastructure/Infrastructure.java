@@ -11,8 +11,8 @@ import main.jabberpoint.domain_service.BuilderService;
  */
 public class Infrastructure {
 
-    public DirectorStrategy director;
-    public BuilderService builderService;
+    private DirectorStrategy director;
+    private BuilderService builderService;
 
     /**
      * Constructs the infrastructure instance

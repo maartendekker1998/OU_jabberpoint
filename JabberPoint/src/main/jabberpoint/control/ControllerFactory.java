@@ -19,7 +19,7 @@ public abstract class ControllerFactory
 
     public abstract Infrastructure getInfraStructure();
 
-    public final ProjectorService getProjectorService()
+    final ProjectorService getProjectorService()
     {
         return new ProjectorService();
     }

@@ -1,8 +1,6 @@
 package main.jabberpoint.domain.components;
 
 import main.jabberpoint.domain.iterators.Iterable;
-import main.jabberpoint.domain.Metadata;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

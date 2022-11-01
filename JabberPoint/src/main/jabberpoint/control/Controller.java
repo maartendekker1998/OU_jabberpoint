@@ -19,10 +19,10 @@ public class Controller
 
     /**
      * This function initializes the controller, and is only called once in the Main function of this program
-     * @param factory
-     * @param filepath
+     * @param factory factory to create controller items
+     * @param filepath location to a file
      */
-    public void initialize(ControllerFactory factory, String filepath) {
+    void initialize(ControllerFactory factory, String filepath) {
         this.infrastructure = factory.getInfraStructure();
         this.projectorService = factory.getProjectorService();
         this.projectorService.setSlideShow(this.infrastructure.loadFile(filepath));
@@ -46,7 +46,7 @@ public class Controller
 
     /**
      * This function instructs the infrastructure to read a file, and sets the parsed file in the projectorService
-     * @param filepath
+     * @param filepath location to a file
      */
     public void loadFile(String filepath) {
         this.projectorService.setSlideShow(this.infrastructure.loadFile(filepath));

@@ -27,8 +27,7 @@ public class Projector
 
     /**
      * Fetches the next slide
-     * @return null if there is no next slide
-     * @return a slide if there is a next slide
+     * @return a slide if there is a next slide or null if there is no next slide
      */
     public SlideShowComponent getNextSlide()
     {
@@ -41,8 +40,7 @@ public class Projector
 
     /**
      * Fetches the previous slide
-     * @return The previous slide if there is a previous slide
-     * @return The current slide if there is no previous slide
+     * @return The previous slide
      */
     public SlideShowComponent getPreviousSlide()
     {
@@ -54,8 +52,7 @@ public class Projector
 
     /**
      * Fetches the next content item
-     * @return null if there is no next content item
-     * @return a slide if there is a next content item
+     * @return a next content item or null if there is no next content item
      */
     public SlideShowComponent getNextContent()
     {

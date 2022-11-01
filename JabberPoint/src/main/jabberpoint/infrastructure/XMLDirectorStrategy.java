@@ -83,7 +83,7 @@ public class XMLDirectorStrategy implements DirectorStrategy {
      * @see BuilderService
      * @param metadata an element containing metadata fields
      */
-    public void parseMetadata(BuilderService builderService, NodeList metadata){
+    private void parseMetadata(BuilderService builderService, NodeList metadata){
         for (int i = 0; i < metadata.getLength() ; i++) {
 
             Element metadataField = (Element) metadata.item(i);
@@ -126,7 +126,7 @@ public class XMLDirectorStrategy implements DirectorStrategy {
      * @param name the name of the nodes that we want to extract
      * @return a list of elements
      */
-    public List<Element> getChildrenByTagName(Element parent, String name) {
+    private List<Element> getChildrenByTagName(Element parent, String name) {
         List<Element> nodeList = new ArrayList<>();
         for (Node child = parent.getFirstChild(); child != null; child = child.getNextSibling()) {
             if (child.getNodeType() == Node.ELEMENT_NODE &&
