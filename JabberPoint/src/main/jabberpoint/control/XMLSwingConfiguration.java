@@ -14,7 +14,7 @@ import main.jabberpoint.userinterface.UserInterface;
  * This class defines a concrete configuration of what the program needs to run
  * This concrete class returns a configuration where XML presentations can be used together with the UI framework Swing
  */
-public class XMLSwingFactory extends ControllerFactory
+public class XMLSwingConfiguration extends ControllerConfigurationFactory
 {
     @Override
     public UserInterface getUserInterface()

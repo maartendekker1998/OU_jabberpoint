@@ -6,8 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Part of Iterator Pattern
+ * Role: ConcreteAggregate
+ *
  * Part of Composite Pattern
- * Role: Concrete SlideShowComposite
+ * Role: Concrete Composite
  */
 public class ConcreteSlideShow extends SlideShowComposite
 {

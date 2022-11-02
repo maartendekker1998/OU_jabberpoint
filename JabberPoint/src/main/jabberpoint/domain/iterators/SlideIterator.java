@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * Part of Iterator Pattern
- * Role: Concrete SlideShowCompositeIterator
+ * Role: Concrete Iterator
  */
 public class SlideIterator extends SlideShowCompositeIterator
 {
@@ -23,10 +23,15 @@ public class SlideIterator extends SlideShowCompositeIterator
      */
     public SlideIterator(ConcreteSlide slide)
     {
+        this.iterable = slide;
+        this.initializeChunks();
+    }
+
+    private void initializeChunks(){
         boolean buildingChunk = false;
         List<Content> chunkList = new ArrayList<>();
 
-        for (SlideShowComponent slideContent : slide.getContent())
+        for (SlideShowComponent slideContent : this.iterable.getContent())
         {
             Content content = (Content)slideContent;
             if (content.getIndentation() == 1 && buildingChunk){

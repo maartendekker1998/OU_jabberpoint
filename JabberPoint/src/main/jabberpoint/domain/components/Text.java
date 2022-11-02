@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Part of Composite Pattern
- * Role: Concrete Content with a string as data type
+ * Role: Concrete Leaf
  */
 public class Text extends Content<String>
 {

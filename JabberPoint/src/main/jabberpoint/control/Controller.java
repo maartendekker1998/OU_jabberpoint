@@ -22,7 +22,7 @@ public class Controller
      * @param factory factory to create controller items
      * @param filepath location to a file
      */
-    void initialize(ControllerFactory factory, String filepath) {
+    void initialize(ControllerConfigurationFactory factory, String filepath) {
         this.infrastructure = factory.getInfrastructure();
         this.projectorService = factory.getProjectorService();
         this.projectorService.setSlideShow(this.infrastructure.loadFile(filepath));

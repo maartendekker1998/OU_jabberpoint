@@ -4,7 +4,7 @@ import main.jabberpoint.domain.components.SlideShowComponent;
 
 /**
  * Part of Iterator Pattern
- * Role: Interface to provide functions for a concrete iterator
+ * Role: Iterator
  */
 public interface Iterator
 {

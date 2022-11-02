@@ -3,8 +3,11 @@ package main.jabberpoint.domain.components;
 import java.util.List;
 
 /**
- * Part of Composite Pattern
- * Role: Concrete ContentComposite
+ * Part of Composite Pattern (with SlideShowComponent as Component)
+ * Role: Concrete Leaf
+ *
+ * Part of Composite Pattern (With Content as Component)
+ * Role: Concrete Composite
  */
 public class BulletList extends ContentComposite
 {

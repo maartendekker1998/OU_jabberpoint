@@ -4,7 +4,7 @@ import main.jabberpoint.domain.components.SlideShowComposite;
 
 /**
  * Part of Iterator Pattern
- * Role: Abstract SlideShowCompositeIterator that implements the Iterator
+ * Role: Abstract Iterator
  */
 abstract class SlideShowCompositeIterator implements Iterator
 {

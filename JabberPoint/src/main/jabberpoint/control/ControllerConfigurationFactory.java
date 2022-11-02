@@ -13,7 +13,7 @@ import main.jabberpoint.userinterface.UserInterface;
  *
  * This abstract class defines an abstraction of the needed configuration for the program to run
  */
-public abstract class ControllerFactory
+public abstract class ControllerConfigurationFactory
 {
     public abstract UserInterface getUserInterface();
 

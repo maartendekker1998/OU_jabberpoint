@@ -7,8 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ *
+ * Part of Iterator Pattern
+ * Role: Abstract Aggregate
+ *
  * Part of Composite Pattern
- * Role: Root component
+ * Role: Component
  */
 public abstract class SlideShowComponent implements Iterable
 {

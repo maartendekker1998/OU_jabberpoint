@@ -20,6 +20,6 @@ public class JabberPoint
             if (args[0] != null) filepath = args[0];
         }
 
-        Controller.getInstance().initialize(new XMLSwingFactory(), filepath);
+        Controller.getInstance().initialize(new XMLSwingConfiguration(), filepath);
     }
 }

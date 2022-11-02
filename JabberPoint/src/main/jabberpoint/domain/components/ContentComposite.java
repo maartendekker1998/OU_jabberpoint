@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Part of Composite Pattern
- * Role: Abstract Content with a List of Content as data type
+ * Part of Composite Pattern (with SlideShowComponent as Component)
+ * Role: Abstract Leaf
+ *
+ * Part of Composite Pattern (With Content as Component)
+ * Role: Abstract Composite
  */
 public abstract class ContentComposite extends Content<List<Content>>
 {

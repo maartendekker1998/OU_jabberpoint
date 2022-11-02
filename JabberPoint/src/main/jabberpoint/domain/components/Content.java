@@ -4,14 +4,13 @@ import main.jabberpoint.domain.iterators.Iterator;
 
 /**
  * Part of Composite Pattern
- * Role: Abstract SlideShowComponent
+ * Role: Abstract Leaf
  *
  * @param <T> This must be set as a type of the data the Content should have
  */
 public abstract class Content<T> extends SlideShowComponent
 {
     private final T data;
-
     private final int indentation;
 
     /**
