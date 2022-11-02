@@ -13,6 +13,7 @@ public class ConcreteSlide extends SlideShowComposite
 {
     private String title;
     private Boolean hasTransitions;
+    private List<SlideShowComponent> componentList = new ArrayList<>();
 
     /**
      * Creates an iterator to iterate over the slide items
@@ -29,7 +30,24 @@ public class ConcreteSlide extends SlideShowComposite
      * @param content Content to add to the slide
      */
     public void addContent(Content content){
-        super.getContent().add(content);
+        this.componentList.add(content);
+//        super.getContent().add(content);
+    }
+
+    /**
+     * Returns the componentList, the concrete classes under SlideShowComposite can still override this for an
+     * own implementation
+     * @return componentList
+     */
+    @Override
+    public List<SlideShowComponent> getContent()
+    {
+        List<SlideShowComponent> sdf = new ArrayList<>();
+        for (SlideShowComponent content : componentList)
+        {
+            sdf.addAll(content.getContent());
+        }
+        return sdf;
     }
 
     /**

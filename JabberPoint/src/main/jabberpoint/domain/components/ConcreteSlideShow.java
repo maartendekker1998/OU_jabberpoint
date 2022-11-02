@@ -11,12 +11,14 @@ import java.util.List;
  */
 public class ConcreteSlideShow extends SlideShowComposite
 {
+    private List<SlideShowComponent> componentList = new ArrayList<>();
+
     /**
      * Adds a slide to the slideshow
      * @param slide Concrete slide to add
      */
     public void addSlide(ConcreteSlide slide){
-        super.getContent().add(slide);
+        this.componentList.add(slide);
     }
 
     /**
@@ -27,5 +29,16 @@ public class ConcreteSlideShow extends SlideShowComposite
     public SlideShowIterator createIterator()
     {
         return new SlideShowIterator(this);
+    }
+
+    @Override
+    public List<? extends SlideShowComponent> getContent()
+    {
+        List<SlideShowComponent> slides = new ArrayList<>();
+        for (SlideShowComponent s : componentList)
+        {
+            slides.add(s);
+        }
+        return slides;
     }
 }

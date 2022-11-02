@@ -66,19 +66,19 @@ public class SwingSlideHandler implements SlideHandler
      * This function is overloaded
      * @param contentList Contains various types of Content
      */
-    private void renderContent(List<Content> contentList)
+    private void renderContent(List<? extends SlideShowComponent> contentList)
     {
-        for (Content content : contentList)
+        for (SlideShowComponent content : contentList)
         {
             if (content instanceof Text) this.windowHandler.addText((Text)content);
             if (content instanceof Image) this.windowHandler.addImage((Image)content);
             if (content instanceof BulletList)
             {
-                for (SlideShowComponent bulletContent : content.getContent())
+                for (SlideShowComponent bulletContent : ((BulletList)content).getData())
                 {
                     Map<String, String> style = new HashMap<>();
                     style.put("bullet", content.getStyles().get("bullet") == null ? "-" : content.getStyles().get("bullet"));
-                    bulletContent.addStyles(style);
+                    if (!(bulletContent instanceof ContentComposite))bulletContent.addStyles(style);
                 }
                 this.renderContent(((ContentComposite)content).getData());
             }

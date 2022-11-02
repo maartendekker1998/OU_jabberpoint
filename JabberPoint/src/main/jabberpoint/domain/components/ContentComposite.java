@@ -26,17 +26,4 @@ public abstract class ContentComposite extends Content<List<Content>>
     {
         super.getData().add(content);
     }
-
-    /**
-     * Gets its children as a list of Content, the concrete classes under ContentComposite can still override this
-     * for an own implementation
-     * @return List of Content items
-     */
-    @Override
-    public List<Content> getContent()
-    {
-        List<Content> displayContentList = new ArrayList<>();
-        super.getData().forEach(content -> content.getContent().forEach(contentItem -> displayContentList.add((Content)contentItem)));
-        return displayContentList;
-    }
 }
