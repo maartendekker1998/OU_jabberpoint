@@ -33,7 +33,19 @@ public class ConcreteSlide extends SlideShowComposite
      * @param content Content to add to the slide
      */
     public void addContent(Content content){
-        super.getContent().add(content);
+        super.componentList.add(content);
+    }
+
+    /**
+     * Calls getContent function to all its children to return the content of the slide
+     * @return List of content
+     */
+    @Override
+    public List<SlideShowComponent> getContent()
+    {
+        List<SlideShowComponent> contentList = new ArrayList<>();
+        super.componentList.forEach(content -> contentList.addAll(content.getContent()));
+        return contentList;
     }
 
     /**

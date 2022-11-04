@@ -2,7 +2,7 @@ package main.jabberpoint.userinterface.handlers;
 
 import main.jabberpoint.domain.components.ConcreteSlide;
 import main.jabberpoint.domain.components.Content;
-import main.jabberpoint.domain.components.ContentList;
+import main.jabberpoint.domain.components.ContentComposite;
 
 /**
  * Part of Abstract Factory Pattern
@@ -31,10 +31,10 @@ public interface SlideHandler
     void renderContent(Content content);
 
     /**
-     * Removes the last added content, if this is of type BulletList, it will also remove all its children
-     * @param content can be of type BulletList or single content
+     * Removes the last added content, if this is of type ContentComposite, it will remove all its children
+     * @param content can be of type ContentComposite or single content
      */
-    void removeContent(ContentList content);
+    void removeContent(ContentComposite content);
 
     /**
      * Removes all rendered content

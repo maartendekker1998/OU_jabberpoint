@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 import static javax.swing.JOptionPane.showMessageDialog;
 
@@ -160,8 +161,8 @@ public class SwingWindowHandler implements WindowHandler
         label.setBorder(new CompoundBorder(new EmptyBorder(0,0,0,0), new EmptyBorder(-7,0,0,0)));
         this.slide.add(label);
         this.previousComponentHeight+=label.getHeight();
-        this.itemMap.put(label, text);
         this.slide.repaint();
+        SwingUtilities.invokeLater(() -> this.itemMap.put(label, text));
     }
 
     /**
@@ -191,7 +192,7 @@ public class SwingWindowHandler implements WindowHandler
             this.slide.repaint();
             imageLabel.getGraphics().drawImage(bufferedImage, 0, 0, (int)(bufferedImage.getWidth()*this.getScale(area)), (int)(bufferedImage.getHeight()*this.getScale(area)), this.slide);
             this.imageMap.put(image, bufferedImage);
-            this.itemMap.put(imageLabel, image);
+            SwingUtilities.invokeLater(() -> this.itemMap.put(imageLabel, image));
         }
         catch (Exception e)
         {
@@ -208,13 +209,19 @@ public class SwingWindowHandler implements WindowHandler
 
     /**
      * Removes the last added content from the window
+     * This gets called recursively if the content is type ContentComposite to remove all its children also
      * @param content Content item to remove
      */
     @Override
-    public void removeLastContent(ContentList content)
+    public void removeLastContent(List<? extends SlideShowComponent> content)
     {
-        for (SlideShowComponent contentToRemove : content.getContent())
+        for (SlideShowComponent contentToRemove : content)
         {
+            if (contentToRemove instanceof ContentComposite)
+            {
+                this.removeLastContent(((ContentComposite)contentToRemove).getData());
+                continue;
+            }
             Component componentToRemove = this.getKeyByValue(contentToRemove);
             if (contentToRemove instanceof Image) this.previousComponentHeight-=IMAGE_BOTTOM_MARGIN;
             if (componentToRemove == null) continue;

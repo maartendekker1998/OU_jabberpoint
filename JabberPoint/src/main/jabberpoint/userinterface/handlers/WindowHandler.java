@@ -2,6 +2,8 @@ package main.jabberpoint.userinterface.handlers;
 
 import main.jabberpoint.domain.components.*;
 
+import java.util.List;
+
 /**
  * Part of Abstract Factory Pattern
  * Role: Interface to provide functions for a concrete WindowHandler that will be created by the HandleFactory
@@ -55,5 +57,5 @@ public interface WindowHandler
      * Removes the last added content from the window
      * @param content Content item to remove
      */
-    void removeLastContent(ContentList content);
+    void removeLastContent(List<? extends SlideShowComponent> content);
 }

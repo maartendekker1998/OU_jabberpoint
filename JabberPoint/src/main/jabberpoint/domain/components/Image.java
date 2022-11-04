@@ -20,7 +20,7 @@ public class Image extends Content<String>
     }
 
     /**
-     * Gets its children as a list of Content, since an Image does not have children, it adds itself
+     * Since an Image is a leaf, it returns itself
      * @return List of Content items with only itself in it
      */
     @Override

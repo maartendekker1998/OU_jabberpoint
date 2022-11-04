@@ -1,5 +1,6 @@
 package main.jabberpoint.domain.components;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,5 +20,17 @@ public class BulletList extends ContentComposite
     public BulletList(int indentation, List<Content> contents)
     {
         super(indentation, contents);
+    }
+
+    /**
+     * Since an BulletList is a leaf, it returns itself
+     * @return List of Content items with only itself in it
+     */
+    @Override
+    public List<Content> getContent()
+    {
+        List<Content> contentList = new ArrayList<>();
+        contentList.add(this);
+        return contentList;
     }
 }

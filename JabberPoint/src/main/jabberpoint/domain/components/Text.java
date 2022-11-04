@@ -20,7 +20,7 @@ public class Text extends Content<String>
     }
 
     /**
-     * Gets its children as a list of Content, since a Text does not have children, it adds itself
+     * Since an Text is a leaf, it returns itself
      * @return List of Content items with only itself in it
      */
     @Override

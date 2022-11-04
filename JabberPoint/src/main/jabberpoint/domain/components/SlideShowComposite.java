@@ -12,16 +12,5 @@ import java.util.List;
  */
 public abstract class SlideShowComposite extends SlideShowComponent
 {
-    private List<SlideShowComponent> componentList = new ArrayList<>();
-
-    /**
-     * Returns the componentList, the concrete classes under SlideShowComposite can still override this for an
-     * own implementation
-     * @return componentList
-     */
-    @Override
-    public List<SlideShowComponent> getContent()
-    {
-        return this.componentList;
-    }
+    List<SlideShowComponent> componentList = new ArrayList<>();
 }

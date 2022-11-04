@@ -1,8 +1,6 @@
 package main.jabberpoint.domain.components;
 
 import main.jabberpoint.domain.iterators.SlideShowIterator;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +17,7 @@ public class ConcreteSlideShow extends SlideShowComposite
      * @param slide Concrete slide to add
      */
     public void addSlide(ConcreteSlide slide){
-        super.getContent().add(slide);
+        this.componentList.add(slide);
     }
 
     /**
@@ -30,5 +28,15 @@ public class ConcreteSlideShow extends SlideShowComposite
     public SlideShowIterator createIterator()
     {
         return new SlideShowIterator(this);
+    }
+
+    /**
+     * Returns the componentList containing the slides
+     * @return List of its slides
+     */
+    @Override
+    public List<SlideShowComponent> getContent()
+    {
+        return super.componentList;
     }
 }

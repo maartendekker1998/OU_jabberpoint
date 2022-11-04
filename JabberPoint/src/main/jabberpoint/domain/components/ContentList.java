@@ -1,5 +1,6 @@
 package main.jabberpoint.domain.components;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,5 +20,17 @@ public class ContentList extends ContentComposite
     public ContentList(int indentation, List<Content> contents)
     {
         super(indentation, contents);
+    }
+
+    /**
+     * Since an ContentList is a leaf, it returns itself
+     * @return List of Content items with only itself in it
+     */
+    @Override
+    public List<SlideShowComponent> getContent()
+    {
+        List<SlideShowComponent> contentList = new ArrayList<>();
+        contentList.add(this);
+        return contentList;
     }
 }

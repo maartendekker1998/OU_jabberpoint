@@ -1,9 +1,6 @@
 package main.jabberpoint.userinterface;
 
-import main.jabberpoint.domain.components.ConcreteSlide;
-import main.jabberpoint.domain.components.Content;
-import main.jabberpoint.domain.components.ContentList;
-import main.jabberpoint.domain.components.SlideShowComponent;
+import main.jabberpoint.domain.components.*;
 import main.jabberpoint.userinterface.handlers.HandlerFactory;
 import main.jabberpoint.userinterface.handlers.SlideHandler;
 import main.jabberpoint.userinterface.handlers.WindowHandler;
@@ -77,11 +74,11 @@ public class UserInterface
 
     /**
      * Tells the slideHandler to remove its last added content
-     * @param content content to remove, this will be casted to ContentList
+     * @param content content to remove, this will be casted to ContentComposite
      */
     public void removeContent(SlideShowComponent content)
     {
-        this.slideHandler.removeContent((ContentList) content);
+        this.slideHandler.removeContent((ContentComposite)content);
     }
 
     /**
