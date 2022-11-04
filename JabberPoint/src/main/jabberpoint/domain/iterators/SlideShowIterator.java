@@ -11,7 +11,7 @@ public class SlideShowIterator extends SlideShowCompositeIterator
 {
     public SlideShowIterator(ConcreteSlideShow iterable)
     {
-        this.iterable = iterable;
+        super.iterable = iterable;
     }
 
     /**
@@ -20,8 +20,8 @@ public class SlideShowIterator extends SlideShowCompositeIterator
     @Override
     public void next()
     {
-        if ((this.index+1) >= this.iterable.getContent().size()) return;
-        this.index++;
+        if ((super.index+1) >= super.iterable.getContent().size()) return;
+        super.index++;
     }
 
     /**
@@ -30,8 +30,8 @@ public class SlideShowIterator extends SlideShowCompositeIterator
     @Override
     public void previous()
     {
-        if ((this.index - 1) < 0) return;
-        this.index--;
+        if ((super.index - 1) < 0) return;
+        super.index--;
     }
 
     /**
@@ -41,7 +41,7 @@ public class SlideShowIterator extends SlideShowCompositeIterator
     @Override
     public boolean isDone()
     {
-        return (this.index+1) >= this.iterable.getContent().size();
+        return (super.index+1) >= super.iterable.getContent().size();
     }
 
     /**
@@ -50,7 +50,7 @@ public class SlideShowIterator extends SlideShowCompositeIterator
     @Override
     public void resetIndex()
     {
-        this.index = 0;
+        super.index = 0;
     }
 
     /**
@@ -60,8 +60,8 @@ public class SlideShowIterator extends SlideShowCompositeIterator
     @Override
     public SlideShowComponent current()
     {
-        if (this.index-1 < 0) return this.first();
-        return this.iterable.getContent().get(this.index);
+        if (super.index-1 < 0) return this.first();
+        return super.iterable.getContent().get(super.index);
     }
 
     /**
@@ -71,6 +71,6 @@ public class SlideShowIterator extends SlideShowCompositeIterator
     @Override
     public SlideShowComponent first()
     {
-        return this.iterable.getContent().get(0);
+        return super.iterable.getContent().get(0);
     }
 }

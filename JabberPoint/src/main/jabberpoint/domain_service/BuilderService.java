@@ -45,7 +45,7 @@ public class BuilderService {
      * sets is the slide has transitions
      * @param transitions true or false
      */
-    public void setTransitions(Boolean transitions){
+    public void setTransitions(boolean transitions){
         builder.setSlideTransitions(transitions);
     }
 
@@ -93,7 +93,7 @@ public class BuilderService {
      * @param indentation to specify the indentation of the item
      * @param contentList to specify the actual content
      */
-    public void addBulletList(Integer indentation, BulletList contentList){
+    public void addBulletList(int indentation, BulletList contentList){
         builder.addBulletList(indentation, contentList);
     }
 
@@ -150,7 +150,7 @@ public class BuilderService {
     }
 
     /**
-     * adds a metadata key value pair to the metdata map
+     * adds a metadata key value pair to the metadata map
      * @param key the name of the metadata category (e.g. showtitle)
      * @param value the value of the metadata (e.g. demo-presentation)
      */

@@ -30,22 +30,32 @@ import static javax.swing.JOptionPane.showMessageDialog;
 public class SwingWindowHandler implements WindowHandler
 {
     /**
-     * UI related variables, this conrains the main frame which is shown and default values
+     * UI related variables, this contains the main frame which is used to paint the whole slide on it
      */
-    private static final String IMAGE_NOT_FOUND = "noimage.jpg";
-    private static final String DEFAULT_JABBER_POINT_TITLE = "JabberPoint";
     private final JFrame mainFrame = new JFrame();
     private final JPanel slide = new JPanel();
+    /**
+     * Default size of the user interface on startup of the application
+     */
+    private static final String DEFAULT_JABBER_POINT_TITLE = "JabberPoint";
     private final int X_MARGIN = 50;
     private final int Y_MARGIN = 5;
     private int DEFAULT_WIDTH = 1000+(2*X_MARGIN);
     private int DEFAULT_HEIGHT = 800;
+    /**
+     * Default values for when there are incomplete or none at all styles provided on the slide elements
+     */
+    private static final String IMAGE_NOT_FOUND = "noimage.jpg";
     private final int DEFAULT_FONT_SIZE = 36;
     private final String DEFAULT_FONT = "Arial";
     private final int DEFAULT_FONT_STYLE = Font.PLAIN;
     private final int TITLE_WHITESPACE = 20;
     private final int IMAGE_BOTTOM_MARGIN = 5;
     private static final Color DEFAULT_FONT_COLOR = Color.BLACK;
+    /**
+     * These maps are used to store a link between the original Content items and a UI element
+     * This is mainly used to keep an reference to original sizes for the scaling of the user interface
+     */
     private final Map<Component, Font> fontMap = new HashMap<>();
     private final Map<Component, SlideShowComponent> itemMap = new HashMap<>();
     private final Map<SlideShowComponent, BufferedImage> imageMap = new HashMap<>();
@@ -61,6 +71,11 @@ public class SwingWindowHandler implements WindowHandler
         this.eventHandler = menuHandler.getEventHandler();
         this.slide.addComponentListener(new ComponentAdapter()
         {
+            /**
+             * Code for the scaling of items when resizing the application
+             * @param event Overridden parameter from awt ComponentAdapter
+             * @see ComponentAdapter
+             */
             @Override
             public void componentResized(ComponentEvent event)
             {
@@ -92,6 +107,12 @@ public class SwingWindowHandler implements WindowHandler
                 }
             }
 
+            /**
+             * Simple check if the content to be resized is an image content since that has to be handled
+             * a bit different then text elements
+             * @param component The component to be checked
+             * @return true if the component is an image, false otherwise
+             */
             private boolean isImage(Component component)
             {
                 return ((JLabel)component).getIcon() != null;
@@ -129,6 +150,7 @@ public class SwingWindowHandler implements WindowHandler
 
     /**
      * Sets the title of the slide, this is always executed whether the slide has transitions or not
+     * The application its title is set to a default title if there is none provided in the metadata
      * @param slide a concrete slide type content
      */
     @Override
@@ -148,7 +170,7 @@ public class SwingWindowHandler implements WindowHandler
     }
 
     /**
-     * Adds a text type content to the slide, this will create a label with styles initiated
+     * Adds a Text type content to the slide, this will create a Swing label with eventually provided styles initiated
      * It also sets the bounds and location of the label
      * @param text a text type content
      */
@@ -166,13 +188,13 @@ public class SwingWindowHandler implements WindowHandler
     }
 
     /**
-     * Adds an image type content to the slide, this will create a label with styles initiated
+     * Adds an image type content to the slide, this will create a Swing label with eventually provided styles initiated
      * An image is loaded in the label, it is also possible that the label contains text and an image
-     * this is so that the BulletList styles can be set on images as well
+     * this is so that the BulletList bullets can be set on images as well
+     * @see BulletList
      * It also sets the bounds and location of the label
      * If the image provided cannot be found, the user will be notified with a message and a default image will be used instead
      * @param image an image type content
-     * @see BulletList
      */
     @Override
     public void addImage(Image image)
@@ -209,7 +231,7 @@ public class SwingWindowHandler implements WindowHandler
 
     /**
      * Removes the last added content from the window
-     * This gets called recursively if the content is type ContentComposite to remove all its children also
+     * This gets called recursively if the content is type ContentComposite to remove all its children
      * @param content Content item to remove
      */
     @Override
@@ -234,7 +256,8 @@ public class SwingWindowHandler implements WindowHandler
     }
 
     /**
-     * Clears the slide, this can be provided information whether it should remove of preserve the title
+     * Clears the slide, this can be provided with information whether it should remove of preserve the title
+     * of the slide
      * @param clearTitle boolean to determine if it should remove the title as well
      */
     @Override
@@ -253,8 +276,9 @@ public class SwingWindowHandler implements WindowHandler
 
     /**
      * Sets styles which are optionally provided on a Content type
-     * It will use default values if the styles parameter is empty or if certain styles are not provided
-     * If one of the styles contains an error, it will notify the user with this information and fallback to a default style
+     * It will use default values if the styles parameter is empty or partially provided
+     * If one of the styles contains an error, it will notify the user with this information and fallback to a
+     * default style instead
      * @param styles the map containing styles of an Content item
      * @param label the label to set the styles to
      * @see SlideShowComponent
@@ -286,8 +310,9 @@ public class SwingWindowHandler implements WindowHandler
     }
 
     /**
-     * Loads an image from the resource folder
-     * @param image the name of an image, example: 'text.png'
+     * Loads an image from the source resource folder
+     * @param image the name of an image, example: 'image.png', in feature changes this can be base64 for example
+     * @see Image
      * @return an instance of a BufferedImage, or null if the image does not exist
      */
     private BufferedImage getImageIcon(String image)
@@ -305,7 +330,7 @@ public class SwingWindowHandler implements WindowHandler
     }
 
     /**
-     * Calculates a scale that can be used to scale content with the scaling of the window
+     * Calculates a scale that can be used to scale content when resizing of the application
      * @param area this contains the width and height of the current window
      * @return a float type number that is the factor of the scaling
      */
@@ -315,7 +340,7 @@ public class SwingWindowHandler implements WindowHandler
     }
 
     /**
-     * Calculates the X coordinate to determine where the UI item should be rendered at
+     * Calculates the X coordinate to determine where the UI element should be rendered at
      * @param indentation the indentation as provided in the Content
      * @return x coordinate
      * @see Content
@@ -340,7 +365,8 @@ public class SwingWindowHandler implements WindowHandler
     }
 
     /**
-     * Creates bounds for an UI item, mainly used to make sure the UI item size will not exceed the window size
+     * Creates bounds for an UI element, mainly used to make sure the UI element size will fit and not exceed
+     * the window size
      * @param x x coordinate of the UI item
      * @param y y coordinate of the UI item
      * @param width width of the UI item

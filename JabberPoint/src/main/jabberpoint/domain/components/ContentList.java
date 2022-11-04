@@ -9,6 +9,9 @@ import java.util.List;
  *
  * Part of Composite Pattern (With Content as Component)
  * Role: Concrete Composite
+ *
+ * T type is set in the ContentComposite
+ * @see Content
  */
 public class ContentList extends ContentComposite
 {

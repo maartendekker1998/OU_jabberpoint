@@ -20,7 +20,7 @@ public class Controller
     /**
      * This function initializes the controller, and is only called once in the Main function of this program
      * @param factory factory to create controller items
-     * @param filepath location to a file
+     * @param filepath location to a presentation file
      */
     void initialize(ControllerConfigurationFactory factory, String filepath) {
         this.infrastructure = factory.getInfrastructure();

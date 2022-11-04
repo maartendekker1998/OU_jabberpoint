@@ -16,7 +16,7 @@ import java.util.List;
 public class ConcreteSlide extends SlideShowComposite
 {
     private String title;
-    private Boolean hasTransitions;
+    private boolean hasTransitions;
 
     /**
      * Creates an iterator to iterate over the slide items
@@ -70,7 +70,7 @@ public class ConcreteSlide extends SlideShowComposite
      * @return Transition
      */
     public boolean hasTransitions() {
-        return hasTransitions;
+        return this.hasTransitions;
     }
 
     /**

@@ -17,13 +17,13 @@ public class SlideIterator extends SlideShowCompositeIterator
     private final List<ContentList> chunks = new ArrayList<>();
 
     /**
-     * Creates chunks of content items, this is because if a content is iterated, it should be able to get
+     * Creates chunks of content items, this is because if a slide is iterated, it should be able to get
      * all the items which have a higher indentation then the previous content
      * @param slide slide that contains content
      */
     public SlideIterator(ConcreteSlide slide)
     {
-        this.iterable = slide;
+        super.iterable = slide;
         this.initializeChunks();
     }
 
@@ -31,7 +31,7 @@ public class SlideIterator extends SlideShowCompositeIterator
         boolean buildingChunk = false;
         List<Content> chunkList = new ArrayList<>();
 
-        for (SlideShowComponent slideContent : this.iterable.getContent())
+        for (SlideShowComponent slideContent : super.iterable.getContent())
         {
             Content content = (Content)slideContent;
             if (content.getIndentation() == 1 && buildingChunk){
@@ -56,8 +56,8 @@ public class SlideIterator extends SlideShowCompositeIterator
     @Override
     public void next()
     {
-        if ((this.index+1) >= this.chunks.size()) return;
-        this.index++;
+        if ((super.index+1) >= this.chunks.size()) return;
+        super.index++;
     }
 
     /**
@@ -66,8 +66,8 @@ public class SlideIterator extends SlideShowCompositeIterator
     @Override
     public void previous()
     {
-        if (this.index < 0) return;
-        this.index--;
+        if (super.index < 0) return;
+        super.index--;
     }
 
     /**
@@ -77,7 +77,7 @@ public class SlideIterator extends SlideShowCompositeIterator
     @Override
     public boolean isDone()
     {
-        return (this.index+1) >= this.chunks.size();
+        return (super.index+1) >= this.chunks.size();
     }
 
     /**
@@ -87,7 +87,7 @@ public class SlideIterator extends SlideShowCompositeIterator
     @Override
     public void resetIndex()
     {
-        this.index = -1;
+        super.index = -1;
     }
 
     /**
@@ -97,8 +97,8 @@ public class SlideIterator extends SlideShowCompositeIterator
     @Override
     public SlideShowComponent current()
     {
-        if (this.index < 0) return null;
-        return this.chunks.get(this.index);
+        if (super.index < 0) return null;
+        return this.chunks.get(super.index);
     }
 
     /**

@@ -31,7 +31,7 @@ public interface Builder
      * sets is the slide has transitions
      * @param transitions true or false
      */
-    void setSlideTransitions(Boolean transitions);
+    void setSlideTransitions(boolean transitions);
 
     /**
      * adds a title to a slide
@@ -68,7 +68,7 @@ public interface Builder
      * @param indentation to specify the indentation of the item
      * @param contentList to specify the actual content
      */
-    void addBulletList(Integer indentation, BulletList contentList);
+    void addBulletList(int indentation, BulletList contentList);
 
     /**
      * adds a slide to the slideshow

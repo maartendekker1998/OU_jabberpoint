@@ -6,6 +6,8 @@ import java.util.List;
 /**
  * Part of Composite Pattern
  * Role: Concrete Leaf
+ *
+ * T type is set to String because an image has an url or perhaps it could be used as base64 string in feature changes
  */
 public class Image extends Content<String>
 {

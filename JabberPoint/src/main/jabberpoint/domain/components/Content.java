@@ -6,7 +6,9 @@ import main.jabberpoint.domain.iterators.Iterator;
  * Part of Composite Pattern
  * Role: Abstract Leaf
  *
- * @param <T> This must be set as a type of the data the Content should have
+ * @param <T> This can be set as a type of the data the Content should have, this makes it possible to
+ *            give content a variable type of content instead of a fixed type of content data, this
+ *            helps to add new variations of content with their own value more easily
  */
 public abstract class Content<T> extends SlideShowComponent
 {

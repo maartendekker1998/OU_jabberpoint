@@ -58,7 +58,7 @@ public class ProjectorService
     }
 
     /**
-     * Tells the projector to reset the index of the slideIterator
+     * Call the projector to reset the index of the slideIterator
      */
     public void removeAllContent()
     {

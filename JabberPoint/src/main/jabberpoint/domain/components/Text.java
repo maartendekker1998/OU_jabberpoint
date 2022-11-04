@@ -6,6 +6,8 @@ import java.util.List;
 /**
  * Part of Composite Pattern
  * Role: Concrete Leaf
+ *
+ * T type is set to String since text usually consists of just text
  */
 public class Text extends Content<String>
 {

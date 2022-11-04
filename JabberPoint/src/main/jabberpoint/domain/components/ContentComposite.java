@@ -8,6 +8,10 @@ import java.util.List;
  *
  * Part of Composite Pattern (With Content as Component)
  * Role: Abstract Composite
+ *
+ * The T type in the Content parent is set to a List of Content so that the children of this class have also a
+ * List of Content
+ * @see Content
  */
 public abstract class ContentComposite extends Content<List<Content>>
 {
@@ -21,7 +25,8 @@ public abstract class ContentComposite extends Content<List<Content>>
     }
 
     /**
-     * Adds content to the data
+     * Adds content to the data via the getData function, there is no extra add function in Content
+     * since the T type is not always a list
      * @param content Content to be added
      */
     public void addContent(Content content)

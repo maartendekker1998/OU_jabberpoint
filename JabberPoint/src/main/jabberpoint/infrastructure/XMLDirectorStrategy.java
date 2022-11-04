@@ -27,7 +27,7 @@ import java.util.List;
 public class XMLDirectorStrategy implements DirectorStrategy {
 
     /**
-     * names of items and attributes
+     * names of items and attributes which are supported in the XML files
      */
     private static final String METADATA = "metadata";
     private static final String PRESENTER = "presenter";
@@ -196,7 +196,7 @@ public class XMLDirectorStrategy implements DirectorStrategy {
         List<Element> slideItems = this.getChildrenByTagName(xmlSlide, ITEM);
         for (Element element : slideItems)
         {
-            int indentation = 0; // default
+            int indentation = 0;
             NamedNodeMap attributes = element.getAttributes();
             String indentationText = attributes.getNamedItem(LEVEL).getTextContent();
             if (indentationText != null) {

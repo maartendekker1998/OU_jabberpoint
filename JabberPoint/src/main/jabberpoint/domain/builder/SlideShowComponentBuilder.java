@@ -48,7 +48,7 @@ public class SlideShowComponentBuilder implements Builder
      * @param transitions true or false
      */
     @Override
-    public void setSlideTransitions(Boolean transitions){
+    public void setSlideTransitions(boolean transitions){
         this.slide.setHasTransitions(transitions);
     }
 
@@ -66,7 +66,7 @@ public class SlideShowComponentBuilder implements Builder
 
     /**
      * Adds content to the slide
-     * @param content a text/image/bulletlist
+     * @param content a piece of content to be added
      */
     private void addContent(Content content) {
         if (!this.styles.isEmpty()) {
@@ -120,7 +120,7 @@ public class SlideShowComponentBuilder implements Builder
      * @param contentList to specify the actual content
      */
     @Override
-    public void addBulletList(Integer indentation, BulletList contentList) {
+    public void addBulletList(int indentation, BulletList contentList) {
         this.addContent(contentList);
     }
 
@@ -159,7 +159,7 @@ public class SlideShowComponentBuilder implements Builder
     }
 
     /**
-     * adds a metadata key value pair to the metdata map
+     * adds a metadata key value pair to the metadata map
      * @param key the name of the metadata category (e.g. showtitle)
      * @param value the value of the metadata (e.g. demo-presentation)
      */
@@ -169,7 +169,7 @@ public class SlideShowComponentBuilder implements Builder
     }
 
     /**
-     * adds the metadata map to the slide
+     * Initializes the metadata map to the slide
      */
     @Override
     public void addMetadata() {
