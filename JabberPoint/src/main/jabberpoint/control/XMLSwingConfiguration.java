@@ -1,6 +1,6 @@
 package main.jabberpoint.control;
 
-import main.jabberpoint.domain.builder.SlideShowComponentBuilder;
+import main.jabberpoint.domain.builder.SlideShowBuilder;
 import main.jabberpoint.domain_service.BuilderService;
 import main.jabberpoint.infrastructure.Infrastructure;
 import main.jabberpoint.infrastructure.XMLDirectorStrategy;
@@ -32,6 +32,6 @@ public class XMLSwingConfiguration extends ControllerConfigurationFactory
      */
     @Override
     public Infrastructure getInfrastructure() {
-        return super.createInfrastructure(new BuilderService(new SlideShowComponentBuilder()), new XMLDirectorStrategy());
+        return super.createInfrastructure(new BuilderService(new SlideShowBuilder()), new XMLDirectorStrategy());
     }
 }

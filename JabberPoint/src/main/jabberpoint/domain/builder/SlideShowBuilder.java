@@ -11,7 +11,7 @@ import java.util.Map;
  * Part of Builder Pattern
  * Role: Concrete builder
  */
-public class SlideShowComponentBuilder implements Builder
+public class SlideShowBuilder implements Builder
 {
     private ConcreteSlideShow slideShow;
     private ConcreteSlide slide;
