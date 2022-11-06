@@ -90,8 +90,8 @@
 		<item kind="bulletlist" bullet="●" level="2">
 			<item kind="text" level="2">Deze bullet list heeft een ● als icoon</item>
 		</item>
-		<item kind="bulletlist" bullet="◇" level="2">
-			<item kind="text" level="2">Deze bullet list heeft ◇ als icoon</item>
+		<item kind="bulletlist" bullet="○" level="2">
+			<item kind="text" level="2">Deze bullet list heeft ○ als icoon</item>
 		</item>
 		<item kind="text" level="1"> </item>
 		<item kind="text" level="1">Voor meer info, zie Help → Troubleshooting</item>
